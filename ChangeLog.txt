@@ -1,0 +1,70 @@
+
+10-25-2012 - Change Log -- Need to submit to designers for approval. 
+
+#1
+The uml specified the following. "+setUserObject(): void"
+- Problem. Nothing is being passed into the set method, as a result you cant set a user object in the UserCredentials class.
+- Change. +setUserObject(String userName, String password, int userType, User iUser): void
+	This will allow for a userobject to be set, along with its given fields. 
+
+#2
+The uml did give any means for getting the Arraylist's in this class.
+- Change.   Added 5 new getter methods to the UserCredentials class.  
+	+getUserNamesArraylist(): ArrayList<String> 
+	+getPasswordsArraylist(): ArrayList<String>
+	+getIdArraylist(): ArrayList<Integer>
+	+getUserTypeArraylist(): ArrayList<Integer>
+	+getUserObjectArraylist(): ArrayList<User> 
+
+#3
+- Problem. There is absolutly no way to reset a already set password in the UserCredentials class
+- Change. Added the below method to the UserCredentials class. 
+	public void setPassword(int userIndex, String newPassword) {
+		getPasswordsArraylist().set(userIndex, newPassword);
+	}
+- Now when a user goes to edit their profile, and they select the option to update their password.  They will now be able to actually update 
+their password.  
+
+
+
+// When a user wishes to edit their profile, and they have the option to edit their name.  Is it really ness to have two attributes an
+- we could get ride of first and last and combine it to just plain old name
+- over a another way would be two add to more methods which would be setFirstAndLast where it would take in a string "Jack Young" delimit it by a 
+space and then set the first and last name attributes.  This seems a bit overkill and retarded.
+
+
+#4
+	//just added - not specified in the uml
+	private int countOfAllTeams = 0;
+	public int getCountOfAllTeams() {
+		return this.countOfAllTeams;
+	}
+	
+	
+#5
+Added a Arg's constuctor to the Team class.  This will yield the depicted bi-directional relationship between the Team and Coach class.  
+
+
+
+#6  Added the following method so the Roster class.
+The problem was that a coach could add a player, but by doing so the coach could only see that the roster count increment. so that can access the individual player fields
+-Solution: I added the below method so that when a coach adds a player to his or her roster, they can also now access that players information
+	/**
+	 * just created 10-27
+	 * @return the roster
+	 */
+	public Player[] getPlayersOnRoster() {
+
+		Player[] arr = new Player[roster.size()];
+		Iterator<Player> iterator = roster.iterator();
+		int counterr = 0;
+		while(iterator.hasNext()) {
+			arr[counterr] = iterator.next();
+			counterr++;
+		}
+
+		return arr;
+	}
+
+
+---If You Need to Make Any changes, place your notes & remarks below ---------

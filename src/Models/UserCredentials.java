@@ -1,0 +1,191 @@
+package Models;
+
+import java.util.ArrayList;
+
+
+public class UserCredentials {
+	
+	private ArrayList<Integer> id = new ArrayList<Integer>();
+	private ArrayList<String> userNames = new ArrayList<String>();
+	private ArrayList<String> passwords = new ArrayList<String>();
+	private ArrayList<Integer> userType = new ArrayList<Integer>();
+	private ArrayList<User> userObject = new ArrayList<User>();
+	
+	
+	public void setID(int id) {
+		getIdArraylist().add(id);
+	}
+	
+	public void setUserName(String userName) {
+		getUserNamesArraylist().add(userName);
+	}
+	
+	public void setPassword(String password) {
+		getPasswordsArraylist().add(password);
+	}
+	
+	public void setUserType(int userType) {
+		getUserTypeArraylist().add(userType);
+	}
+	
+	//their proposed method -- bad design - doesnt work
+//	public void setUserObject() {
+//		
+//	}
+	
+	//my method below
+	public void setUserObject(String userName, String password, int userType, User iUser) {
+		setID(getIdArraylist().size());
+		setUserName(userName);
+		setPassword(password);
+		setUserType(userType);
+		getUserObjectArraylist().add(iUser);
+	}
+	
+	public int getID(String userName, String password) {
+		boolean finder1 = getUserNamesArraylist().contains(userName);
+		boolean finder2 = getPasswordsArraylist().contains(password);
+		int uIndex = -1;
+		int pIndex = -2;
+		int foundIndex = -1;
+		
+		if ( finder1 && finder2) {
+			System.out.println("the user name and password do exist somewhere");
+			uIndex = getUserNamesArraylist().indexOf(userName);
+			pIndex = getPasswordsArraylist().indexOf(password);
+			
+			if ( uIndex == pIndex ) {
+				foundIndex = uIndex;
+			}
+		} 
+		//I made it so that it will search the arraylist. First check if user and pass exist in those arraylist
+		//then check if those have correspond indexes
+		//if so it will return there userID, else if it doesnt find it, it will return -1
+		return foundIndex;
+	}
+	
+	/***Start - Methods I added that not described in UML**/
+	
+	public void setPassword(int userIndex, String newPassword) {
+		getPasswordsArraylist().set(userIndex, newPassword);
+	}
+	
+	public ArrayList<String> getUserNamesArraylist() {
+		return userNames;
+	}
+	public ArrayList<String> getPasswordsArraylist() {
+		return passwords;
+	}
+
+	public ArrayList<Integer> getIdArraylist() {
+		return id;
+	}
+	
+	public ArrayList<Integer> getUserTypeArraylist() {
+		return userType;
+	}
+	
+	public ArrayList<User> getUserObjectArraylist() {
+		return userObject;
+	}
+	
+	public void tempVs(){
+		setUserName("jyoung");
+		setPassword("greatness");
+		setUserName("rpyoung");
+		setPassword("122686");
+		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
+			System.out.println("#" + i + "  : " + getUserNamesArraylist().get(i) + "    " + getPasswordsArraylist().get(i));
+		}
+		System.out.println("Count: " + getUserNamesArraylist().size());
+		
+	}
+
+	
+	/***End - Methods I added that not described in UML**/
+	
+	public String getUserName(int id) {
+		String un = getUserNamesArraylist().get(id);
+		return un;
+	}
+	public String getPassword(int id) {
+		String pn = getPasswordsArraylist().get(id);
+		return pn;
+	}
+	public int getUserType(int id) {
+		int tt = getUserTypeArraylist().get(id);
+		return tt;
+	}
+	public User getUserObject(int id) {
+		return getUserObjectArraylist().get(id);
+	}
+	private int validateUserName(String userName) {
+		
+		boolean isError = true;
+		
+		int length = userName.length();
+		boolean isValidLength = false;
+			if(length >= 6 && length <= 12) {
+				isValidLength = true;
+			}
+		
+		if( isValidLength) {
+			int indexOfAtSymbol = userName.indexOf("@");
+			int indexOfDot = userName.indexOf(".");
+			System.out.println("length of : " + length);
+			System.out.println("index of @: " + indexOfAtSymbol);
+			System.out.println("index of .  : " + indexOfDot);
+			if ( indexOfAtSymbol == -1 || indexOfDot == -1) {
+				System.out.println("sorry but you are missing the @ symbol");
+			} else {
+				System.out.println("Valid Email");
+				isError = true;
+			}
+		} else {
+			//sorry but needs to be atleast 6 and 12 in length
+			if(length < 6) {
+				//too short
+				System.out.println("Error: username is to short!");
+			} else if (length > 12) {
+				//to long
+				System.out.println("Error: username is to long!");
+			} else {
+				System.out.println("Error: something went wrong in username validation");
+			}
+		}
+		//string of alphanumeric characters + @ stirng of alphanumer characters + . + alpha characters
+		
+		
+		if(isError) {
+			//no there is no error
+			return 1;
+		} else {
+			//yes there is an error
+			return -1;
+		}
+		
+	}
+	private int validatePassword(String password) {
+		return 1;
+	}
+	public int validateLogin(int i) {
+		return 1;
+	}
+	
+
+	//temp method for testing
+	public void outputAllCredentials() {
+		String ot = "Output - UserTable Credentials";
+		System.out.println("\n------------Output - UserTable Credentials-------------------");
+		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
+			System.out.println("#" + i + "  :  userName: " + getUserNamesArraylist().get(i) + ",    password: "
+			+ getPasswordsArraylist().get(i) + "    id: " + getIdArraylist().get(i) + "    userType: "
+			+ getUserTypeArraylist().get(i) + "    user: " + getUserObjectArraylist().get(i)
+			);
+		}
+		System.out.println("User Count: " + getUserNamesArraylist().size());
+		System.out.println("-------------------------------------------------------------\n");
+	}
+
+	
+}
