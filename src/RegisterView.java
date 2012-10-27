@@ -90,11 +90,15 @@ public class RegisterView {
 	public static User promptForToEnterUserInfo(int type) {
 		String firstName = InputHelper.promptString("Please enter in your first name", "firstname", "Register - first name");
 		String lastName = InputHelper.promptString("Please enter in your last name", "lastName", "Register - last name");
-		String phone = InputHelper.promptString("Please enter in your phone number", "phone number", "Register - phone number");
+		String phone;
+		do{phone = InputHelper.promptString("Please enter in your phone number", "phone number", "Register - phone number");}
+		while(phone.length() != 10);
 		String street = InputHelper.promptString("Please enter in your street", "street", "Register - street");
 		String city = InputHelper.promptString("Please enter in your city", "city", "Register - city");
 		String state = InputHelper.promptString("Please enter in your state", "state", "Register - state");
-		String zip = InputHelper.promptString("Please enter in your zip code", "zip code", "Register - zip code");
+		String zip;
+		do{zip = InputHelper.promptString("Please enter in your zip code", "zip code", "Register - zip code");}
+		while(zip.length() != 5);
 		
 		Address nAddress = new Address();
 		nAddress.setStreet(street);
