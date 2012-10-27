@@ -10,7 +10,8 @@ import Models.Player;
 import Models.Team;
 import Models.User;
 
-
+//Jack Young
+//10-27-2012
 public class ManageTeamView {
 	
 	public static void manageTeamView(int usersIndex) {
@@ -160,6 +161,7 @@ public class ManageTeamView {
 			if (t.getRoster().playerCount == 0) {
 				// their are no players on this coaches roster
 				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster", title);
+				manageTeamView(usersIndex);
 			} else {
 				//they do have players on their roster
 				Player[] pp = t.getRoster().getPlayersOnRoster();
