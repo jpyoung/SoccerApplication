@@ -27,6 +27,9 @@ public class InputHelper {
 		JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	public static void displayMessage(String message, String title) {
+		JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+	}
 	
 	/************************* Helper prompter section ************************************************/
 	public static String promptString(String displayMessage, String varName, String title){

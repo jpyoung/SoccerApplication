@@ -38,7 +38,8 @@ public class MainApplication {
 		p.setTeam(cc.getTeam());
 		Player p2 = (Player)getController().getUc().getUserObject(2);
 		cc.getTeam().getRoster().addPlayerName(p2);
-		p.setTeam(cc.getTeam());
+		p2.setTeam(cc.getTeam());
+	
 		//end of temp data
 		
 		

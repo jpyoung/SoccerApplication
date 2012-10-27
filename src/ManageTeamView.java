@@ -111,11 +111,11 @@ public class ManageTeamView {
 		System.out.println(coach);
 		JOptionPane.showMessageDialog(null, "Your at view roster top");
 		
-		viewRosterChoices(coach.getTeam());
+		viewRosterChoices(coach.getTeam(), usersIndex);
 		
 	}
 	
-	public static void viewRosterChoices(Team t) {
+	public static void viewRosterChoices(Team t, int usersIndex) {
 		
 		String title = "View Roster [" + t.getName() + "]";
 		String m = "Select player you want to see or click 'back':\n";
@@ -136,7 +136,12 @@ public class ManageTeamView {
 					tempPoss[i] = (i + 1);
 				}
 				String resp = InputHelper.promptStringMenuOptions(m, "player choosen", title, tempPoss);
-				System.out.println("You selected this player number: " + resp);
+				
+				
+				int n = Integer.parseInt(resp) - 1;
+				System.out.println("You selected this player number: " + resp + "   index value: " + n);
+				viewTeamDetailedPlayerProfile(pp[n], usersIndex);
+				
 			}
 		}
 	
@@ -144,19 +149,21 @@ public class ManageTeamView {
 	}
 	
 	
-	public static void viewTeamDetailedPlayerProfile(Player p){ 
+	public static void viewTeamDetailedPlayerProfile(Player p, int usersIndex){ 
+		
+		System.out.println(p);
+		
 		String title = "Player Profile: [" + OutputHelpers.giveConcatName(p) + "]";
 		String m = "Player Name: " + OutputHelpers.giveConcatName(p);
 			m += "\nEmail: email address goes here";
 			m += "\nPhone: " + p.getPhone();
-		//	m += "\nSigned Waiver: " + ()
+			m += "\nSigned Waiver: " + (hasSignedWaiver(p) ? "Yes" : "NOO");
 		
-		//Player Profile: []
-		//Player Name
-		//Email:
-		//Phone
-		//Signed Waiver
-		//Captain
+		InputHelper.displayMessage(m, title);
+		
+		
+		//this takes the coach back to the menu display all the players on their roster
+		viewRosterChoices(p.getTeam(), usersIndex);
 	}
 	
 	
