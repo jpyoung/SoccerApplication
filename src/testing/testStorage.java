@@ -1,5 +1,9 @@
 package testing;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+
 import Models.Coach;
 import Models.Player;
 import Models.Team;
@@ -42,18 +46,42 @@ public class testStorage {
 		
 		c.getUc().outputAllCredentials();
 		
+		String[] gatheredInfo = new String[c.getUc().getUserObjectArraylist().size()];
 		
-
+		for (int i = 0; i < gatheredInfo.length; i++) {
+			gatheredInfo[i] = c.getUc().getUserObjectArraylist().toString();
+		}
 		
-		
-		
-		//c.getUc().ge
-		
-		System.out.println("\n       END OF MAIN METHOD \n\n");
-		
-		om(c);
+		  String FILELOC = "/Users/youngbuck14188/Desktop/Program WorkSpace/306_SoccerProject_v2/Sample.txt";
+	        
+	        writeOutputToResultFile(gatheredInfo, FILELOC);
+	
+//		System.out.println("\n       END OF MAIN METHOD \n\n");
+//		
+//		om(c);
 		
 	}
+	
+    public static void writeOutputToResultFile(String[] info, String fileLocation){
+
+        PrintWriter outputStream = null;
+        try{
+            //outputStream = new PrintWriter(new FileOutputStream(fileLocation));
+           outputStream = new PrintWriter(new FileOutputStream(fileLocation, true));
+        }
+        catch(FileNotFoundException e){
+            System.out.println("Error opening the file Results File");
+            System.exit(0);
+        }
+
+        System.out.println("Check the text file for the program output");
+        for(int z = 0; z < info.length; z++){          
+            outputStream.println(info[z]);
+        }
+    
+    outputStream.close();
+}
+    
 	
 	public static void om(Controller c) {
 		
