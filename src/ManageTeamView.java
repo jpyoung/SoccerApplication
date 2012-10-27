@@ -13,22 +13,14 @@ import Models.User;
 
 public class ManageTeamView {
 	
-	
-	
 	public static void manageTeamView(int usersIndex) {
-		
-		//Need if statement
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
-		
 		if (c.getTeam() != null) {
 			//Team already create: No. THen do this
 			manageTeamPrompt(c.getTeam(), usersIndex);
 		} else {
 			
 		}
-		
-		System.out.println("Does Coach: " + c.getFirstName() + " have a team: " + c.getTeam());
-		
 	}
 	
 	
@@ -113,23 +105,19 @@ public class ManageTeamView {
 		m += "Select the player you want to invite to join your roster:";
 		
 		ArrayList<User> aa = MainApplication.getController().getUc().getUserObjectArraylist();
-		System.out.println("The Size: " + aa.size());
 		ArrayList<Player> tempee = new ArrayList<Player>();
 		
 		for (int i = 0; i < aa.size(); i++) {
 			if(aa.get(i).getClass().getName().equals("Models.Player")){
 				tempee.add((Player)aa.get(i));
 			}
-			System.out.println(aa.get(i).getClass().getName());
 		}
 		
 		int counter = 1;
-		ArrayList<Player> tempee2 = new ArrayList<Player>();
+		ArrayList<Player> tempee2 = new ArrayList<Player>(); //this var holds the potential players in which the coach could invite to join his or her roster
 		
 		for (int i = 0; i < tempee.size(); i++) {
-			System.out.println("aaa: " + tempee.get(i));
 			if(tempee.get(i).getTeam() == null ){
-				System.out.println(tempee.get(i).getFirstName() + "   null team: ");
 				m +="\n" + counter + ". " + OutputHelpers.giveConcatName(tempee.get(i));
 				tempee2.add(tempee.get(i));
 				counter++;
@@ -137,26 +125,16 @@ public class ManageTeamView {
 				tempee.remove(i);
 			}
 		}
-		System.out.println("The size: " + tempee.size());
-		
-		for (int i = 0; i < tempee2.size(); i++) {
-			System.out.println("aaa: " + tempee2.get(i).getFirstName());
-		}
-		
+
 		String resp = InputHelper.promptStringMenuOptionsType2(m, "select player", title, OutputHelpers.generatePossibleOptions(counter - 1));
-		
-		System.out.println("Your answer: " + resp);
 		
 		if (resp.equals("-n-u-l-l-")) {
 			manageTeamView(usersIndex);
 		} else {
-			System.out.println("Lets display the view");
 			int n = Integer.parseInt(resp) - 1;
-			
 			String ddMessage = OutputHelpers.giveConcatName(tempee2.get(n)) + " was invited to your team. He/shee will appear in your\n";
-			ddMessage += "roster after he/she accepted your invitation.\n";
-			ddMessage += "If he/she refuses the invitation, he/she will not appear in your roster.";
-			
+				ddMessage += "roster after he/she accepted your invitation.\n";
+				ddMessage += "If he/she refuses the invitation, he/she will not appear in your roster.";
 			InputHelper.displayMessage(ddMessage, "Invitation Confirmation");
 			manageTeamView(usersIndex);
 		}
@@ -165,36 +143,20 @@ public class ManageTeamView {
 	}
 	
 	
-	
-	
 /*****************************View Roster Section**************************************************************/
-	//View Roster [team name ]
-	//select player you want to see or click back or ok 
-	
 	
 	//method was designed for the coaches
 	public static void viewRosterMenu(int usersIndex) {
-		
-		
 		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
-		
-		
-		
-		System.out.println(coach);
-		JOptionPane.showMessageDialog(null, "Your at view roster top");
-		
 		viewRosterChoices(coach.getTeam(), usersIndex);
-		
 	}
 	
 	public static void viewRosterChoices(Team t, int usersIndex) {
-		
 		String title = "View Roster [" + t.getName() + "]";
 		String m = "Select player you want to see or click 'back':\n";
 		
 		if (hasRosterBeenSet(t)) {
 			//has the roster been initialized 
-			
 			if (t.getRoster().playerCount == 0) {
 				// their are no players on this coaches roster
 				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster", title);
@@ -202,52 +164,35 @@ public class ManageTeamView {
 				//they do have players on their roster
 				Player[] pp = t.getRoster().getPlayersOnRoster();
 				int[] tempPoss = new int[pp.length];
-				for (int i = 0; i < pp.length; i++) {
-					m += (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "  ";
-					m += "\n";
-					tempPoss[i] = (i + 1);
-				}
-				//String resp = InputHelper.promptStringMenuOptions(m, "player choosen", title, tempPoss);
-				
+					for (int i = 0; i < pp.length; i++) {
+						m += (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "  ";
+						m += "\n";
+						tempPoss[i] = (i + 1);
+					}
 				String resp = InputHelper.promptStringMenuOptionsType2(m, "player choosen", title, tempPoss);
-				
-				System.out.println("Your answer: " + resp);
-				
 				if (resp.equals("-n-u-l-l-")) {
 					manageTeamPrompt(t, usersIndex);
 				} else {
-					System.out.println("Lets display the view");
 					int n = Integer.parseInt(resp) - 1;
-					System.out.println("You selected this player number: " + resp + "   index value: " + n);
+					//System.out.println("You selected this player number: " + resp + "   index value: " + n);
 					viewTeamDetailedPlayerProfile(pp[n], usersIndex);
 				}
-			
-				
 			}
 		}
-	
-		
 	}
 	
 	
 	public static void viewTeamDetailedPlayerProfile(Player p, int usersIndex){ 
-		
-		System.out.println(p);
-		
+		//System.out.println(p);
 		String title = "Player Profile: [" + OutputHelpers.giveConcatName(p) + "]";
 		String m = "Player Name: " + OutputHelpers.giveConcatName(p);
 			m += "\nEmail: email address goes here";
 			m += "\nPhone: " + p.getPhone();
 			m += "\nSigned Waiver: " + (hasSignedWaiver(p) ? "Yes" : "NOO");
-		
 		InputHelper.displayMessage(m, title);
-		
-		
 		//this takes the coach back to the menu display all the players on their roster
 		viewRosterChoices(p.getTeam(), usersIndex);
 	}
-	
-	
 	
 /*******************************************************************************************/	
 	
@@ -258,9 +203,7 @@ public class ManageTeamView {
 				message += "\n1. Home: " + t.getHomeColor();
 				message += "\n2. Away: " + t.getAwayColor();
 				message += "\n\n3. Go Back";
-		
 		String resp = InputHelper.promptStringMenuOptions(message, "select color option", title, new int[]{1, 2, 3});
-		
 		int n = Integer.parseInt(resp);
 		
 		if (n == 1) {
@@ -279,8 +222,6 @@ public class ManageTeamView {
 		} else {
 			System.out.println("Something is wrong in the if tree for the chageTeamColor Method");
 		}
-		
-		
 	}
 	
 	
