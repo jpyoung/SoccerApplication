@@ -1,5 +1,6 @@
 package Models;
 
+import Waiver.CoachWaiver;
 import Waiver.UserForm;
 import controller.Controller;
 
@@ -15,7 +16,8 @@ public class Coach extends User {
 //		this.team = new Team();
 //		this.team.setCoach(this);
 		
-		this.coachWaiver = null;
+//		this.coachWaiver = null;//Jacks prior to change
+		this.coachWaiver = new CoachWaiver();//(DUC) updated 10/27 : Creating Coach object auto create CoachWaiver()
 		
 	}
 	
