@@ -216,6 +216,8 @@ public class testStorage {
 	
 	
 	///useful methods consider implementing
+	
+	//Method is used for concatenating the first and last name of passed in user, and returns it as a string. 
 	public static String giveConcatName(User n) {
 		String name = n.getFirstName() + " " + n.getLastName(); 
 		return name;

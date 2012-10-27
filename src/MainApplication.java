@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
@@ -30,9 +31,22 @@ public class MainApplication {
 		getController().loadInitialData();
 		
 		
+		//temp data
+		Player p = (Player)getController().getUc().getUserObject(1);
+		Coach cc = (Coach)getController().getUc().getUserObject(3);
+		cc.getTeam().getRoster().addPlayerName(p);
+		p.setTeam(cc.getTeam());
+		Player p2 = (Player)getController().getUc().getUserObject(2);
+		cc.getTeam().getRoster().addPlayerName(p2);
+		p.setTeam(cc.getTeam());
+		//end of temp data
+		
+		
+		
 		//make the call for the first view 
 		firstView();
 		
+
 		
 		//output all userCreditential data on close
 		System.out.println("--Data on Application Close---");

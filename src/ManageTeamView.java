@@ -1,12 +1,15 @@
 import helpers.InputHelper;
+import helpers.OutputHelpers;
 
 import javax.swing.JOptionPane;
 
 import Models.Coach;
+import Models.Player;
 import Models.Team;
 
 
 public class ManageTeamView {
+	
 	
 	
 	public static void manageTeamView(int usersIndex) {
@@ -57,6 +60,7 @@ public class ManageTeamView {
 			if ( n == 1) {
 				//view roster
 				System.out.println("view roster");
+				viewRosterMenu(usersIndex);
 			} else if ( n == 2) {
 				//add a player
 				System.out.println("add a player");
@@ -88,8 +92,76 @@ public class ManageTeamView {
 	// remove a player
 	// choose a captain
 	// pay league fees
+	// view roster
 	
 	
+/*******************************************************************************************/
+	//View Roster [team name ]
+	//select player you want to see or click back or ok 
+	
+	
+	//method was designed for the coaches
+	public static void viewRosterMenu(int usersIndex) {
+		
+		
+		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
+		
+		
+		
+		System.out.println(coach);
+		JOptionPane.showMessageDialog(null, "Your at view roster top");
+		
+		viewRosterChoices(coach.getTeam());
+		
+	}
+	
+	public static void viewRosterChoices(Team t) {
+		
+		String title = "View Roster [" + t.getName() + "]";
+		String m = "Select player you want to see or click 'back':\n";
+		
+		if (hasRosterBeenSet(t)) {
+			//has the roster been initialized 
+			
+			if (t.getRoster().playerCount == 0) {
+				// their are no players on this coaches roster
+				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster", title);
+			} else {
+				//they do have players on their roster
+				Player[] pp = t.getRoster().getPlayersOnRoster();
+				int[] tempPoss = new int[pp.length];
+				for (int i = 0; i < pp.length; i++) {
+					m += (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "  ";
+					m += "\n";
+					tempPoss[i] = (i + 1);
+				}
+				String resp = InputHelper.promptStringMenuOptions(m, "player choosen", title, tempPoss);
+				System.out.println("You selected this player number: " + resp);
+			}
+		}
+	
+		
+	}
+	
+	
+	public static void viewTeamDetailedPlayerProfile(Player p){ 
+		String title = "Player Profile: [" + OutputHelpers.giveConcatName(p) + "]";
+		String m = "Player Name: " + OutputHelpers.giveConcatName(p);
+			m += "\nEmail: email address goes here";
+			m += "\nPhone: " + p.getPhone();
+		//	m += "\nSigned Waiver: " + ()
+		
+		//Player Profile: []
+		//Player Name
+		//Email:
+		//Phone
+		//Signed Waiver
+		//Captain
+	}
+	
+	
+	
+/*******************************************************************************************/	
 	
 	//method used for changing the team colors. Either home or away
 	public static void changeTeamColor(Team t, int usersIndex) {
@@ -139,4 +211,29 @@ public class ManageTeamView {
 	}
 	
 
+	
+	public static boolean hasCaptainBeenSet(Team t){
+		boolean answer = false;
+		if (t.getCaptain() != null) {
+			answer = true;
+		} 
+		return answer;
+	}
+	
+	public static boolean hasRosterBeenSet(Team t) {
+		boolean answer = false;
+		if ( t.getRoster() != null) {
+			answer = true;
+		}
+		return answer;
+	}
+	
+	public static boolean hasSignedWaiver(Player p) {
+		boolean answer = false;
+		if(p.getPlayerWaiver() != null) {
+			answer = true;
+		}
+		return answer;
+	}
+	
 }
