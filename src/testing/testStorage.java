@@ -7,7 +7,10 @@ import Models.User;
 import Models.UserCredentials;
 import controller.Controller;
 
+//Jack Young
+// 10-27-2012
 
+//This class is only for testing purposes.  When project is completed this class shall be deleted.  
 public class testStorage {
 	
 	public static Controller c = new Controller();
