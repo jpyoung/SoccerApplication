@@ -1,14 +1,14 @@
 package Waiver;
 
 
-public class OfficalWaiver implements UserForm {
+public class OfficialWaiver implements UserForm {
 
 	private boolean signFlag;
 	private String name;
 	private String description;
 	private String signDate;
 	
-	public OfficalWaiver() {
+	public OfficialWaiver() {
 		// TODO Auto-generated constructor stub
 		
 		this.signFlag = false;
