@@ -47,6 +47,19 @@ public class InputHelper {
 			} while (!validateNumericInputMenu(input, varName, possibilities));
 		return input;
 	}
+	
+	
+	public static String promptStringMenuOptionsType2(String displayMessage, String varName, String title, int[] possibilities){
+		String input = "";
+			do {
+				input = JOptionPane.showInputDialog(null, displayMessage, title, JOptionPane.QUESTION_MESSAGE);
+				if(input == null) {
+					JOptionPane.showMessageDialog(null, "Your Pressed the Cancel Button, result was NULL");
+					return "-n-u-l-l-";
+				}
+			} while (!validateNumericInputMenu2(input, varName, possibilities));
+		return input;
+	}
 //	public static String promptStringMenuOptions(String displayMessage, String varName, String title, int[] possibilities){
 //		String input = "";
 //		boolean pressedCancel = false;
@@ -158,6 +171,40 @@ public class InputHelper {
 			return false;
 		}
 	}
+	
+	
+	
+	
+	public static boolean validateNumericInputMenu2(String inputed, String type, int[] possibilities) {
+		if(validateInputForEmpty(inputed, type)) {
+			int convertedValue;
+			try {
+				convertedValue = Integer.parseInt(inputed);
+				boolean isInList = false;
+				for(int z = 0; z < possibilities.length; z++) {
+					if(convertedValue == possibilities[z]){
+						isInList = true;
+					}
+				}
+				if(isInList) { 
+					return true;
+				} else {
+					JOptionPane.showMessageDialog(null, "Sorry! No such choice. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+					return false;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println(e);
+				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				return false;
+			}
+		} else {
+			//the inputed value was empty
+			return false;
+		}
+	}
+	
+	
+	
 	
 	public static boolean validateInputForEmpty(String input, String type){
 		/*

@@ -135,12 +135,21 @@ public class ManageTeamView {
 					m += "\n";
 					tempPoss[i] = (i + 1);
 				}
-				String resp = InputHelper.promptStringMenuOptions(m, "player choosen", title, tempPoss);
+				//String resp = InputHelper.promptStringMenuOptions(m, "player choosen", title, tempPoss);
 				
+				String resp = InputHelper.promptStringMenuOptionsType2(m, "player choosen", title, tempPoss);
 				
-				int n = Integer.parseInt(resp) - 1;
-				System.out.println("You selected this player number: " + resp + "   index value: " + n);
-				viewTeamDetailedPlayerProfile(pp[n], usersIndex);
+				System.out.println("Your answer: " + resp);
+				
+				if (resp.equals("-n-u-l-l-")) {
+					manageTeamPrompt(t, usersIndex);
+				} else {
+					System.out.println("Lets display the view");
+					int n = Integer.parseInt(resp) - 1;
+					System.out.println("You selected this player number: " + resp + "   index value: " + n);
+					viewTeamDetailedPlayerProfile(pp[n], usersIndex);
+				}
+			
 				
 			}
 		}
