@@ -42,6 +42,13 @@ public class testStorage {
 		
 		c.getUc().outputAllCredentials();
 		
+		
+
+		
+		
+		
+		//c.getUc().ge
+		
 		System.out.println("\n       END OF MAIN METHOD \n\n");
 		
 		om(c);

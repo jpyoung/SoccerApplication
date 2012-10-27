@@ -46,6 +46,26 @@ public class TestDataLoader {
 		return p;
 	}
 	
+	public Player getUser7() {
+		Player p = new Player();
+		p.setAddress(createAddress3());
+		p.setCaptain(true);
+		p.setFirstName("Sammy");
+		p.setLastName("Spees");
+		p.setPhone("222 455 1123");
+		return p;
+	}
+	
+	public Player getUser8() {
+		Player p = new Player();
+		p.setAddress(createAddress3());
+		p.setCaptain(true);
+		p.setFirstName("Corey");
+		p.setLastName("Fortier");
+		p.setPhone("233 455 2323");
+		return p;
+	}
+	
 	//coach user
 	public Coach getUser4() {
 		Coach c = new Coach();

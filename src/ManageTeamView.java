@@ -1,11 +1,14 @@
 import helpers.InputHelper;
 import helpers.OutputHelpers;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import Models.Coach;
 import Models.Player;
 import Models.Team;
+import Models.User;
 
 
 public class ManageTeamView {
@@ -64,6 +67,7 @@ public class ManageTeamView {
 			} else if ( n == 2) {
 				//add a player
 				System.out.println("add a player");
+				viewAddPlayerMenu(usersIndex);
 			} else if ( n == 3) {
 				//remove a player
 				System.out.println("remove a player");
@@ -94,8 +98,76 @@ public class ManageTeamView {
 	// pay league fees
 	// view roster
 	
+/****************************Add Player Section***************************************************************/	
+	public static void viewAddPlayerMenu(int usersIndex) {
+		JOptionPane.showMessageDialog(null, "Your at view add player menu top");
+		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
+		
+		viewAvailablePlayers(usersIndex);
+	}
 	
-/*******************************************************************************************/
+	public static void viewAvailablePlayers(int usersIndex) {
+		
+		String title = "Add Player";
+		String m = "This is a list of players who do not have a team.\n";
+		m += "Select the player you want to invite to join your roster:";
+		
+		ArrayList<User> aa = MainApplication.getController().getUc().getUserObjectArraylist();
+		System.out.println("The Size: " + aa.size());
+		ArrayList<Player> tempee = new ArrayList<Player>();
+		
+		for (int i = 0; i < aa.size(); i++) {
+			if(aa.get(i).getClass().getName().equals("Models.Player")){
+				tempee.add((Player)aa.get(i));
+			}
+			System.out.println(aa.get(i).getClass().getName());
+		}
+		
+		int counter = 1;
+		ArrayList<Player> tempee2 = new ArrayList<Player>();
+		
+		for (int i = 0; i < tempee.size(); i++) {
+			System.out.println("aaa: " + tempee.get(i));
+			if(tempee.get(i).getTeam() == null ){
+				System.out.println(tempee.get(i).getFirstName() + "   null team: ");
+				m +="\n" + counter + ". " + OutputHelpers.giveConcatName(tempee.get(i));
+				tempee2.add(tempee.get(i));
+				counter++;
+			} else {
+				tempee.remove(i);
+			}
+		}
+		System.out.println("The size: " + tempee.size());
+		
+		for (int i = 0; i < tempee2.size(); i++) {
+			System.out.println("aaa: " + tempee2.get(i).getFirstName());
+		}
+		
+		String resp = InputHelper.promptStringMenuOptionsType2(m, "select player", title, OutputHelpers.generatePossibleOptions(counter - 1));
+		
+		System.out.println("Your answer: " + resp);
+		
+		if (resp.equals("-n-u-l-l-")) {
+			manageTeamView(usersIndex);
+		} else {
+			System.out.println("Lets display the view");
+			int n = Integer.parseInt(resp) - 1;
+			
+			String ddMessage = OutputHelpers.giveConcatName(tempee2.get(n)) + " was invited to your team. He/shee will appear in your\n";
+			ddMessage += "roster after he/she accepted your invitation.\n";
+			ddMessage += "If he/she refuses the invitation, he/she will not appear in your roster.";
+			
+			InputHelper.displayMessage(ddMessage, "Invitation Confirmation");
+			manageTeamView(usersIndex);
+		}
+		
+		
+	}
+	
+	
+	
+	
+/*****************************View Roster Section**************************************************************/
 	//View Roster [team name ]
 	//select player you want to see or click back or ok 
 	

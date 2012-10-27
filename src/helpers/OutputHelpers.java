@@ -4,6 +4,16 @@ import Models.Player;
 import Models.User;
 
 public class OutputHelpers {
+	
+	
+	//Dynamically generate possible options for a list selection
+	public static int[] generatePossibleOptions(int size) {
+		int[] temp = new int[size];
+		for (int i = 0; i < temp.length; i++) {
+			temp[i] = (i + 1);
+		}
+		return temp;
+	}
 
 	//Method is used for concatenating the first and last name of passed in user, and returns it as a string. 
 	public static String giveConcatName(User n) {

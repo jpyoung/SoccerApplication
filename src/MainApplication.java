@@ -42,8 +42,7 @@ public class MainApplication {
 	
 		//end of temp data
 		
-		
-		
+	
 		//make the call for the first view 
 		firstView();
 		
