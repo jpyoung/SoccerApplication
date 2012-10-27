@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Team {
 	
-	private Roster roster = new Roster(); //add the new Roster() to initialize the player
+	private Roster roster;
 	private String name;
 	private String homeColor;
 	private String awayColor;
@@ -27,11 +27,13 @@ public class Team {
 	}
 	
 	public Team() {
+		roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
 		
 	}
 	
 	public Team(Coach c) {
 		coach = c;
+		roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
 		
 	}
 	

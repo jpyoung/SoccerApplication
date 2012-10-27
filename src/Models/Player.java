@@ -1,5 +1,6 @@
 package Models;
 
+import Waiver.PlayerWaiver;
 import Waiver.UserForm;
 
 
@@ -14,7 +15,7 @@ public class Player extends User {
 		super();
 		this.captain = false;
 		this.team = null;
-		this.playerWaiver = null;
+		this.playerWaiver = new PlayerWaiver();//(DUC) updated 10/27 : Creating Player object auto create PlayerWaiver()
 		
 	}
 	
