@@ -1,10 +1,12 @@
 package Models;
 
+import java.io.Serializable;
+
 import Waiver.CoachWaiver;
 import Waiver.UserForm;
 import controller.Controller;
 
-public class Coach extends User {
+public class Coach extends User implements Serializable {
 	private Team team;
 	private UserForm coachWaiver;
 	

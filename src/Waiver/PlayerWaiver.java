@@ -1,7 +1,9 @@
 package Waiver;
 
+import java.io.Serializable;
 
-public class PlayerWaiver implements UserForm {
+
+public class PlayerWaiver implements UserForm, Serializable {
 
 	private boolean signFlag;
 	private String name;

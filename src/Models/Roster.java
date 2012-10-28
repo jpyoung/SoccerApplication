@@ -1,8 +1,9 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
-public class Roster {
+public class Roster implements Serializable{
 
 	private HashSet<Player> roster = new HashSet<Player>();
 	public final int MAX_NUM_OF_PLAYERS = 30;

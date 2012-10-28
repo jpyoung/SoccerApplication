@@ -2,6 +2,8 @@ import helpers.InputHelper;
 import helpers.Prompt;
 import helpers.Prompter;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,7 +13,6 @@ import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
-import XML.CreateUserCredXML;
 import controller.Controller;
 
 //Jack Young
@@ -23,22 +24,49 @@ public class MainApplication {
 		return controller;
 	}
 	
+	
+	public static void writeOut() {
+		try
+		{
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Person.dat"));
+			out.writeObject(getController().uc);
+			out.close();
+			
+			System.out.println("--------------------------------------");
+			System.out.println("-----SAVED STATE TO DATA FILE---------");
+			System.out.println("--------------------------------------");
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	
+	
 	public static void saveUserCreds() {
-		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
-		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
-		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
-		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
 		
-		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
-		cxml.runExample();
+		writeOut();
+		
+//		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
+//		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
+//		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
+//		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
+//		
+//		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
+//		cxml.runExample();
 	}
 	
 	public static void main(String args[]) {
 		System.out.println("MainApplication class - Main Method launch");
 		
 		//load and output the initial  data
-		getController().loadInitialData();
+		//getController().loadInitialData();
+		//getController().getUc() = readIn();
 		
+		//Calling the serial load
+		getController().tempLoad();
 		
 		//temp data
 		Player p = (Player)getController().getUc().getUserObject(1);

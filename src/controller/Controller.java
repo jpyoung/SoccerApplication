@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import testing.TestDataLoader;
@@ -14,6 +16,29 @@ public class Controller {
 	//Getters
 	public static ArrayList<Team> getTeam() { return team; }
 	public UserCredentials getUc() { return uc; }
+	
+	public void tempLoad() {
+		uc = readIn();
+		
+		//outputting all the users credentials
+		getUc().outputAllCredentials();
+	}
+	
+	public UserCredentials readIn() {
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Person.dat"));
+			UserCredentials uu = (UserCredentials) in.readObject();
+			//Person[] newPersons = (Person[]) in.readObject();
+			in.close();
+			return uu;
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	
 	public void loadInitialData() {
 		TestDataLoader td = new TestDataLoader();

@@ -1,10 +1,12 @@
 package Models;
 
+import java.io.Serializable;
+
 import Waiver.PlayerWaiver;
 import Waiver.UserForm;
 
 
-public class Player extends User {
+public class Player extends User implements Serializable{
 	
 	private boolean captain;
 	private Team team;

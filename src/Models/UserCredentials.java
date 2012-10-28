@@ -1,9 +1,10 @@
 package Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class UserCredentials {
+public class UserCredentials implements Serializable {
 	
 	private ArrayList<Integer> id = new ArrayList<Integer>();
 	private ArrayList<String> userNames = new ArrayList<String>();
