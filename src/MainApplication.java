@@ -63,7 +63,6 @@ public class MainApplication {
 		
 		//load and output the initial  data
 		//getController().loadInitialData();
-		//getController().getUc() = readIn();
 		
 		//Calling the serial load
 		getController().tempLoad();
@@ -138,20 +137,13 @@ public class MainApplication {
 /*************************************************************************************************************/
 	public static void loginView() {
 		System.out.println(timeStamp() + "- SECTION: Login In.   Method Called: logingView()");
-		
 		userLoginAction();
-		
 	}
 	
 	public static void userLoginAction() {
 		System.out.println(timeStamp() + "- SECTION: Login In.   Method Called: userLoginAction()");
-		
 		Prompt userName;
 		Prompt iPassword;
-		
-//		do {
-//			userName = promptMessage("Please enter your email/username", "Login - username");
-//		} while (userName.isEmpty());
 		userName = Prompter.question("Please enterr your email/username", "Login - username");
 		
 		//checking to see if they pressed the cancel button on username input
@@ -163,33 +155,24 @@ public class MainApplication {
 			//checking to see if they pressed the cancel button on the password input 
 			if (!iPassword.isDidPressCancel()) {
 				System.out.println("\n\nCongrats, You have entered username: " + userName.getInputEntered() + " and password: " + iPassword.getInputEntered());
-				//validate their info here then if it checks out send them to this Dashboard
 				
 				String u = userName.getInputEntered();
 				String p = iPassword.getInputEntered();
-				
 				int loginResult = getController().getUc().getID(u, p);
 				if (loginResult != -1) {
 					System.out.println("id found: " + loginResult);
-					
 					dashBoards(loginResult);
-					
 				} else {
 					JOptionPane.showMessageDialog(null, "Sorry! The enter credentials do not match our records");
 					System.out.println("No id found: " + loginResult);
 					firstView();
 				}
-				
-			
 			} else {
-				//they pressed the cancel button in the password box, go back to firstview()
-				firstView();
+				firstView(); //they pressed the cancel button in the password box, go back to firstview()
 			}
 			
 		} else {
-			//they pressed the cancel button in the username input prompt
-			//go back to first view
-			firstView();
+			firstView(); //they pressed the cancel button in the username input prompt. go back to first view
 		}			
 	}
 	
@@ -211,9 +194,6 @@ public class MainApplication {
 /****************************END:  Login In ******************************************************************/
 /*************************************************************************************************************/
 	
-	
-	
-
 	
 	
 /*************************************************************************************************************/
@@ -276,7 +256,6 @@ public class MainApplication {
 			firstView(); // this will bring the user back to the first view
 		} else {
 			//error
-			
 		}
 		
 	}
@@ -285,10 +264,7 @@ public class MainApplication {
 	//View for the coaches dash board view
 	public static void coachesDashBoardView(int usersIndex) {
 		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()");
-		
-		//denotations form the uses cases
-		// can create team, manage team (edit team, view team info, play league fees), edit user profiel, save
-		
+	
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Manage or Create Team\n4. Save and Logout";
 		String titleString = "Dashboard - Coach - " + getController().getUc().getUserName(usersIndex);
 		String option = InputHelper.promptStringMenuOptions(displayString, "options", titleString, new int[]{1, 2, 3, 4});
@@ -319,8 +295,6 @@ public class MainApplication {
 	
 	//view for the players dashboard view
 	public static void playersDashBoardView(int usersIndex) {
-		//dentaitons from the uses cases
-		// player can edit urse profiel, view all teams, join a team (sign up as captain), and save
 		System.out.println("\n\nPlayers Dash Board loaded");
 		
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Invitations and Notifications\n4. Save and Logout";
@@ -347,14 +321,11 @@ public class MainApplication {
 			
 		}
 		
-		
 	}
 /*************************************************************************************************************/
 /****************************END:  Dashboards ****************************************************************/
 /*************************************************************************************************************/
 	
-
-
 	
 /***************************************************************************************************/
 /*******************************Start: View Team Profiles ******************************************/
@@ -440,7 +411,6 @@ public class MainApplication {
 		data += "\n1. player 1: asdfasd\n2. player 2: aasdfsfaasdf";
 		JOptionPane.showMessageDialog(null, data, dTitle, JOptionPane.INFORMATION_MESSAGE);
 		
-		
 		viewTeamProfiles(usersIndex);
 		
 	}
@@ -452,14 +422,9 @@ public class MainApplication {
 	public static void editProfileView(int usersIndex) {
 		//"1. Password\n2. Phone Number\n3. Name"
 		String message = "What would you like to edit?\n1. Password\n2. Phone Number\n3. Name\n4. Go back to Dashboard";
-		
 		String titleString = "Edit Profile - " + getController().getUc().getUserName(usersIndex);
 		
 		String r = InputHelper.promptStringMenuOptions(message, "Edit Profile", titleString, new int[]{1, 2, 3, 4});
-		
-		//System.exit(0);
-		
-		System.out.println("Value of R: " + r);
 		
 		int editMenuSelection = Integer.parseInt(r);
 		
@@ -481,9 +446,6 @@ public class MainApplication {
 			playersDashBoardView(usersIndex);
 		}
 		
-		
-		
-		
 	}
 	
 	/*****/
@@ -499,15 +461,13 @@ public class MainApplication {
 	public static void editMenuName(int usersIndex) {
 		
 		String curNameConcat = getController().getUc().getUserObject(usersIndex).getFirstName() + " " + getController().getUc().getUserObject(usersIndex).getLastName();
-		
 		String data = "The current name is: " + curNameConcat;
-		data += "\nPlease enter in the new name, first and last name seperated by a space: ";
+			data += "\nPlease enter in the new name, first and last name seperated by a space: ";
 		
 		String newName = InputHelper.promptString(data, "newName", "Edit - name");
 		System.out.println("Entered name is now : " + newName + " where as before it was " + curNameConcat);
 		
 		//Need to check and make sure they actually entered a space between the first and last name to delimite and set attribtures
-		
 		if (newName == null ) {
 			//they pressed the cancel button
 			System.out.println("Pressed the cancel button on editMenuName");
@@ -515,11 +475,7 @@ public class MainApplication {
 			//they entered in something for their name, now we just need to valdiate it for a delimite to set the first and last name attribtues
 			String delims = "[ ]+";
 			String[] tokens = newName.split(delims);
-			
-//			System.out.println("--------------------");
-//			for (int i = 0; i < tokens.length; i++) {
-//				System.out.println("#" + i + "  : " + tokens[i]);
-//			}
+
 			if (tokens.length == 2) {
 				//the entered name had a space, so the name was set
 				getController().getUc().getUserObject(usersIndex).setFirstName(tokens[0]);
@@ -532,26 +488,19 @@ public class MainApplication {
 				InputHelper.unsuccessfulEditDialog("name", "Edit - name");
 				editProfileView(usersIndex);
 			}
-			
-			
-			
+		
 		} else {
 			System.out.println("They pressed the exit button on the editMenuName method");
-		}
-		
-		
+		}	
 	}
 	
 	@SuppressWarnings("unused")
 	public static void editMenuPhoneNumber(int usersIndex) {
-		
 		String data = "Your current phone number is : " + getController().getUc().getUserObject(usersIndex).getPhone();
-		data += "\nPlease enter the new phone number (xxx xxx xxxx):";
+			data += "\nPlease enter the new phone number (xxx xxx xxxx):";
 		
 		//need to add validatation to this phone input area.  ex. 703 252 0854
 		String newNumber = InputHelper.promptString(data, "phoneNumber", "Edit - phone number");
-		
-		
 		
 		System.out.println("The new phone number they entered: " + newNumber);
 		
@@ -571,13 +520,9 @@ public class MainApplication {
 			} else {
 				InputHelper.unsuccessfulEditDialog("phone number", "Edit - phone number");
 			}
-			
-			
 		} else {
 			System.out.println("They pressed the exit button on the editMenuPHoneNumber method");
 		}
-		
-		
 		
 		editProfileView(usersIndex);
 	}
@@ -616,21 +561,13 @@ public class MainApplication {
 				//redirects them back to the editProfileView
 				editProfileView(usersIndex);
 			}
-			
 		} else {
 			System.out.println("They pressed the exit button on the edtiMenuPasswordOption");
 			editProfileView(usersIndex);
 		}
-		
-
-		
-		
 	}	
 	
 
-	
-	
-	
 	//Other methods not sure where to place yet
 	
 	public static void invitationDialog(String message, String title) {
@@ -638,7 +575,6 @@ public class MainApplication {
 		int n = JOptionPane.showOptionDialog(null, message,
 				title, JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
-		
 		if (n == -1 ) {
 			//they pressed the x button
 			System.out.println("Clicked the x button");
@@ -652,26 +588,21 @@ public class MainApplication {
 				System.out.println("Clicked Refuse");
 			}
 		}
-		
 	}
 	
 	public static void playerProfileView(User player1) {
 		Player player = (Player)player1;
-		
-		
 		@SuppressWarnings("unused")
 		String data = "Player Name: " + player.getFirstName() + " " + player.getLastName();
 		//data += "\nEmail: " + player.get
 		data += "\nPhone: " + player.getPhone();
 		//data += "\nSigned Waiver: " + player.getPlayerWaiver().getSignFlag();
 		data += "\nCaptain: " + player.getCaptain();
-		
 	}
 	
 	//time stamp area
 	public static String timeStamp(){
 		Date today = new Date();   
-	
 	    String a = "" + today;
 	    return a;
 	}
