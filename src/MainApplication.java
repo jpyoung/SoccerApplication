@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -34,6 +33,19 @@ public class MainApplication {
 		MainApplication.controller = readIn();
 		
 		getController().getUc().outputAllCredentials();
+		
+		
+		Coach c = (Coach)getController().getUc().getUserObject(3);
+		Coach c2 = (Coach)getController().getUc().getUserObject(5);
+		System.out.println(c2.getTeam().getName());
+		System.out.println("---asd-fadsf-asdf-asdf-asd-f---\n");
+		System.out.println(c.getTeam().getName());
+		
+		//Team t = c.getTeam();
+		//getController().getTeam().add(c2.getTeam());
+		//getController().addATeam(c.getTeam());
+		
+		
 	}
 	
 	public static Controller readIn() {
@@ -146,9 +158,17 @@ public class MainApplication {
 		
 		System.out.println("\n\n--Before Application Close---");
 		System.out.println("Team arraylist size: " + getController().getTeam().size());
-		getController().getUc().outputAllCredentials();
 		
+		for (int i = 0; i < getController().getTeam().size(); i++) {
+			System.out.println(getController().getTeam().get(i).getName());
+		}
+		
+		getController().getUc().outputAllCredentials();
+		//System.out.println("Team arraylist size: " + getController().getTeam().size());
 		//make the call for the first view 
+		
+		
+		
 		firstView();
 		
 
@@ -334,7 +354,7 @@ public class MainApplication {
 		
 		//data += Team.getAllTeams();
 		
-		int ln = Controller.getTeam().size();
+		int ln = getController().getTeam().size();
 		
 		InputHelper.displayMessage("There are number of teams " + ln, "view all teams");
 		System.out.println("\n\nThere are number of teams: " + ln);
@@ -427,24 +447,34 @@ public class MainApplication {
 	
 	@SuppressWarnings("unused")
 	public static void viewTeamProfiles(int usersIndex) {
-		String data = "Choose team to view:\n";		
-		data += Team.getAllTeams();
 		
-		int ln = Controller.getTeam().size();
-		
-		//Taking the number of teams size, then creating a array of ints that corresponds to the option that they can select from
-		int[] tempA = new int[ln + 1];
-		ArrayList<Integer> tempB = new ArrayList<Integer>();
-		for (int y = 0; y < tempA.length; y++) {
-			tempA[y] = (y + 1);
-			tempB.add(y + 1);
+		String data = "Choose team to view:\n";	
+		System.out.println("\n\n\n\n");
+		for (int i = 0; i < getController().getTeam().size(); i++) {
+			data += "\n" + (i+1) + ". "+ getController().getTeam().get(i).getName();
 		}
+		System.out.println("The Size: " + getController().getTeam().size());
+		System.out.println("\n\n\n\n");
 		
+//		String data = "Choose team to view:\n";		
+//		data += Team.getAllTeams();
+		
+		int ln = getController().getTeam().size();
+		int[] pos = OutputHelpers.generatePossibleOptions(ln + 1);
+//		
+//		//Taking the number of teams size, then creating a array of ints that corresponds to the option that they can select from
+//		int[] tempA = new int[ln + 1];
+//		ArrayList<Integer> tempB = new ArrayList<Integer>();
+//		for (int y = 0; y < tempA.length; y++) {
+//			tempA[y] = (y + 1);
+//			tempB.add(y + 1);
+//		}
+//		
 		//setting the exit condition number for a dynamically generated list of teams
-		int exitNum = tempA[ln];
-		data += "\n" + tempA.length + ". Exit";
+		int exitNum = ln + 1;
+		data += "\n" + exitNum + ". Exit";
 		
-		String option = InputHelper.promptStringMenuOptions(data, "View Team", "View Team", tempA);
+		String option = InputHelper.promptStringMenuOptions(data, "View Team", "View Team", pos);
 		
 		if (option == null) {
 			//they pressed cancel button
@@ -477,7 +507,7 @@ public class MainApplication {
 				
 			} else {
 				//Calling the method to view a more detailed look at the selected team
-				detailedTeamView(Controller.getTeam().get(c - 1), usersIndex);
+				detailedTeamView(getController().getTeam().get(c - 1), usersIndex);
 //				if (tempB.contains(c - 1)) {
 //					System.out.println("It contains it ");
 //					detailedTeamView(Controller.getTeam().get(c - 1), usersIndex);

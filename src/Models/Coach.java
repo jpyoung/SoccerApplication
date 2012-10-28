@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import Waiver.CoachWaiver;
 import Waiver.UserForm;
-import controller.Controller;
+
 
 public class Coach extends User implements Serializable {
 	/**
@@ -21,14 +21,14 @@ public class Coach extends User implements Serializable {
 		
 		
 		System.out.println("\n\n-----------------------------------");
-		System.out.println("Team Info size: " + Controller.getTeam().size());
+		//System.out.println("Team Info size: " + Controller.getTeam().size());
 		System.out.println("\n\n-----------------------------------");
 		
 		
-		Controller.getTeam().add(team);
+		//Controller.getTeam().add(team);
 		
 		System.out.println("\n\n-----------------------------------");
-		System.out.println("Team Info size: " + Controller.getTeam().size());
+		//System.out.println("Team Info size: " + Controller.getTeam().size());
 		System.out.println("\n\n-----------------------------------");
 		
 //		this.team = new Team();

@@ -16,11 +16,14 @@ public class Controller implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	public UserCredentials uc;
-	public static ArrayList<Team> team = new ArrayList<Team>();
-	
+	public ArrayList<Team> team = new ArrayList<Team>();
+	//public ArrayList<Team> team;
 	//Getters
-	public static ArrayList<Team> getTeam() { return team; }
+	public ArrayList<Team> getTeam() { return team; }
 	
+	public void addATeam(Team t) {
+		this.team.add(t);
+	}
 	
 	
 	public UserCredentials getUc() { return uc; }

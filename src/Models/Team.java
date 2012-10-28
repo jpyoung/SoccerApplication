@@ -9,7 +9,7 @@ public class Team implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Roster roster;
+	private Roster roster = new Roster();
 	private String name;
 	private String homeColor;
 	private String awayColor;
@@ -32,13 +32,13 @@ public class Team implements Serializable {
 	}
 	
 	public Team() {
-		roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
+		//roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
 		
 	}
 	
 	public Team(Coach c) {
 		coach = c;
-		roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
+		//roster = new Roster();//(DUC) updated 10/27 creating new roster when team is created
 		
 	}
 	
