@@ -8,9 +8,6 @@ public class User {
 	private String phone;
 	private Address address;
 	
-	
-	
-	
 	public String getFirstName() {
 		return firstName;
 	}

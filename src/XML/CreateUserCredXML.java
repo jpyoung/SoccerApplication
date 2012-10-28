@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,8 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import Models.UserCredentials;
 
 import com.sun.org.apache.xml.internal.serialize.OutputFormat;
 import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
@@ -28,22 +24,35 @@ import com.sun.org.apache.xml.internal.serialize.XMLSerializer;
 @SuppressWarnings("restriction")
 public class CreateUserCredXML {
     
-	List<UserCredentials> myData;
+	ArrayList<String> myData;
+	ArrayList<String> myData2;
+	ArrayList<Integer> myData3;
+	ArrayList<Integer> myData4;
+	
     Document dom;
     private String fileLocation;
     private int count;
 
    
-    public CreateUserCredXML(UserCredentials[] iPerson, String iFileLocation) {
+    public CreateUserCredXML(ArrayList<String> xUserName, ArrayList<String> xPassword, ArrayList<Integer> xID, ArrayList<Integer> type, String iFileLocation) {
         this.count = 1;
         this.fileLocation = iFileLocation;
         //create a list to hold the data
-        myData = new ArrayList<UserCredentials>();
-
-        for (int x = 0; x < iPerson.length; x++) {
-            myData.add(iPerson[x]);
-        }
-
+        myData = new ArrayList<String>();
+        myData2 = new ArrayList<String>();
+        myData3 = new ArrayList<Integer>();
+        myData4 = new ArrayList<Integer>();
+        	
+       
+        
+        for (int i = 0; i < xUserName.size(); i++) {
+			myData.add(xUserName.get(i));
+			myData2.add(xPassword.get(i));
+			myData3.add(xID.get(i));
+			myData4.add(type.get(i));
+		}
+        
+        	
         System.out.println("CreateXML constructor was called");
         createDocument();
     }
@@ -102,13 +111,21 @@ public class CreateUserCredXML {
     public void createDOMTree() {
         Element rootEle = dom.createElement("Tracker"); //create the root element <Books>
         dom.appendChild(rootEle);
-        Iterator<UserCredentials> it = myData.iterator();
-        while (it.hasNext()) {
-        	UserCredentials b = (UserCredentials) it.next();
-            Element bookEle = createOrderElement(b);
-            rootEle.appendChild(bookEle);
+        
+        
+        for (int i = 0; i < myData.size(); i++) {
+			Element bookEle = createOrderElement(myData.get(i), myData2.get(i), myData3.get(i), myData4.get(i));
+			rootEle.appendChild(bookEle);
             incrementCount();
-        }
+		}
+        
+//        Iterator<UserCredentials> it = myData.iterator();
+//        while (it.hasNext()) {
+//        	UserCredentials b = (UserCredentials) it.next();
+//            Element bookEle = createOrderElement(b);
+//            rootEle.appendChild(bookEle);
+//            incrementCount();
+//        }
     }
 
 //This method builds the element representation in xml
@@ -117,26 +134,32 @@ public class CreateUserCredXML {
      * @param b
      * @return Element
      */
-    public Element createOrderElement(UserCredentials b) {
+    public Element createOrderElement(String xU, String xP, int id, int type) {
 
         Element ele = dom.createElement("Order");
         ele.setAttribute("Subject", String.valueOf(getCount()));
         
         
-//        Element fnE = dom.createElement("firstName");
-//        Text fnText = dom.createTextNode(b.getFirstName());
-//        fnE.appendChild(fnText);
-//        ele.appendChild(fnE);
-//
-//        Element lnE = dom.createElement("lastName");
-//        Text lnText = dom.createTextNode(b.getLastName());
-//        lnE.appendChild(lnText);
-//        ele.appendChild(lnE);
-//
-//        Element aE = dom.createElement("age");
-//        Text aText = dom.createTextNode(String.valueOf(b.getAge()));
-//        aE.appendChild(aText);
-//        ele.appendChild(aE);
+        Element fnE = dom.createElement("userName");
+        org.w3c.dom.Text fnText = dom.createTextNode(xU);
+        fnE.appendChild(fnText);
+        ele.appendChild(fnE);
+        
+        Element fnE2 = dom.createElement("password");
+        org.w3c.dom.Text fnText2 = dom.createTextNode(xP);
+        fnE2.appendChild(fnText2);
+        ele.appendChild(fnE2);
+
+        Element fnE3 = dom.createElement("id");
+        org.w3c.dom.Text fnText3 = dom.createTextNode(String.valueOf(id));
+        fnE3.appendChild(fnText3);
+        ele.appendChild(fnE3);
+        
+        Element fnE4 = dom.createElement("userType");
+        org.w3c.dom.Text fnText4 = dom.createTextNode(String.valueOf(type));
+        fnE4.appendChild(fnText4);
+        ele.appendChild(fnE4);
+        
 
         return ele;
     }

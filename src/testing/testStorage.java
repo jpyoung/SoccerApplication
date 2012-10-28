@@ -3,12 +3,14 @@ package testing;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
 import Models.UserCredentials;
+import XML.CreateUserCredXML;
 import controller.Controller;
 
 //Jack Young
@@ -46,15 +48,14 @@ public class testStorage {
 		
 		c.getUc().outputAllCredentials();
 		
-		String[] gatheredInfo = new String[c.getUc().getUserObjectArraylist().size()];
 		
-		for (int i = 0; i < gatheredInfo.length; i++) {
-			gatheredInfo[i] = c.getUc().getUserObjectArraylist().toString();
-		}
+		ArrayList<String> xU = c.getUc().getUserNamesArraylist();
+		ArrayList<String> xP = c.getUc().getPasswordsArraylist();
+		ArrayList<Integer> xID = c.getUc().getIdArraylist();
+		ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
 		
-		  String FILELOC = "/Users/youngbuck14188/Desktop/Program WorkSpace/306_SoccerProject_v2/Sample.txt";
-	        
-	        writeOutputToResultFile(gatheredInfo, FILELOC);
+		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
+		cxml.runExample();
 	
 //		System.out.println("\n       END OF MAIN METHOD \n\n");
 //		

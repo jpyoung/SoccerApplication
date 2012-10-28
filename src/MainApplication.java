@@ -11,6 +11,7 @@ import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
+import XML.CreateUserCredXML;
 import controller.Controller;
 
 //Jack Young
@@ -22,7 +23,15 @@ public class MainApplication {
 		return controller;
 	}
 	
-
+	public static void saveUserCreds() {
+		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
+		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
+		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
+		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
+		
+		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
+		cxml.runExample();
+	}
 	
 	public static void main(String args[]) {
 		System.out.println("MainApplication class - Main Method launch");
@@ -51,6 +60,10 @@ public class MainApplication {
 		//output all userCreditential data on close
 		System.out.println("--Data on Application Close---");
 		getController().getUc().outputAllCredentials();
+		
+		
+		//saving the usercrediential data to xml
+		saveUserCreds();
 		
 	}
 	
