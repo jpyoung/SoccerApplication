@@ -56,6 +56,8 @@ public class TestDataLoader {
 		return p;
 	}
 	
+
+	
 	public Player getUser8() {
 		Player p = new Player();
 		p.setAddress(createAddress3());
@@ -174,4 +176,8 @@ public class TestDataLoader {
 		a.setCity("Chantilly");
 		return a;
 	}
+	
+	
+	///generated methods
+	
 }
