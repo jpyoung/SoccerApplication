@@ -5,6 +5,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 public class Roster implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HashSet<Player> roster = new HashSet<Player>();
 	public final int MAX_NUM_OF_PLAYERS = 30;
 	public int playerCount = 0;
@@ -12,6 +16,7 @@ public class Roster implements Serializable{
 	public void addPlayerName(Player player) {
 		System.out.println("Add Player Method called");
 		roster.add(player);
+	
 		
 		playerCount++;
 	}

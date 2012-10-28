@@ -7,6 +7,10 @@ import Waiver.UserForm;
 import controller.Controller;
 
 public class Coach extends User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Team team;
 	private UserForm coachWaiver;
 	
@@ -14,7 +18,19 @@ public class Coach extends User implements Serializable {
 		// TODO Auto-generated constructor stub
 		super();
 		team = new Team(this);
+		
+		
+		System.out.println("\n\n-----------------------------------");
+		System.out.println("Team Info size: " + Controller.getTeam().size());
+		System.out.println("\n\n-----------------------------------");
+		
+		
 		Controller.getTeam().add(team);
+		
+		System.out.println("\n\n-----------------------------------");
+		System.out.println("Team Info size: " + Controller.getTeam().size());
+		System.out.println("\n\n-----------------------------------");
+		
 //		this.team = new Team();
 //		this.team.setCoach(this);
 		

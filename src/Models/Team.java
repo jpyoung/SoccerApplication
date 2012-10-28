@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class Team implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Roster roster;
 	private String name;
 	private String homeColor;

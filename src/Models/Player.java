@@ -8,6 +8,10 @@ import Waiver.UserForm;
 
 public class Player extends User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean captain;
 	private Team team;
 	public UserForm playerWaiver;

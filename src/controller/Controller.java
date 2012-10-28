@@ -2,19 +2,27 @@ package controller;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import testing.TestDataLoader;
 import Models.Team;
 import Models.UserCredentials;
 
-public class Controller {
+public class Controller implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public UserCredentials uc;
 	public static ArrayList<Team> team = new ArrayList<Team>();
 	
 	//Getters
 	public static ArrayList<Team> getTeam() { return team; }
+	
+	
+	
 	public UserCredentials getUc() { return uc; }
 	
 	public void tempLoad() {
@@ -22,7 +30,10 @@ public class Controller {
 		
 	
 		//outputting all the users credentials
+		
+		
 		getUc().outputAllCredentials();
+		
 	}
 	
 	public UserCredentials readIn() {
@@ -40,7 +51,10 @@ public class Controller {
 	}
 	
 	
+	
+	
 	public void loadInitialData() {
+			
 		TestDataLoader td = new TestDataLoader();
 		
 		uc = new UserCredentials();

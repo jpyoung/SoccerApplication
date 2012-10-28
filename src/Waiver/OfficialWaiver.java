@@ -5,6 +5,10 @@ import java.io.Serializable;
 
 public class OfficialWaiver implements UserForm, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean signFlag;
 	private String name;
 	private String description;

@@ -1,11 +1,17 @@
 package Models;
 
+import java.io.Serializable;
+
 import Waiver.OfficialWaiver;
 import Waiver.UserForm;
 
 
-public class Official extends User {
+public class Official extends User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private UserForm officalWaiver;
 	
 	public Official() {

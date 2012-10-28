@@ -3,14 +3,12 @@ package testing;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
 import Models.UserCredentials;
-import XML.CreateUserCredXML;
 import controller.Controller;
 
 //Jack Young
@@ -35,31 +33,31 @@ public class testStorage {
 		c.getUc().setUserObject("jyoung", "greatness", 3, td.getUser2());
 		c.getUc().setUserObject("dtruong", "dtr", 3, td.getUser3());
 		
-		
-		Player p = new Player();
-		p.setCaptain(false);
-		p.setFirstName("Ryan");
-		p.setLastName("Young");
-		p.setPhone("773 455 2323");
-		
-		c.getUc().setUserObject("ryoung", "ryc", 3, p);
-		
-		
-		
-		c.getUc().outputAllCredentials();
-		
-		
-		ArrayList<String> xU = c.getUc().getUserNamesArraylist();
-		ArrayList<String> xP = c.getUc().getPasswordsArraylist();
-		ArrayList<Integer> xID = c.getUc().getIdArraylist();
-		ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
-		
-		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
-		cxml.runExample();
-	
-//		System.out.println("\n       END OF MAIN METHOD \n\n");
 //		
-//		om(c);
+//		Player p = new Player();
+//		p.setCaptain(false);
+//		p.setFirstName("Ryan");
+//		p.setLastName("Young");
+//		p.setPhone("773 455 2323");
+//		
+//		c.getUc().setUserObject("ryoung", "ryc", 3, p);
+//		
+//		
+//		
+//		c.getUc().outputAllCredentials();
+//		
+//		
+//		ArrayList<String> xU = c.getUc().getUserNamesArraylist();
+//		ArrayList<String> xP = c.getUc().getPasswordsArraylist();
+//		ArrayList<Integer> xID = c.getUc().getIdArraylist();
+//		ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
+//		
+//		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
+//		cxml.runExample();
+//	
+//		System.out.println("\n       END OF MAIN METHOD \n\n");
+		
+		om(c);
 		
 	}
 	

@@ -1,8 +1,11 @@
 import helpers.InputHelper;
+import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,17 +22,46 @@ import controller.Controller;
 //Created On: 10/25/2012
 public class MainApplication {
 	
+	//public static Controller controller;
 	public static Controller controller = new Controller();
 	public static Controller getController(){
 		return controller;
 	}
 	
 	
+	
+	public static void loadEverything() {
+		MainApplication.controller = readIn();
+		
+		getController().getUc().outputAllCredentials();
+	}
+	
+	public static Controller readIn() {
+		try
+		{
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream("TeamssArr.dat"));
+			Controller uu = (Controller) in.readObject();
+			
+			in.close();
+			
+			System.out.println("\n\n----------------READIN-------------------");
+			
+			
+			return uu;
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public static void writeOut() {
 		try
 		{
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Person.dat"));
-			out.writeObject(getController().uc);
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TeamssArr.dat"));
+			
+			System.out.println("\n\n\n\n\n------asdfasdfasdf-" + getController().getTeam().size());
+			out.writeObject(getController());
 			out.close();
 			
 			System.out.println("--------------------------------------");
@@ -40,6 +72,37 @@ public class MainApplication {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+//		try
+//		{
+//			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Person.dat"));
+//			out.writeObject(getController().uc);
+//			out.close();
+//			
+//			System.out.println("--------------------------------------");
+//			System.out.println("-----SAVED STATE TO DATA FILE---------");
+//			System.out.println("--------------------------------------");
+//			
+//		} 
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
+//		try {
+//			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TeamssArr.dat"));
+//			out.writeObject(Controller.getTeam());
+//			out.close();
+//			
+//			System.out.println("--------------------------------------");
+//			System.out.println("-----SAVED STATE TO DATA FILE---------");
+//			System.out.println("--------------------------------------");
+//			
+//		} 
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
+		
 	}
 	
 
@@ -65,7 +128,9 @@ public class MainApplication {
 		//getController().loadInitialData();
 		
 		//Calling the serial load
-		getController().tempLoad();
+		//getController().tempLoad();
+		
+		loadEverything();
 		
 		//temp data
 		Player p = (Player)getController().getUc().getUserObject(1);
@@ -78,7 +143,11 @@ public class MainApplication {
 	
 		//end of temp data
 		
-	
+		
+		System.out.println("\n\n--Before Application Close---");
+		System.out.println("Team arraylist size: " + getController().getTeam().size());
+		getController().getUc().outputAllCredentials();
+		
 		//make the call for the first view 
 		firstView();
 		
@@ -250,7 +319,8 @@ public class MainApplication {
 			editProfileView(usersIndex);
 		} else if (c == 2) {
 			//go to view teams profiles
-			
+			//viewAllTeams(usersIndex);
+			viewTeamProfiles(usersIndex);
 		} else if (c == 3) {
 			//go to save and log out
 			firstView(); // this will bring the user back to the first view
@@ -258,6 +328,31 @@ public class MainApplication {
 			//error
 		}
 		
+	}
+	
+	public static void viewAllTeams(int usersIndex) {
+		
+		//data += Team.getAllTeams();
+		
+		int ln = Controller.getTeam().size();
+		
+		InputHelper.displayMessage("There are number of teams " + ln, "view all teams");
+		System.out.println("\n\nThere are number of teams: " + ln);
+		
+		officialsDashBoardView(usersIndex);
+		
+	}
+	
+	//temp method
+	public static void viewAllPlayersListing(int usersIndex){
+		String a = "";
+		for (int i = 0; i < getController().getUc().getUserObjectArraylist().size(); i++) {
+			a += "#" + (i+1) + "  " + OutputHelpers.giveConcatName(getController().getUc().getUserObject(i));
+			a += "\n";
+		}
+		
+		InputHelper.displayMessage(a, "View all people");
+		officialsDashBoardView(usersIndex);
 	}
 	
 	
@@ -607,4 +702,18 @@ public class MainApplication {
 	    return a;
 	}
 
+	
+	//temp method
+//	public static void viewAllPlayersListing(int usersIndex){
+//		String a = "";
+//		for (int i = 0; i < getController().getUc().getUserObjectArraylist().size(); i++) {
+//			a += "#" + (i+1) + "  " + OutputHelpers.giveConcatName(getController().getUc().getUserObject(i));
+//			a += "\n";
+//		}
+//		
+//		InputHelper.displayMessage(a, "View all people");
+//		officialsDashBoardView(usersIndex);
+//	}
+	
+	
 }
