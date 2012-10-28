@@ -44,7 +44,4 @@ public class Coach extends User implements Serializable {
 		return a;
 	}
 	
-	
-	
-
 }

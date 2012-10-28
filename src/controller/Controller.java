@@ -29,7 +29,6 @@ public class Controller {
 		{
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Person.dat"));
 			UserCredentials uu = (UserCredentials) in.readObject();
-			//Person[] newPersons = (Person[]) in.readObject();
 			in.close();
 			return uu;
 		} 
@@ -60,7 +59,4 @@ public class Controller {
 
 	}
 	
-	
-
-
 }

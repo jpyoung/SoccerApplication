@@ -94,6 +94,7 @@ public class ManageTeamView {
 /****************************Add Player Section***************************************************************/	
 	public static void viewAddPlayerMenu(int usersIndex) {
 		JOptionPane.showMessageDialog(null, "Your at view add player menu top");
+		@SuppressWarnings("unused")
 		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
 		
 		viewAvailablePlayers(usersIndex);
