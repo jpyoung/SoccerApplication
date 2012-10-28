@@ -61,6 +61,7 @@ public class TestBackButton {
 		
 		for (int i = 0; i < email.length; i++) {
 			System.out.println("uc.setUserObject(\"" + email[i] + "\", \"" + passwords[i] + "\", 3, td.getUser" + startingMethodNumber + "());");
+			startingMethodNumber++;
 		}
 		
 		System.out.println("\n\n methods to added to data loader");

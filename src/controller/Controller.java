@@ -20,6 +20,7 @@ public class Controller {
 	public void tempLoad() {
 		uc = readIn();
 		
+	
 		//outputting all the users credentials
 		getUc().outputAllCredentials();
 	}
