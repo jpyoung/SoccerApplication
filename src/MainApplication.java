@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
+import testing.PDFWriter;
 import Models.Coach;
 import Models.Player;
 import Models.Team;
@@ -71,6 +72,9 @@ public class MainApplication {
 		
 		//saving the usercrediential data to xml
 		//SystemStateController.saveUserCreds();
+		
+		PDFWriter pdf = new PDFWriter();
+		PDFWriter.runPDFwriter(getController());
 		
 	}
 	

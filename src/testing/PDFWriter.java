@@ -1,6 +1,7 @@
 package testing;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.itextpdf.text.Anchor;
@@ -59,7 +60,7 @@ public class PDFWriter {
 			      document.open();
 			      addMetaData(document);
 			      addTitlePage(document, c);
-			      addContent(document);
+			      addContent(document, c);
 			      document.close();
 			    } catch (Exception e) {
 			      e.printStackTrace();
@@ -79,10 +80,7 @@ public class PDFWriter {
 	  }
 
 	  
-//		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
-//		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
-//		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
-//		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
+	  
 	  
 	  
 	  private static void addTitlePage(Document document, Controller c)
@@ -111,28 +109,29 @@ public class PDFWriter {
 	    document.newPage();
 	  }
 
-	private static void addContent(Document document) throws DocumentException {
+	  private static void addContent(Document document, Controller c) throws DocumentException {
+	  
+	    
+	    Anchor anchor = new Anchor("User Information/Data", catFont);
+	    anchor.setName("UserCredentials Table");
 
-		Anchor anchor = new Anchor("User Information/Data", catFont);
-		anchor.setName("UserCredentials Table");
+	    // Second parameter is the number of the chapter
+	    Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 
-		// Second parameter is the number of the chapter
-		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+	    Paragraph subPara = new Paragraph("Subcategory 1", subFont);
+	    Section subCatPart = catPart.addSection(subPara);
+	  
+	    Paragraph paragraph = new Paragraph();
+	    addEmptyLine(paragraph, 5);
 
-		Paragraph subPara = new Paragraph("Subcategory 1", subFont);
-		Section subCatPart = catPart.addSection(subPara);
+	    subCatPart.add(paragraph);
+	    createSecondTable(subCatPart, c);
 
-		Paragraph paragraph = new Paragraph();
-		addEmptyLine(paragraph, 5);
-
-		subCatPart.add(paragraph);
-		createSecondTable(subCatPart);
-
-		document.add(catPart);
-	}
+	    document.add(catPart);
+	  }
 	
 	
-	  public static void createSecondTable(Section subCatPart) throws BadElementException{
+	  public static void createSecondTable(Section subCatPart, Controller c) throws BadElementException{
 		  
 		  PdfPTable table = new PdfPTable(4);
 		  
@@ -160,17 +159,41 @@ public class PDFWriter {
 		    table.addCell(c1);
 		    table.setHeaderRows(1);
 		    
-		   
+			ArrayList<String> xU = c.getUc().getUserNamesArraylist();
+			ArrayList<String> xP = c.getUc().getPasswordsArraylist();
+			ArrayList<Integer> xID = c.getUc().getIdArraylist();
+			ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
+			
+			
+			System.out.println("-----------------Printer info---------------");
+			System.out.println("username length: " + xU.size());
+			System.out.println("PASSWORD length: " + xP.size());
+			System.out.println("id length: " + xID.size());
+			System.out.println("userType length: " + xTYPE.size());
+			System.out.println("--------------------------------------------\n\n");
+			
+			int loopLength = 0;
+			if (xU.size() == xP.size()) {
+				loopLength = xU.size();
+			}
+			
+			for (int i = 0; i < loopLength; i++) {
+				table.addCell(xU.get(i));
+			    table.addCell(xP.get(i));
+			    table.addCell(String.valueOf(xID.get(i)));
+			    table.addCell(String.valueOf(xTYPE.get(i)));
+			}
+			
 		    
-		    table.addCell("jyoung");
-		    table.addCell("greatness");
-		    table.addCell("1");
-		    table.addCell("3");
-		    
-		    table.addCell("bVam");
-		    table.addCell("vam");
-		    table.addCell("5");
-		    table.addCell("1");
+//		    table.addCell("jyoung");
+//		    table.addCell("greatness");
+//		    table.addCell("1");
+//		    table.addCell("3");
+//		    
+//		    table.addCell("bVam");
+//		    table.addCell("vam");
+//		    table.addCell("5");
+//		    table.addCell("1");
 		    
 		    subCatPart.add(table);
 	  }
