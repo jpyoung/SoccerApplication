@@ -18,6 +18,8 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import controller.Controller;
+
 /**
  * @author Jack Young
  * @date Oct 29, 2012
@@ -35,22 +37,34 @@ public class PDFWriter {
 	      Font.BOLD);
 
 	
-	public static void runPDFwriter() {
-		  try {
-		      Document document = new Document();
-		      PdfWriter.getInstance(document, new FileOutputStream(FILE));
-		      document.open();
-		      addMetaData(document);
-		      addTitlePage(document);
-		      addContent(document);
-		      document.close();
-		    } catch (Exception e) {
-		      e.printStackTrace();
-		    }
-	}
+//	public static void runPDFwriter() {
+//		  try {
+//		      Document document = new Document();
+//		      PdfWriter.getInstance(document, new FileOutputStream(FILE));
+//		      document.open();
+//		      addMetaData(document);
+//		      addTitlePage(document);
+//		      addContent(document);
+//		      document.close();
+//		    } catch (Exception e) {
+//		      e.printStackTrace();
+//		    }
+//	}
 	
 	
-	
+		public static void runPDFwriter(Controller c) {
+			  try {
+			      Document document = new Document();
+			      PdfWriter.getInstance(document, new FileOutputStream(FILE));
+			      document.open();
+			      addMetaData(document);
+			      addTitlePage(document, c);
+			      addContent(document);
+			      document.close();
+			    } catch (Exception e) {
+			      e.printStackTrace();
+			    }
+		}
 	
 
 	  // iText allows to add metadata to the PDF which can be viewed in your Adobe
@@ -60,11 +74,18 @@ public class PDFWriter {
 	    document.addTitle("My first PDF");
 	    document.addSubject("Using iText");
 	    document.addKeywords("Java, PDF, iText");
-	    document.addAuthor("Lars Vogel");
-	    document.addCreator("Lars Vogel");
+	    document.addAuthor("Jack Young");
+	    document.addCreator("Jack Young");
 	  }
 
-	  private static void addTitlePage(Document document)
+	  
+//		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
+//		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
+//		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
+//		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
+	  
+	  
+	  private static void addTitlePage(Document document, Controller c)
 	      throws DocumentException {
 	    Paragraph preface = new Paragraph();
 	    // We add one empty line
@@ -90,33 +111,32 @@ public class PDFWriter {
 	    document.newPage();
 	  }
 
-	  private static void addContent(Document document) throws DocumentException {
-	  
-	    
-	    Anchor anchor = new Anchor("User Information/Data", catFont);
-	    anchor.setName("UserCredentials Table");
+	private static void addContent(Document document) throws DocumentException {
 
-	    // Second parameter is the number of the chapter
-	    Chapter catPart = new Chapter(new Paragraph(anchor), 1);
+		Anchor anchor = new Anchor("User Information/Data", catFont);
+		anchor.setName("UserCredentials Table");
 
-	    Paragraph subPara = new Paragraph("Subcategory 1", subFont);
-	    Section subCatPart = catPart.addSection(subPara);
-	  
-	    Paragraph paragraph = new Paragraph();
-	    addEmptyLine(paragraph, 5);
+		// Second parameter is the number of the chapter
+		Chapter catPart = new Chapter(new Paragraph(anchor), 1);
 
-	    subCatPart.add(paragraph);
-	    createSecondTable(subCatPart);
+		Paragraph subPara = new Paragraph("Subcategory 1", subFont);
+		Section subCatPart = catPart.addSection(subPara);
 
-	    document.add(catPart);
-	  }
+		Paragraph paragraph = new Paragraph();
+		addEmptyLine(paragraph, 5);
+
+		subCatPart.add(paragraph);
+		createSecondTable(subCatPart);
+
+		document.add(catPart);
+	}
 	
 	
 	  public static void createSecondTable(Section subCatPart) throws BadElementException{
 		  
 		  PdfPTable table = new PdfPTable(4);
 		  
-		  String tem = "username: jyoung   password: greatness   id: 1   userType: 3";
+		  //String tem = "username: jyoung   password: greatness   id: 1   userType: 3";
 		  
 		  
 		  PdfPCell c1 = new PdfPCell(new Phrase("username"));

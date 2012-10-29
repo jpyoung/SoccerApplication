@@ -24,18 +24,20 @@ public class testStorage {
 	
 		System.out.println("Hello world");
 		
-		PDFWriter pdf = new PDFWriter();
-		PDFWriter.runPDFwriter();
+		
 		
 		TestDataLoader td = new TestDataLoader();
 	
-		
-		
 		c.uc = new UserCredentials();
 		c.getUc().setUserObject("tomyoung", "tjy", 2, td.getUser6());
 		c.getUc().setUserObject("jyoung", "greatness", 3, td.getUser2());
 		c.getUc().setUserObject("dtruong", "dtr", 3, td.getUser3());
 		
+		PDFWriter pdf = new PDFWriter();
+		PDFWriter.runPDFwriter(c);
+		
+		
+		System.out.println("yeahok");
 //		
 //		Player p = new Player();
 //		p.setCaptain(false);
@@ -60,7 +62,7 @@ public class testStorage {
 //	
 //		System.out.println("\n       END OF MAIN METHOD \n\n");
 		
-		om(c);
+		//om(c);
 		
 	}
 	
