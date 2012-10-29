@@ -21,7 +21,7 @@ public class MainApplication {
 		return controller;
 	}
 	
-	public static boolean showConsoleDetails = true;
+	public static boolean showConsoleDetails = false;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -325,71 +325,41 @@ public class MainApplication {
 	@SuppressWarnings("unused")
 	public static void viewTeamProfiles(int usersIndex) {
 		
-		String data = "Choose team to view:\n";	
-		System.out.println("\n\n\n\n");
+		String data = "Choose team to view:  (press cancel to go back)\n";	
+		
 		for (int i = 0; i < getController().getTeam().size(); i++) {
 			data += "\n" + (i+1) + ". "+ getController().getTeam().get(i).getName();
 		}
-		System.out.println("The Size: " + getController().getTeam().size());
-		System.out.println("\n\n\n\n");
 		
-//		String data = "Choose team to view:\n";		
-//		data += Team.getAllTeams();
+		if (getShowConsoleDetails()) { System.out.println("viewTeamProfiles, The Team Size: " + getController().getTeam().size()); }
 		
+		
+
 		int ln = getController().getTeam().size();
-		int[] pos = OutputHelpers.generatePossibleOptions(ln + 1);
-//		
-//		//Taking the number of teams size, then creating a array of ints that corresponds to the option that they can select from
-//		int[] tempA = new int[ln + 1];
-//		ArrayList<Integer> tempB = new ArrayList<Integer>();
-//		for (int y = 0; y < tempA.length; y++) {
-//			tempA[y] = (y + 1);
-//			tempB.add(y + 1);
-//		}
-//		
-		//setting the exit condition number for a dynamically generated list of teams
-		int exitNum = ln + 1;
-		data += "\n" + exitNum + ". Exit";
+		int[] pos = OutputHelpers.generatePossibleOptions(ln);
+
+		String resp = InputHelper.promptStringMenuOptionsType2(data, "View Team", "View Team", pos);
 		
-		String option = InputHelper.promptStringMenuOptions(data, "View Team", "View Team", pos);
-		
-		if (option == null) {
-			//they pressed cancel button
-			System.out.println("Pressed the cancel button on editMenuPhoneNumber");
-		} else if (option != null) {
-			//they didn't pressed the cancel button
-			int c = Integer.parseInt(option);
-			
-			if (exitNum == c) {
-				//selected the number that corresponds to the exit condition, which brings the 
-				//user back the their respective dashboard.
-				int ti = usersIndex;
-				
-				if(getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Coach")) {
-					coachesDashBoardView(usersIndex);    //its of coach type
-				} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Player")) {
-					playersDashBoardView(usersIndex);    //its of player type
-				} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Official")) {
-					officialsDashBoardView(usersIndex);  //its of Official type
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Not of coach type");
-				}
-				
-			} else {
-				//Calling the method to view a more detailed look at the selected team
-				detailedTeamView(getController().getTeam().get(c - 1), usersIndex);
-//				if (tempB.contains(c - 1)) {
-//					System.out.println("It contains it ");
-//					detailedTeamView(Controller.getTeam().get(c - 1), usersIndex);
-//				} else {
-//					JOptionPane.showMessageDialog(null, "It does not contain : " + c);
-//				}
+		if (resp.equals("-n-u-l-l-")) {
+			//selected the number that corresponds to the exit condition, which brings the 
+			//user back the their respective dashboard.
+			int ti = usersIndex;
+			if(getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Coach")) {
+				coachesDashBoardView(usersIndex);    //its of coach type
+			} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Player")) {
+				playersDashBoardView(usersIndex);    //its of player type
+			} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Official")) {
+				officialsDashBoardView(usersIndex);  //its of Official type
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Not of coach type");
 			}
 		} else {
-			System.out.println("They pressed the exit button");
+			int c = Integer.parseInt(resp);
+			//Calling the method to view a more detailed look at the selected team
+			detailedTeamView(getController().getTeam().get(c - 1), usersIndex);
 		}
-	
+		
 	}
 	
 	//need to pass in a para when the backend classes are finished

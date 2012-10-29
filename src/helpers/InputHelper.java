@@ -55,7 +55,7 @@ public class InputHelper {
 			do {
 				input = JOptionPane.showInputDialog(null, displayMessage, title, JOptionPane.QUESTION_MESSAGE);
 				if(input == null) {
-					JOptionPane.showMessageDialog(null, "Your Pressed the Cancel Button, result was NULL");
+					System.out.println(OutputHelpers.timeStamp() + "-  Pressed the CANCEL button, go back to previous view");
 					return "-n-u-l-l-";
 				}
 			} while (!validateNumericInputMenu2(input, varName, possibilities));
