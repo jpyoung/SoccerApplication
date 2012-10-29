@@ -27,7 +27,7 @@ public class ManageTeamView {
 	
 	//create team workflow
 	public static void createTeamWorkFlow(int usersIndex){
-		JOptionPane.showMessageDialog(null, "Create team workflow will go here");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: ManageTeamView.   Method Called: createTeamWorkFlow()");
 		MainApplication.coachesDashBoardView(usersIndex);
 	}
 	
@@ -49,9 +49,7 @@ public class ManageTeamView {
 		int n = Integer.parseInt(resp);
 		
 		if ( n == 8) {
-			//exit
-			System.out.println("exit");
-			MainApplication.coachesDashBoardView(usersIndex);
+			MainApplication.coachesDashBoardView(usersIndex); //exit, go back to coaches dashboard
 		} else {
 			if ( n == 1) {
 				//view roster

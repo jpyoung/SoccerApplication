@@ -21,6 +21,7 @@ public class MainApplication {
 		return controller;
 	}
 	
+	//this var is used for to limit the whats being displayed in the console. 
 	public static boolean showConsoleDetails = false;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
@@ -31,11 +32,8 @@ public class MainApplication {
 		//load and output the initial  data
 		//getController().loadInitialData();
 		
-		//Calling the serial load
-		//getController().tempLoad();
-		
-
-		
+	
+		//used for load data from data file
 		SystemStateController.loadEverything();
 		
 		//temp data
@@ -49,15 +47,15 @@ public class MainApplication {
 	
 		//end of temp data
 		
-		
-		System.out.println("\n\n--Before Application Close---");
-		System.out.println("Team arraylist size: " + getController().getTeam().size());
-		
+		if (getShowConsoleDetails()) { 
+		System.out.println("\n\n--Before Application Close---"); System.out.println("Team arraylist size: " + getController().getTeam().size());
 		for (int i = 0; i < getController().getTeam().size(); i++) {
 			System.out.println(getController().getTeam().get(i).getName());
 		}
-		
 		getController().getUc().outputAllCredentials();
+		}
+		
+		
 		
 		
 		firstView();
@@ -138,17 +136,15 @@ public class MainApplication {
 			
 			//checking to see if they pressed the cancel button on the password input 
 			if (!iPassword.isDidPressCancel()) {
-				System.out.println("\n\nCongrats, You have entered username: " + userName.getInputEntered() + " and password: " + iPassword.getInputEntered());
+				if (getShowConsoleDetails()) { System.out.println("\n\nCongrats, You have entered username: " + userName.getInputEntered() + " and password: " + iPassword.getInputEntered()); }
 				
 				String u = userName.getInputEntered();
 				String p = iPassword.getInputEntered();
 				int loginResult = getController().getUc().getID(u, p);
 				if (loginResult != -1) {
-					System.out.println("id found: " + loginResult);
 					dashBoards(loginResult);
 				} else {
 					JOptionPane.showMessageDialog(null, "Sorry! The enter credentials do not match our records");
-					System.out.println("No id found: " + loginResult);
 					firstView();
 				}
 			} else {
@@ -160,17 +156,16 @@ public class MainApplication {
 		}			
 	}
 	
+	
+	//figure our on login entry if they pressed cancel and so forth
 	public static Prompt promptMessage(String displayMessage, String title) {
 		String input = JOptionPane.showInputDialog(null, displayMessage, title, JOptionPane.QUESTION_MESSAGE);
 		   Prompt p = null;
 		   if ( input == null) {
-			   p = new Prompt(null, true);
-			   System.out.println("You Pressed Cancel");
+			   p = new Prompt(null, true); //pressed cancel
 		   } else {
 			   p = new Prompt(input, false);
-			   System.out.println("enter: " + input);
 		   }
-		   System.out.println("sss: " + p);
 		   return p;
 	}
 
@@ -193,17 +188,14 @@ public class MainApplication {
 		
 		if (tempType == 1) {
 			//usertype is offical
-			System.out.println("Logged In AS:  Official");
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call officialsDashBoardView() method");
 			officialsDashBoardView(usersIndex);
 		} else if (tempType == 2) {
 			//usertype is coach 
-			System.out.println("Logged In AS:  Coach");
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call coachesDashBoardView() method");
 			coachesDashBoardView(usersIndex);
 		} else if (tempType == 3) {
 			//usertype is a player
-			System.out.println("Logged In AS:  Player");
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call playersDashBoardView() method");
 			playersDashBoardView(usersIndex);
 		} else {
@@ -397,20 +389,7 @@ public class MainApplication {
 	
 	
 /***************************************************************************************************/	
-/********************************Start: Edit View ***********************************/
 	
-
-	
-	/*****/
-	//delete this portion 
-	public static void output(Player p) {
-		System.out.println("----------player -----------");
-		System.out.println(p);
-	}
-
-
-	
-
 	//Other methods not sure where to place yet
 	
 	public static void invitationDialog(String message, String title) {
@@ -443,12 +422,5 @@ public class MainApplication {
 		data += "\nCaptain: " + player.getCaptain();
 	}
 	
-	//time stamp area
-//	public static String timeStamp(){
-//		Date today = new Date();   
-//	    String a = "" + today;
-//	    return a;
-//	}
 
-	
 }
