@@ -5,7 +5,6 @@ import Models.User;
 
 public class OutputHelpers {
 	
-	
 	//Dynamically generate possible options for a list selection
 	public static int[] generatePossibleOptions(int size) {
 		int[] temp = new int[size];
