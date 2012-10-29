@@ -24,6 +24,9 @@ public class testStorage {
 	
 		System.out.println("Hello world");
 		
+		PDFWriter pdf = new PDFWriter();
+		PDFWriter.runPDFwriter();
+		
 		TestDataLoader td = new TestDataLoader();
 	
 		
