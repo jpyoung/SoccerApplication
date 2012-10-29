@@ -8,27 +8,36 @@ public class EditProfileView {
 	/***************************************************************************************************/	
 	/********************************Start: Edit View ***********************************/
 		
-		public static void editProfileView(int usersIndex) {
-			//"1. Password\n2. Phone Number\n3. Name"
-			String message = "What would you like to edit?\n1. Password\n2. Phone Number\n3. Name\n4. Go back to Dashboard";
-			String titleString = "Edit Profile - " + MainApplication.getController().getUc().getUserName(usersIndex);
-			
-			String r = InputHelper.promptStringMenuOptions(message, "Edit Profile", titleString, new int[]{1, 2, 3, 4});
-			
+	//method used display a list of items in which they can edit. ex password, phone number, name
+	public static void editProfileView(int usersIndex) {
+		String message = "What would you like to edit?\n1. Password\n2. Phone Number\n3. Name";
+		String titleString = "Edit Profile - " + MainApplication.getController().getUc().getUserName(usersIndex);
+
+		String r = InputHelper.promptStringMenuOptionsType2(message, "Edit Profile", titleString, new int[]{1, 2, 3});
+
+		if (r.equals("-n-u-l-l-")) {
+			int ti = usersIndex;
+			//If they press cancel, they should be taken back to there dashboards. This if structure checks which user class they
+			//are and takes them back to their respective dashboards
+			if(MainApplication.getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Coach")) {
+				MainApplication.coachesDashBoardView(usersIndex);    //its of coach type
+			} else if (MainApplication.getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Player")) {
+				MainApplication.playersDashBoardView(usersIndex);    //its of player type
+			} else if (MainApplication.getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Official")) {
+				MainApplication.officialsDashBoardView(usersIndex);  //its of Official type
+			}
+		} else {
 			int editMenuSelection = Integer.parseInt(r);
-			
 			if (editMenuSelection == 1) {
 				editMenuPasswordOption(usersIndex);  //edit password
 			} else if (editMenuSelection == 2) {
 				editMenuPhoneNumber(usersIndex); //edit phone number
 			} else if (editMenuSelection == 3) {
 				editMenuName(usersIndex); 	//edit name
-			} else if (editMenuSelection == 4) {
-				//Just added, not specified in directions. Go back to dashboard
-				MainApplication.playersDashBoardView(usersIndex);
 			}
-			
 		}
+
+	}
 		
 	
 		@SuppressWarnings("unused")
