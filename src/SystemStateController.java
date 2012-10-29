@@ -13,15 +13,14 @@ public class SystemStateController {
 	public static void loadEverything() {
 		MainApplication.controller = readIn();
 		
-		MainApplication.getController().getUc().outputAllCredentials();
+		MainApplication.getController().getUc().outputSystemUsersTable();
 		
 		
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(3);
 		Coach c2 = (Coach)MainApplication.getController().getUc().getUserObject(5);
-		System.out.println(c2.getTeam().getName());
-		System.out.println("---asd-fadsf-asdf-asdf-asd-f---\n");
-		System.out.println(c.getTeam().getName());
-		
+//		System.out.println(c2.getTeam().getName());
+//		System.out.println("---asd-fadsf-asdf-asdf-asd-f---\n");
+//		System.out.println(c.getTeam().getName());
 		//Team t = c.getTeam();
 		//getController().getTeam().add(c2.getTeam());
 		//getController().addATeam(c.getTeam());

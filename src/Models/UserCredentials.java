@@ -193,4 +193,17 @@ public class UserCredentials implements Serializable {
 	}
 
 	
+	public void outputSystemUsersTable() {
+		String ot = "Output - UserTable Credentials";
+		System.out.println("\n------------Output - UserTable Credentials-------------------");
+		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
+			System.out.println("#" + i + "  :  userName: " + getUserNamesArraylist().get(i) + ",    password: "
+			+ getPasswordsArraylist().get(i) + "    id: " + getIdArraylist().get(i) + "    userType: "
+			+ getUserTypeArraylist().get(i) + "    user: " + (getUserObjectArraylist().get(i) == null ? "NULL" : getUserObjectArraylist().get(i).getClass().getName())
+			);
+		}
+		System.out.println("User Count: " + getUserNamesArraylist().size());
+		System.out.println("-------------------------------------------------------------\n");
+	}
+	
 }

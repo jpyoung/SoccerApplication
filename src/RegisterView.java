@@ -110,19 +110,15 @@ public class RegisterView {
 		
 		User nUser = null;
 		if (type == 1) {
-			//official
-			nUser = new Official();
+			nUser = new Official(); //official
 		} else if (type == 2) {
-			//coach
-			nUser = new Coach();
+			nUser = new Coach(); //coach
 		} else if (type == 3) {
-			// player captain
-			Player p = new Player();
+			Player p = new Player(); // player captain
 			p.setCaptain(true);
 			nUser = p;
 		} else {
-			//player
-			Player p = new Player();
+			Player p = new Player(); //player
 			p.setCaptain(false);
 			nUser = p;
 		}

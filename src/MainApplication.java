@@ -182,11 +182,6 @@ public class MainApplication {
 	public static void dashBoards(int usersIndex) {
 		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()");
 	
-		String displayString = "Person Info";
-		displayString += "\n\nUser Name: " + getController().getUc().getUserName(usersIndex);
-		displayString += "\nPassword: " + getController().getUc().getPassword(usersIndex);
-		displayString += "\nUser Object: " + getController().getUc().getUserObject(usersIndex);
-		JOptionPane.showMessageDialog(null, displayString);
 		
 		//Here will go a if tree to decide whether the user that just loged in is a coach
 		//player or official.  From which it will call one of the three below methods to carry out that function

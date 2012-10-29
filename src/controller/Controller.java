@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -9,6 +7,10 @@ import testing.TestDataLoader;
 import Models.Team;
 import Models.UserCredentials;
 
+/**
+ * @author Jack Young
+ * @date Oct 28, 2012
+ */
 public class Controller implements Serializable {
 	
 	/**
@@ -17,45 +19,17 @@ public class Controller implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public UserCredentials uc;
 	public ArrayList<Team> team = new ArrayList<Team>();
-	//public ArrayList<Team> team;
+	
 	//Getters
 	public ArrayList<Team> getTeam() { return team; }
+	public UserCredentials getUc() { return uc; }
+	
 	
 	public void addATeam(Team t) {
 		this.team.add(t);
 	}
 	
-	
-	public UserCredentials getUc() { return uc; }
-	
-	public void tempLoad() {
-		uc = readIn();
-		
-	
-		//outputting all the users credentials
-		
-		
-		getUc().outputAllCredentials();
-		
-	}
-	
-	public UserCredentials readIn() {
-		try
-		{
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("Person.dat"));
-			UserCredentials uu = (UserCredentials) in.readObject();
-			in.close();
-			return uu;
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	
-	
-	
+	//used for loading temp data manually into the system
 	public void loadInitialData() {
 			
 		TestDataLoader td = new TestDataLoader();

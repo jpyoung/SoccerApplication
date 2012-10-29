@@ -2,8 +2,6 @@ import helpers.InputHelper;
 
 import javax.swing.JOptionPane;
 
-import Models.Player;
-
 
 public class EditProfileView {
 
@@ -20,18 +18,11 @@ public class EditProfileView {
 			int editMenuSelection = Integer.parseInt(r);
 			
 			if (editMenuSelection == 1) {
-				//edit password
-				//-first prompt for them to entered their existing password
-				//if correct allow them to enter in a new password
-				//then display a successful message dialog
-				
-				editMenuPasswordOption(usersIndex);
+				editMenuPasswordOption(usersIndex);  //edit password
 			} else if (editMenuSelection == 2) {
-				//edit phone number
-				editMenuPhoneNumber(usersIndex);
+				editMenuPhoneNumber(usersIndex); //edit phone number
 			} else if (editMenuSelection == 3) {
-				//edit name
-				editMenuName(usersIndex);
+				editMenuName(usersIndex); 	//edit name
 			} else if (editMenuSelection == 4) {
 				//Just added, not specified in directions. Go back to dashboard
 				MainApplication.playersDashBoardView(usersIndex);
@@ -39,15 +30,7 @@ public class EditProfileView {
 			
 		}
 		
-		/*****/
-		//delete this portion 
-		public static void output(Player p) {
-			System.out.println("----------player -----------");
-			System.out.println(p);
-		}
-		
-		/****/
-		
+	
 		@SuppressWarnings("unused")
 		public static void editMenuName(int usersIndex) {
 			
