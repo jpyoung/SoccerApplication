@@ -80,21 +80,21 @@ public class EditProfileView {
 		@SuppressWarnings("unused")
 		public static void editMenuPhoneNumber(int usersIndex) {
 			String data = "Your current phone number is : " + MainApplication.getController().getUc().getUserObject(usersIndex).getPhone();
-				data += "\nPlease enter the new phone number (xxx xxx xxxx):";
-			
+			data += "\nPlease enter the new phone number (xxx xxx xxxx):";
+
 			//need to add validatation to this phone input area.  ex. 703 252 0854
 			String newNumber = InputHelper.promptString(data, "phoneNumber", "Edit - phone number");
-			
+
 			System.out.println("The new phone number they entered: " + newNumber);
-			
+
 			if (newNumber == null) {
 				//they pressed the cancel button
 				System.out.println("Pressed the cancel button on editMenuPhoneNumber");
-				
+
 			} else if (newNumber != null) {
 				// place phone number validation here
 				System.out.println("entered in something for the new phone number");
-				
+
 				int l = newNumber.length();
 				System.out.println("Phone number length is : " + l);
 				if (l == 12) {
@@ -106,7 +106,7 @@ public class EditProfileView {
 			} else {
 				System.out.println("They pressed the exit button on the editMenuPHoneNumber method");
 			}
-			
+
 			editProfileView(usersIndex);
 		}
 		
@@ -136,6 +136,9 @@ public class EditProfileView {
 						//getUc().getPassword(usersIndex) = newPassword;
 						MainApplication.getController().getUc().setPassword(usersIndex, newPassword);
 						System.out.println("After added new method changed exist password: " + MainApplication.getController().getUc().getPassword(usersIndex) + " to : " + newPassword);
+						
+						MainApplication.getController().getUc().outputSystemUsersTable();
+						
 						InputHelper.successfulEditDialog("password", "Successful edit");
 						editProfileView(usersIndex);
 					}
