@@ -17,9 +17,7 @@ public class MainApplication {
 	
 	
 	public static Controller controller = new Controller();
-	public static Controller getController() {
-		return controller;
-	}
+	public static Controller getController() { return controller; }
 	
 	//this var is used for to limit the whats being displayed in the console. 
 	public static boolean showConsoleDetails = false;
@@ -67,8 +65,8 @@ public class MainApplication {
 		if (getShowConsoleDetails()) { System.out.println("--Data on Application Close---"); getController().getUc().outputAllCredentials(); }
 		
 		
-		//saving the usercrediential data to xml
-		//SystemStateController.saveUserCreds();
+		//Saving Everything via serial data file
+		SystemStateController.saveUserCreds();
 		
 		//before the application closes, below i am creating a pdf document with information.  UserPdf.pdf
 		PDFWriter pdf = new PDFWriter();
