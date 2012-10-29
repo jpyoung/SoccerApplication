@@ -1,5 +1,7 @@
 
 
+import helpers.OutputHelpers;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -34,7 +36,7 @@ public class SystemStateController {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream("TeamssArr.dat"));
 			Controller uu = (Controller) in.readObject();
 			in.close();
-				System.out.println("\n\n----------------READ IN From DATA File-------------------");
+				System.out.println(OutputHelpers.timeStamp() + "----------------READ IN From DATA File-------------------");
 			return uu;
 		} 
 		catch (Exception e) {
@@ -51,9 +53,9 @@ public class SystemStateController {
 			out.writeObject(MainApplication.getController());
 			out.close();
 			
-				System.out.println("--------------------------------------");
-				System.out.println("-----SAVED STATE TO DATA FILE---------");
-				System.out.println("--------------------------------------");
+				
+				System.out.println(OutputHelpers.timeStamp() + "--------------SAVED STATE TO DATA FILE---------");
+				
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

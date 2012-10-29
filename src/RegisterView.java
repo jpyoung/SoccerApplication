@@ -1,4 +1,5 @@
 import helpers.InputHelper;
+import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
@@ -17,12 +18,12 @@ public class RegisterView {
 /****************************START:  Register Section ********************************************************/
 /*************************************************************************************************************/
 	public static void registerView() {
-		System.out.println(MainApplication.timeStamp() + "- SECTION: Register Section.   Method Called: registerView()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Register Section.   Method Called: registerView()");
 		registerNewUser();
 	}
 	
 	public static void registerNewUser() {
-		System.out.println(MainApplication.timeStamp() + "- SECTION: Register Section.   Method Called: registerNewUser()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Register Section.   Method Called: registerNewUser()");
 		
 		Prompt username;
 		Prompt password;

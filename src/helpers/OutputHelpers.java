@@ -1,5 +1,7 @@
 package helpers;
 
+import java.util.Date;
+
 import Models.Player;
 import Models.User;
 
@@ -31,6 +33,13 @@ public class OutputHelpers {
 			}
 		String name = n.getFirstName() + " " + n.getLastName() + extraMarkings; 
 		return name;
+	}
+	
+	//time stamp area
+	public static String timeStamp(){
+		Date today = new Date();   
+	    String a = "" + today;
+	    return a;
 	}
 	
 }

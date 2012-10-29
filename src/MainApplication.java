@@ -3,8 +3,6 @@ import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
-import java.util.Date;
-
 import javax.swing.JOptionPane;
 
 import testing.PDFWriter;
@@ -26,7 +24,7 @@ public class MainApplication {
 	
 	
 	public static void main(String args[]) {
-		System.out.println("MainApplication class - Main Method launch");
+		System.out.println(OutputHelpers.timeStamp() + "-----MainApplication class - Main Method launch------");
 		
 		//load and output the initial  data
 		//getController().loadInitialData();
@@ -73,6 +71,7 @@ public class MainApplication {
 		//saving the usercrediential data to xml
 		//SystemStateController.saveUserCreds();
 		
+		//before the application closes, below i am creating a pdf document with information.  UserPdf.pdf
 		PDFWriter pdf = new PDFWriter();
 		PDFWriter.runPDFwriter(getController());
 		
@@ -86,7 +85,7 @@ public class MainApplication {
 	//Welcome to Soccer Tournament Management - user can login or register
 	public static void firstView() {
 
-		System.out.println(timeStamp() + "- SECTION: firstView.   Method Called: firstView()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()");
 		
 		Object[] options = {"Login", "Register" };
 		int n = JOptionPane.showOptionDialog(null,
@@ -97,15 +96,15 @@ public class MainApplication {
 		
 		if(n == 1 ) {
 			// n == 1, means the user selected the register button
-			System.out.println(timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected register button");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected register button");
 			RegisterView.registerView();
 		} else if (n == 0 ) { 
 			// n == 0, means the user selected the login button
-			System.out.println(timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected login button");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected login button");
 			loginView();
 		} else {
 			// n is equal to -1
-			System.out.println(timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected exit red button");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected exit red button");
 			JOptionPane.showMessageDialog(null, "Good Bye - You clicked the exit button");
 		}
 	
@@ -120,12 +119,12 @@ public class MainApplication {
 /****************************START:  Login In ****************************************************************/
 /*************************************************************************************************************/
 	public static void loginView() {
-		System.out.println(timeStamp() + "- SECTION: Login In.   Method Called: logingView()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Login In.   Method Called: logingView()");
 		userLoginAction();
 	}
 	
 	public static void userLoginAction() {
-		System.out.println(timeStamp() + "- SECTION: Login In.   Method Called: userLoginAction()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Login In.   Method Called: userLoginAction()");
 		Prompt userName;
 		Prompt iPassword;
 		userName = Prompter.question("Please enterr your email/username", "Login - username");
@@ -184,7 +183,7 @@ public class MainApplication {
 /****************************START:  Dashboards **************************************************************/
 /*************************************************************************************************************/
 	public static void dashBoards(int usersIndex) {
-		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()");
 	
 		
 		//Here will go a if tree to decide whether the user that just loged in is a coach
@@ -194,17 +193,17 @@ public class MainApplication {
 		if (tempType == 1) {
 			//usertype is offical
 			System.out.println("Logged In AS:  Official");
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call officialsDashBoardView() method");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call officialsDashBoardView() method");
 			officialsDashBoardView(usersIndex);
 		} else if (tempType == 2) {
 			//usertype is coach 
 			System.out.println("Logged In AS:  Coach");
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call coachesDashBoardView() method");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call coachesDashBoardView() method");
 			coachesDashBoardView(usersIndex);
 		} else if (tempType == 3) {
 			//usertype is a player
 			System.out.println("Logged In AS:  Player");
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call playersDashBoardView() method");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()   ACTION: call playersDashBoardView() method");
 			playersDashBoardView(usersIndex);
 		} else {
 			System.out.println("Error, in the dashboard method if three. Unknown usertype");
@@ -215,7 +214,7 @@ public class MainApplication {
 	
 	//view for the officials dash board view
 	public static void officialsDashBoardView(int usersIndex) {
-		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: officialsDashBoardView()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: officialsDashBoardView()");
 		
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Save and Logout";
 		String titleString = "Dashboard - Official - " + getController().getUc().getUserName(usersIndex);
@@ -263,7 +262,7 @@ public class MainApplication {
 	
 	//View for the coaches dash board view
 	public static void coachesDashBoardView(int usersIndex) {
-		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()");
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()");
 	
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Manage or Create Team\n4. Save and Logout";
 		String titleString = "Dashboard - Coach - " + getController().getUc().getUserName(usersIndex);
@@ -272,13 +271,13 @@ public class MainApplication {
 		int c = Integer.parseInt(option);
 		
 		if (c == 1) {
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call editProfileView() method");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call editProfileView() method");
 			EditProfileView.editProfileView(usersIndex); //go to edit profile
 		} else if (c == 2) {
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call viewTeamProfiles() method");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call viewTeamProfiles() method");
 			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
-			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call manageTeamView() method  in ManageTeamView class");
+			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call manageTeamView() method  in ManageTeamView class");
 			ManageTeamView.manageTeamView(usersIndex); //go to manage or create team
 		} else if (c == 4) {
 			firstView(); // go to save and log out. this will bring the user back to the first view
@@ -474,11 +473,11 @@ public class MainApplication {
 	}
 	
 	//time stamp area
-	public static String timeStamp(){
-		Date today = new Date();   
-	    String a = "" + today;
-	    return a;
-	}
+//	public static String timeStamp(){
+//		Date today = new Date();   
+//	    String a = "" + today;
+//	    return a;
+//	}
 
 	
 }
