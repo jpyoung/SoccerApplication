@@ -6,7 +6,6 @@ import helpers.Prompter;
 import javax.swing.JOptionPane;
 
 import testing.PDFWriter;
-import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
@@ -22,6 +21,9 @@ public class MainApplication {
 		return controller;
 	}
 	
+	public static boolean showConsoleDetails = true;
+	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
+	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
 	public static void main(String args[]) {
 		System.out.println(OutputHelpers.timeStamp() + "-----MainApplication class - Main Method launch------");
@@ -32,16 +34,18 @@ public class MainApplication {
 		//Calling the serial load
 		//getController().tempLoad();
 		
+
+		
 		SystemStateController.loadEverything();
 		
 		//temp data
-		Player p = (Player)getController().getUc().getUserObject(1);
-		Coach cc = (Coach)getController().getUc().getUserObject(3);
-		cc.getTeam().getRoster().addPlayerName(p);
-		p.setTeam(cc.getTeam());
-		Player p2 = (Player)getController().getUc().getUserObject(2);
-		cc.getTeam().getRoster().addPlayerName(p2);
-		p2.setTeam(cc.getTeam());
+//		Player p = (Player)getController().getUc().getUserObject(1);
+//		Coach cc = (Coach)getController().getUc().getUserObject(3);
+//		cc.getTeam().getRoster().addPlayerName(p);
+//		p.setTeam(cc.getTeam());
+//		Player p2 = (Player)getController().getUc().getUserObject(2);
+//		cc.getTeam().getRoster().addPlayerName(p2);
+//		p2.setTeam(cc.getTeam());
 	
 		//end of temp data
 		
@@ -54,9 +58,6 @@ public class MainApplication {
 		}
 		
 		getController().getUc().outputAllCredentials();
-		//System.out.println("Team arraylist size: " + getController().getTeam().size());
-		//make the call for the first view 
-		
 		
 		
 		firstView();
@@ -64,8 +65,8 @@ public class MainApplication {
 
 		
 		//output all userCreditential data on close
-		System.out.println("--Data on Application Close---");
-		getController().getUc().outputAllCredentials();
+		
+		if (getShowConsoleDetails()) { System.out.println("--Data on Application Close---"); getController().getUc().outputAllCredentials(); }
 		
 		
 		//saving the usercrediential data to xml
