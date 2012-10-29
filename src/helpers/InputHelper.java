@@ -2,9 +2,10 @@ package helpers;
 
 import javax.swing.JOptionPane;
 
+
 /**
  * @author Jack Young
- *
+ * @date Oct 28, 2012
  */
 public class InputHelper {
 	/**************************************************************************************************/
@@ -60,25 +61,11 @@ public class InputHelper {
 			} while (!validateNumericInputMenu2(input, varName, possibilities));
 		return input;
 	}
-//	public static String promptStringMenuOptions(String displayMessage, String varName, String title, int[] possibilities){
-//		String input = "";
-//		boolean pressedCancel = false;
-//			do {
-//				if (!pressedCancel) {
-//					input = JOptionPane.showInputDialog(null, displayMessage, title, JOptionPane.QUESTION_MESSAGE);
-//					if (Integer.parseInt(input) == JOptionPane.CANCEL_OPTION) {
-//						pressedCancel = true;
-//					}
-//				} 
-//				
-//			} while (!validateNumericInputMenu(input, varName, possibilities) && !pressedCancel);
-//		return input;
-//	}
-	
+
 	public static String promptInt(String displayMessage, String varName, int max){
 		String input = "";
 			do {
-				input = JOptionPane.showInputDialog(null, displayMessage, "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				input = JOptionPane.showInputDialog(null, displayMessage, "Title", JOptionPane.QUESTION_MESSAGE);
 			} while (!validateForIntInput(input, varName, max));
 		return input;
 	}
@@ -86,7 +73,7 @@ public class InputHelper {
 	public static String promptDouble(String displayMessage, String varName, int max){
 		String input = "";
 		do {
-			input = JOptionPane.showInputDialog(null, displayMessage, "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+			input = JOptionPane.showInputDialog(null, displayMessage, "Title", JOptionPane.QUESTION_MESSAGE);
 		} while (!validateForDoubleInput(input, varName, max));
 		return input;
 	}
@@ -102,14 +89,14 @@ public class InputHelper {
 				if(convertedValue < 0 || convertedValue > max) {
 					//the number is a negative number
 					//or the number they entered is greater then the given max number allowed to be enter
-					JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 					return false;
 				} else {
 					return true;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 				return false;
 			}
 		} else {
@@ -127,14 +114,14 @@ public class InputHelper {
 				if(convertedValue < 0 || convertedValue > max) {
 					//the number is a negative number
 					//or the number they entered is greater then the given max number allowed to be enter
-					JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sorry! The " + type + " is not valid. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 					return false;
 				} else {
 					return true;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again", "Error Message", JOptionPane.QUESTION_MESSAGE);
 				return false;
 			}
 		} else {
@@ -158,12 +145,12 @@ public class InputHelper {
 				if(isInList) { 
 					return true;
 				} else {
-					JOptionPane.showMessageDialog(null, "Sorry! No such choice. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sorry! No such choice. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 					return false;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 				return false;
 			}
 		} else {
@@ -171,8 +158,6 @@ public class InputHelper {
 			return false;
 		}
 	}
-	
-	
 	
 	
 	public static boolean validateNumericInputMenu2(String inputed, String type, int[] possibilities) {
@@ -189,12 +174,12 @@ public class InputHelper {
 				if(isInList) { 
 					return true;
 				} else {
-					JOptionPane.showMessageDialog(null, "Sorry! No such choice. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Sorry! No such choice. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 					return false;
 				}
 			} catch (NumberFormatException e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again.", "Take-Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Sorry! The " + type + " needs to be a number. Please enter it again.", "Error Message", JOptionPane.QUESTION_MESSAGE);
 				return false;
 			}
 		} else {
@@ -202,8 +187,6 @@ public class InputHelper {
 			return false;
 		}
 	}
-	
-	
 	
 	
 	public static boolean validateInputForEmpty(String input, String type){
@@ -214,7 +197,7 @@ public class InputHelper {
 		//10-20-2012 just added this input !=null so to avoid the null point exception when user presses the cancel button
 		if (input != null) {
 		if(input.length() <= 0 ){
-			JOptionPane.showMessageDialog(null, message, "Take Home Assignment 5", JOptionPane.QUESTION_MESSAGE);
+			JOptionPane.showMessageDialog(null, message, "Error Message", JOptionPane.QUESTION_MESSAGE);
 			return false;
 		} else {
 			return true;
