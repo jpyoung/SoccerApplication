@@ -179,7 +179,7 @@ public class MainApplication {
 		
 		
 		//saving the usercrediential data to xml
-		saveUserCreds();
+		//saveUserCreds();
 		
 	}
 	
@@ -527,14 +527,28 @@ public class MainApplication {
 	public static void detailedTeamView(Team t, int usersIndex){
 		
 		System.out.println("Detailed Team View Method was Called");
-		
 		String dTitle = "View - " + t.getName();
-	
-		String data = t.getName() + "\n";
-		data += "Coach Name: " + t.getCoach().getFirstName() + " " + t.getCoach().getLastName();
 		
-		data += "\n1. player 1: asdfasd\n2. player 2: aasdfsfaasdf";
-		JOptionPane.showMessageDialog(null, data, dTitle, JOptionPane.INFORMATION_MESSAGE);
+		if(t.getRoster().playerCount == 0) {
+			//thought a team has been created, there are no players associated with this team yet. ie zero players
+			InputHelper.displayMessage("This team currently does not have any players.", dTitle);
+		} else {
+			//the selected team does have players
+			
+			String data = t.getName() + "\n";
+			data += "Coach Name: " + OutputHelpers.giveConcatName(t.getCoach()) + "\n\n";
+			data += "--Players List---\n";
+			Player[] pp = t.getRoster().getPlayersOnRoster();
+			
+			for (int i = 0; i < pp.length; i++) {
+				data += "   " + (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "\n";
+			}
+			
+			JOptionPane.showMessageDialog(null, data, dTitle, JOptionPane.INFORMATION_MESSAGE);
+		}
+		
+		
+
 		
 		viewTeamProfiles(usersIndex);
 		
