@@ -189,7 +189,7 @@ public class MainApplication {
 		JOptionPane.showMessageDialog(null, displayString);
 		
 		//Here will go a if tree to decide whether the user that just loged in is a coach
-		//player or offical.  From which it will call one of the three below methods to carry out that function
+		//player or official.  From which it will call one of the three below methods to carry out that function
 		int tempType = getController().getUc().getUserType(usersIndex);
 		
 		if (tempType == 1) {
@@ -217,8 +217,7 @@ public class MainApplication {
 	//view for the officials dash board view
 	public static void officialsDashBoardView(int usersIndex) {
 		System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: officialsDashBoardView()");
-		//denotations from uses cases
-		// can save, can view all teams, can edit user profile
+		
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Save and Logout";
 		String titleString = "Dashboard - Official - " + getController().getUc().getUserName(usersIndex);
 		String option = InputHelper.promptStringMenuOptions(displayString, "options", titleString, new int[]{1, 2, 3});
@@ -226,15 +225,11 @@ public class MainApplication {
 		int c = Integer.parseInt(option);
 		
 		if (c == 1) {
-			//go to edit profile
-			EditProfileView.editProfileView(usersIndex);
+			EditProfileView.editProfileView(usersIndex); //go to edit profile
 		} else if (c == 2) {
-			//go to view teams profiles
-			//viewAllTeams(usersIndex);
-			viewTeamProfiles(usersIndex);
+			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
-			//go to save and log out
-			firstView(); // this will bring the user back to the first view
+			firstView(); // go to save and log out. this will bring the user back to the first view
 		} else {
 			//error
 		}
@@ -278,20 +273,16 @@ public class MainApplication {
 		int c = Integer.parseInt(option);
 		
 		if (c == 1) {
-			//go to edit profile
 			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call editProfileView() method");
-			EditProfileView.editProfileView(usersIndex);
+			EditProfileView.editProfileView(usersIndex); //go to edit profile
 		} else if (c == 2) {
-			//go to view teams profiles
 			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call viewTeamProfiles() method");
-			viewTeamProfiles(usersIndex);
+			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
-			//go to manage or create team
 			System.out.println(timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call manageTeamView() method  in ManageTeamView class");
-			ManageTeamView.manageTeamView(usersIndex);
+			ManageTeamView.manageTeamView(usersIndex); //go to manage or create team
 		} else if (c == 4) {
-			//go to save and log out
-			firstView(); // this will bring the user back to the first view
+			firstView(); // go to save and log out. this will bring the user back to the first view
 		} else {
 			//error
 			
@@ -311,20 +302,16 @@ public class MainApplication {
 		int c = Integer.parseInt(option);
 		
 		if (c == 1) {
-			//go to edit profile
-			EditProfileView.editProfileView(usersIndex);
+			EditProfileView.editProfileView(usersIndex); //go to edit profile
 		} else if (c == 2) {
-			//go to view teams profiles
-			viewTeamProfiles(usersIndex);
+			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
 			//go to invitations and notifications
 			
 		} else if (c == 4) {
-			//go to save and log out
-			firstView(); // this will bring the user back to the first view
+			firstView(); // go to save and log out. this will bring the user back to the first view
 		} else {
 			//error
-			
 		}
 		
 	}
