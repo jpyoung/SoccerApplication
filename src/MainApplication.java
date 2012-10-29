@@ -3,10 +3,6 @@ import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -21,117 +17,12 @@ import controller.Controller;
 //Created On: 10/25/2012
 public class MainApplication {
 	
-	//public static Controller controller;
+	
 	public static Controller controller = new Controller();
-	public static Controller getController(){
+	public static Controller getController() {
 		return controller;
 	}
 	
-	
-	
-	public static void loadEverything() {
-		MainApplication.controller = readIn();
-		
-		getController().getUc().outputAllCredentials();
-		
-		
-		Coach c = (Coach)getController().getUc().getUserObject(3);
-		Coach c2 = (Coach)getController().getUc().getUserObject(5);
-		System.out.println(c2.getTeam().getName());
-		System.out.println("---asd-fadsf-asdf-asdf-asd-f---\n");
-		System.out.println(c.getTeam().getName());
-		
-		//Team t = c.getTeam();
-		//getController().getTeam().add(c2.getTeam());
-		//getController().addATeam(c.getTeam());
-		
-		
-	}
-	
-	public static Controller readIn() {
-		try
-		{
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream("TeamssArr.dat"));
-			Controller uu = (Controller) in.readObject();
-			
-			in.close();
-			
-			System.out.println("\n\n----------------READIN-------------------");
-			
-			
-			return uu;
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public static void writeOut() {
-		try
-		{
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TeamssArr.dat"));
-			
-			System.out.println("\n\n\n\n\n------asdfasdfasdf-" + getController().getTeam().size());
-			out.writeObject(getController());
-			out.close();
-			
-			System.out.println("--------------------------------------");
-			System.out.println("-----SAVED STATE TO DATA FILE---------");
-			System.out.println("--------------------------------------");
-			
-		} 
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-//		try
-//		{
-//			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("Person.dat"));
-//			out.writeObject(getController().uc);
-//			out.close();
-//			
-//			System.out.println("--------------------------------------");
-//			System.out.println("-----SAVED STATE TO DATA FILE---------");
-//			System.out.println("--------------------------------------");
-//			
-//		} 
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		
-//		try {
-//			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TeamssArr.dat"));
-//			out.writeObject(Controller.getTeam());
-//			out.close();
-//			
-//			System.out.println("--------------------------------------");
-//			System.out.println("-----SAVED STATE TO DATA FILE---------");
-//			System.out.println("--------------------------------------");
-//			
-//		} 
-//		catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		
-	}
-	
-
-	
-	
-	public static void saveUserCreds() {
-		
-		writeOut();
-		
-//		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
-//		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
-//		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
-//		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
-//		
-//		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
-//		cxml.runExample();
-	}
 	
 	public static void main(String args[]) {
 		System.out.println("MainApplication class - Main Method launch");
@@ -142,7 +33,7 @@ public class MainApplication {
 		//Calling the serial load
 		//getController().tempLoad();
 		
-		loadEverything();
+		SystemStateController.loadEverything();
 		
 		//temp data
 		Player p = (Player)getController().getUc().getUserObject(1);
@@ -179,7 +70,7 @@ public class MainApplication {
 		
 		
 		//saving the usercrediential data to xml
-		//saveUserCreds();
+		//SystemStateController.saveUserCreds();
 		
 	}
 	
@@ -489,17 +380,11 @@ public class MainApplication {
 				int ti = usersIndex;
 				
 				if(getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Coach")) {
-					//its of coach type
-					//JOptionPane.showMessageDialog(null, "Its of coach type");
-					coachesDashBoardView(usersIndex);
+					coachesDashBoardView(usersIndex);    //its of coach type
 				} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Player")) {
-					//its of player type
-					//JOptionPane.showMessageDialog(null, "Its of Player type");
-					playersDashBoardView(usersIndex);
+					playersDashBoardView(usersIndex);    //its of player type
 				} else if (getController().getUc().getUserObject(ti).getClass().getName().equals("Models.Official")) {
-					//its of Official type
-					//JOptionPane.showMessageDialog(null, "Its of Official type");
-					officialsDashBoardView(usersIndex);
+					officialsDashBoardView(usersIndex);  //its of Official type
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Not of coach type");
@@ -531,7 +416,7 @@ public class MainApplication {
 		
 		if(t.getRoster().playerCount == 0) {
 			//thought a team has been created, there are no players associated with this team yet. ie zero players
-			InputHelper.displayMessage("This team currently does not have any players.", dTitle);
+			InputHelper.displayMessage("This team currently does not have any players.", dTitle); 
 		} else {
 			//the selected team does have players
 			
