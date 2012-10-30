@@ -12,7 +12,7 @@ public class Prompter {
 		Prompt prompt;
 
 		do {
-			prompt = promptMessage(message, "edit-password");
+			prompt = promptMessage(message, title);
 		} while (prompt.isEmpty());
 		return prompt;
 	}
