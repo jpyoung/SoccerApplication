@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import Models.Coach;
+import Models.Notification;
 import Models.Player;
 import Models.Team;
 import Models.User;
@@ -136,6 +137,16 @@ public class ManageTeamView {
 				ddMessage += "roster after he/she accepted your invitation.\n";
 				ddMessage += "If he/she refuses the invitation, he/she will not appear in your roster.";
 			InputHelper.displayMessage(ddMessage, "Invitation Confirmation");
+			
+			Coach coach = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
+			Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
+			Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach");
+			jack.getInBox().addNotification(mm);
+			
+			//coach.getTeam().getRoster().addPlayerName(jack);
+			//jack.setTeam(coach.getTeam());
+			
+			
 			manageTeamView(usersIndex);
 		}
 		

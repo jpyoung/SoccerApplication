@@ -21,6 +21,15 @@ public class Roster implements Serializable{
 		playerCount++;
 	}
 	
+	//just added
+	public void removePlayer(Player player) {
+		System.out.println("Remove Player Method called");
+		player.setTeam(null);
+		roster.remove(player);
+		playerCount--;
+	}
+	
+	
 	public int getPlayerCount() {
 		return playerCount;
 	}

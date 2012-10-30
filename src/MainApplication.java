@@ -20,7 +20,7 @@ public class MainApplication {
 	public static Controller getController() { return controller; }
 	
 	//this var is used for to limit the whats being displayed in the console. 
-	public static boolean showConsoleDetails = false;
+	public static boolean showConsoleDetails = true;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -296,7 +296,10 @@ public class MainApplication {
 			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
 			//go to invitations and notifications
-			
+			//Player p = (Player)getController().getUc().getUserObject(usersIndex);
+			//System.out.println(p);
+			//System.out.println(p.getInBox());
+			playerNotificationView(usersIndex);
 		} else if (c == 4) {
 			firstView(); // go to save and log out. this will bring the user back to the first view
 		} else {
@@ -304,6 +307,38 @@ public class MainApplication {
 		}
 		
 	}
+	
+	
+	public static void playerNotificationView(int usersIndex) {
+		System.out.println("The index is: " + usersIndex);
+		Player p = (Player)getController().getUc().getUserObject(usersIndex);
+		
+		if (p.getInBox() != null) {
+			
+			if(p.getInBox().getHasNotifications()) {
+				
+				String message = "You have " + p.getInBox().getNotifications().size() + " new Notifications";
+				InputHelper.displayMessage(message, "Your Notifications");
+				
+				if (p.getInBox().getHasNotifications()) {
+					for (int i = 0; i < p.getInBox().getNotifications().size(); i++) {
+						//System.out.println(p.getInBox().getNotifications().get(i));
+						InputHelper.displayMessage(p.getInBox().getNotifications().get(i).toString(), "Your Notifications");
+					}
+				}
+			} else {
+				System.out.println("You have none");
+			}
+		} else {
+			InputHelper.displayMessage("You have none", "Notifications");
+		}
+		
+	
+		
+		playersDashBoardView(usersIndex);
+	}
+	
+	
 /*************************************************************************************************************/
 /****************************END:  Dashboards ****************************************************************/
 /*************************************************************************************************************/

@@ -62,3 +62,11 @@ The problem was that a coach could add a player, but by doing so the coach could
 
 
 ---If You Need to Make Any changes, place your notes & remarks below ---------
+
+
+
+#7 Added new class called Notifications to the Models
+#8 Created a Inbox Class
+#9 The Player class will have a new field called inbox
+
+

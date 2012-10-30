@@ -16,6 +16,11 @@ public class Player extends User implements Serializable{
 	private Team team;
 	public UserForm playerWaiver;
 	
+	public InBox inBox = new InBox();
+	public InBox getInBox() {
+		return inBox;
+	}
+	
 	public Player() {
 		//initialize class vars
 		super();

@@ -25,6 +25,7 @@ public class Team implements Serializable {
 //	}
 	
 	
+	
 	//just added - not specified in the uml
 	private static int countOfAllTeams = 0;
 	public static int getCountOfAllTeams() {

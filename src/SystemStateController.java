@@ -24,9 +24,9 @@ public class SystemStateController {
 //		System.out.println("---asd-fadsf-asdf-asdf-asd-f---\n");
 //		System.out.println(c.getTeam().getName());
 		//Team t = c.getTeam();
-		//getController().getTeam().add(c2.getTeam());
-		//getController().addATeam(c.getTeam());
-		
+		//MainApplication.getController().getTeam().add(c2.getTeam());
+		MainApplication.getController().addATeam(c.getTeam());
+		MainApplication.getController().addATeam(c2.getTeam());
 		
 	}
 	
