@@ -29,7 +29,6 @@ public class MainApplication {
 		
 		//load and output the initial  data
 		//getController().loadInitialData();
-		
 	
 		//used for load data from data file
 		SystemStateController.loadEverything();
@@ -42,7 +41,6 @@ public class MainApplication {
 //		Player p2 = (Player)getController().getUc().getUserObject(2);
 //		cc.getTeam().getRoster().addPlayerName(p2);
 //		p2.setTeam(cc.getTeam());
-	
 		//end of temp data
 		
 		if (getShowConsoleDetails()) { 
@@ -61,7 +59,6 @@ public class MainApplication {
 
 		
 		//output all userCreditential data on close
-		
 		if (getShowConsoleDetails()) { System.out.println("--Data on Application Close---"); getController().getUc().outputAllCredentials(); }
 		
 		
@@ -245,7 +242,6 @@ public class MainApplication {
 			a += "#" + (i+1) + "  " + OutputHelpers.giveConcatName(getController().getUc().getUserObject(i));
 			a += "\n";
 		}
-		
 		InputHelper.displayMessage(a, "View all people");
 		officialsDashBoardView(usersIndex);
 	}
@@ -269,8 +265,6 @@ public class MainApplication {
 			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call manageTeamView() method  in ManageTeamView class");
-			
-			
 			ManageTeamView.manageTeamView(usersIndex); //go to manage or create team
 		} else if (c == 4) {
 			firstView(); // go to save and log out. this will bring the user back to the first view
@@ -280,30 +274,21 @@ public class MainApplication {
 		}
 		
 	}
-	
 
-	
-	
 	//view for the players dashboard view
 	public static void playersDashBoardView(int usersIndex) {
 		System.out.println("\n\nPlayers Dash Board loaded");
 		
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Invitations and Notifications\n4. Save and Logout";
 		String titleString = "Dashboard - Player - " + getController().getUc().getUserName(usersIndex);
-		
 		String option = InputHelper.promptStringMenuOptions(displayString, "options", titleString, new int[]{1, 2, 3, 4});
 		
 		int c = Integer.parseInt(option);
-		
 		if (c == 1) {
 			EditProfileView.editProfileView(usersIndex); //go to edit profile
 		} else if (c == 2) {
 			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
-			//go to invitations and notifications
-			//Player p = (Player)getController().getUc().getUserObject(usersIndex);
-			//System.out.println(p);
-			//System.out.println(p.getInBox());
 			playerNotificationView(usersIndex);
 		} else if (c == 4) {
 			firstView(); // go to save and log out. this will bring the user back to the first view

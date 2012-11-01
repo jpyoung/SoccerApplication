@@ -49,18 +49,9 @@ public class SystemStateController {
 	
 
 	public static void loadEverything() {
-		
-		
-		
-		
 		MainApplication.controller = readIn();
-		
 		MainApplication.getController().getUc().outputSystemUsersTable();
-		
-		
 		findCoachesAndAddThereTeams();
-		
-		
 	}
 	
 	public static Controller readIn() {
@@ -80,6 +71,11 @@ public class SystemStateController {
 		}
 	}
 	
+	
+	public static void saveUserCreds() {
+		writeOut();
+	}
+	
 	public static void writeOut() {
 		try
 		{
@@ -97,17 +93,6 @@ public class SystemStateController {
 		}		
 	}
 	
-	public static void saveUserCreds() {
-		
-		writeOut();
-		
-//		ArrayList<String> xU = getController().getUc().getUserNamesArraylist();
-//		ArrayList<String> xP = getController().getUc().getPasswordsArraylist();
-//		ArrayList<Integer> xID = getController().getUc().getIdArraylist();
-//		ArrayList<Integer> xTYPE = getController().getUc().getUserTypeArraylist();
-//		
-//		CreateUserCredXML cxml = new CreateUserCredXML(xU, xP, xID, xTYPE, "UserCredData.xml");
-//		cxml.runExample();
-	}
+
 	
 }

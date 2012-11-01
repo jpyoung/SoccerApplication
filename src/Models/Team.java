@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Team implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Roster roster = new Roster();
 	private String name;
@@ -23,8 +20,6 @@ public class Team implements Serializable {
 //	public void updateRoster(){
 //		this.roster = new Roster();
 //	}
-	
-	
 	
 	//just added - not specified in the uml
 	private static int countOfAllTeams = 0;

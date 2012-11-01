@@ -16,39 +16,24 @@ public class Coach extends User implements Serializable {
 	
 	private boolean hasTeam = false;
 	public boolean getHasTeam() {
-		
 		if (getTeam().getName() == null) {
 			hasTeam = false;
 		} else {
 			hasTeam = true;
 		}
-		
 		return hasTeam;
 	}
-	public void setHasTeam(boolean r) {
-		hasTeam = r;
-	}
+	public void setHasTeam(boolean r) { hasTeam = r; }
 	
 	public Coach() {
 		// TODO Auto-generated constructor stub
 		super();
 		team = new Team(this);
 		
-		
 		System.out.println("\n\n-----------------------------------");
 		//System.out.println("Team Info size: " + Controller.getTeam().size());
 		System.out.println("\n\n-----------------------------------");
-		
-		
-		//Controller.getTeam().add(team);
-		
-		System.out.println("\n\n-----------------------------------");
-		//System.out.println("Team Info size: " + Controller.getTeam().size());
-		System.out.println("\n\n-----------------------------------");
-		
-//		this.team = new Team();
-//		this.team.setCoach(this);
-		
+	
 //		this.coachWaiver = null;//Jacks prior to change
 		this.coachWaiver = new CoachWaiver();//(DUC) updated 10/27 : Creating Coach object auto create CoachWaiver()
 		

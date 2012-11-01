@@ -10,7 +10,6 @@ public class Prompter {
 
 	public static Prompt question(String message, String title) {
 		Prompt prompt;
-
 		do {
 			prompt = promptMessage(message, title);
 		} while (prompt.isEmpty());

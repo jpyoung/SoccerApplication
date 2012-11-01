@@ -25,13 +25,6 @@ public class ManageTeamView {
 			System.out.println("Dont have a team");
 			createTeamView(usersIndex);
 		}
-		
-//		if (c.getTeam() != null) {
-//			//Team already create: No. THen do this
-//			manageTeamPrompt(c.getTeam(), usersIndex);
-//		} else {
-//			
-//		}
 	}
 	
 	public static void createTeamView(int usersIndex){
@@ -172,10 +165,6 @@ public class ManageTeamView {
 			Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
 			Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach:" + coach.getFirstName());
 			jack.getInBox().addNotification(mm);
-			
-			//coach.getTeam().getRoster().addPlayerName(jack);
-			//jack.setTeam(coach.getTeam());
-			
 			
 			manageTeamView(usersIndex);
 		}

@@ -70,3 +70,21 @@ The problem was that a coach could add a player, but by doing so the coach could
 #9 The Player class will have a new field called inbox
 
 
+
+
+
+#10  added the below methods to the coaches class
+	private boolean hasTeam = false;
+	public boolean getHasTeam() {
+		
+		if (getTeam().getName() == null) {
+			hasTeam = false;
+		} else {
+			hasTeam = true;
+		}
+		
+		return hasTeam;
+	}
+	public void setHasTeam(boolean r) {
+		hasTeam = r;
+	}
