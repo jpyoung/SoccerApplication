@@ -5,10 +5,7 @@ import java.util.ArrayList;
 
 
 public class UserCredentials implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Integer> id = new ArrayList<Integer>();
 	private ArrayList<String> userNames = new ArrayList<String>();

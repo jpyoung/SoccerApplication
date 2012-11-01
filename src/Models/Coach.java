@@ -7,17 +7,25 @@ import Waiver.UserForm;
 
 
 public class Coach extends User implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Team team;
 	private UserForm coachWaiver;
-	
 	private boolean payLeagueFees = false;
-	
-	
 	private boolean hasTeam = false;
+	
+
+	public Coach() {
+		super();
+		team = new Team(this);
+		this.coachWaiver = new CoachWaiver();//(DUC) updated 10/27 : Creating Coach object auto create CoachWaiver()
+	}
+	
+	//getters
+	public UserForm getCoachWaiver() { return coachWaiver; }
+	public Team getTeam() { return team; }
+	public boolean getPayLeagueFees() { return payLeagueFees; }
+	
 	public boolean getHasTeam() {
 		if (getTeam().getName() == null) {
 			hasTeam = false;
@@ -26,37 +34,11 @@ public class Coach extends User implements Serializable {
 		}
 		return hasTeam;
 	}
+	
+	//setters
 	public void setHasTeam(boolean r) { hasTeam = r; }
+	public void setPayLeagueFees(boolean l) { this.payLeagueFees = l; }
 	
-	public Coach() {
-		// TODO Auto-generated constructor stub
-		super();
-		team = new Team(this);
-		
-		System.out.println("\n\n-----------------------------------");
-		//System.out.println("Team Info size: " + Controller.getTeam().size());
-		System.out.println("\n\n-----------------------------------");
-	
-//		this.coachWaiver = null;//Jacks prior to change
-		this.coachWaiver = new CoachWaiver();//(DUC) updated 10/27 : Creating Coach object auto create CoachWaiver()
-		
-	}
-	
-	public UserForm getCoachWaiver() {
-		return coachWaiver;
-	}
-	public Team getTeam() {
-		return team;
-	}
-	public boolean getPayLeagueFees() {
-		return payLeagueFees;
-	}
-	public void setPayLeagueFees(boolean l) {
-		this.payLeagueFees = l;
-	}
-	
-	
-
 	@Override
 	public String toString() {
 		String a = "Coach [ " + super.toString();

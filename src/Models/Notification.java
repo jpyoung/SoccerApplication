@@ -48,9 +48,7 @@ public class Notification implements Serializable {
 	public void setMessage(String message) { this.message = message; }
 	public void setSender(String sender) { this.sender = sender; }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return "Notification [hasBeenViewed=" + hasBeenViewed
@@ -58,8 +56,5 @@ public class Notification implements Serializable {
 				+ message + ", sender=" + sender + ", senderUsersIndex="
 				+ senderUsersIndex + "]";
 	}
-
-	
-
 
 }

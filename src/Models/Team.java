@@ -16,11 +16,7 @@ public class Team implements Serializable {
 	private boolean leagueFeesPaid;
 	private static ArrayList<String> allTeams = new ArrayList<String>();
 	
-	//just added saturday 10-27
-//	public void updateRoster(){
-//		this.roster = new Roster();
-//	}
-	
+
 	//just added - not specified in the uml
 	private static int countOfAllTeams = 0;
 	public static int getCountOfAllTeams() {
@@ -48,8 +44,6 @@ public class Team implements Serializable {
 	public void setAwayColor(String color){awayColor = color;}
 	public void setCoach(Coach coach){
 		this.coach = coach;
-//		Team.allTeams.add(name);
-//		Team.countOfAllTeams++;
 	}
 	public void setCaptain(Player captain){this.captain = captain;}
 	public String getName(){return name;}

@@ -7,19 +7,13 @@ import Waiver.UserForm;
 
 
 public class Player extends User implements Serializable{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private boolean captain;
 	private Team team;
 	public UserForm playerWaiver;
-	
 	public InBox inBox = new InBox();
-	public InBox getInBox() {
-		return inBox;
-	}
+	
 	
 	public Player() {
 		//initialize class vars
@@ -39,16 +33,10 @@ public class Player extends User implements Serializable{
 	}
 	
 	//getters
-	public boolean getCaptain() {
-		return captain;
-	}
-	public Team getTeam() {
-		return team;
-	}
-	public UserForm getPlayerWaiver() {
-		return playerWaiver;
-	}
-
+	public boolean getCaptain() { return captain; }
+	public Team getTeam() { return team; }
+	public UserForm getPlayerWaiver() { return playerWaiver; }
+	public InBox getInBox() { return inBox; }
 
 	
 	

@@ -8,10 +8,7 @@ import java.util.ArrayList;
  * @date Oct 30, 2012
  */
 public class InBox implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private boolean hasNotifications;
 	private ArrayList<Notification> notifications = new ArrayList<Notification>();
@@ -21,20 +18,13 @@ public class InBox implements Serializable {
 	}
 	
 	//getters
-	public ArrayList<Notification> getNotifications() {
-		return notifications;
-	}
-	public boolean getHasNotifications() {
-		return hasNotifications;
-	}
+	public ArrayList<Notification> getNotifications() { return notifications; }
+	public boolean getHasNotifications() { return hasNotifications; }
 	
 	//setters
-	public void setHasNotifications(boolean hasNotifications) {
-		this.hasNotifications = hasNotifications;
-	}
+	public void setHasNotifications(boolean hasNotifications) { this.hasNotifications = hasNotifications; }
 	
 	public void addNotification(Notification n) {
-		System.out.println("The Arraylist of notes : " + notifications);
 		notifications.add(n);
 		setHasNotifications(true);
 	}
@@ -49,7 +39,6 @@ public class InBox implements Serializable {
 	
 	public String toString() {
 		String a = "InBox: \n Does have notifications: " + getHasNotifications();
-		
 		return a;
 	}
 
