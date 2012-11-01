@@ -470,25 +470,7 @@ public class MainApplication {
 			}
 		}
 	}	
-//	public static void invitationDialog(String message, String title) {
-//		Object[] options = { "Refuse", "Accept"};
-//		int n = JOptionPane.showOptionDialog(null, message,
-//				title, JOptionPane.YES_NO_CANCEL_OPTION,
-//				JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
-//		if (n == -1 ) {
-//			//they pressed the x button
-//			System.out.println("Clicked the x button");
-//		} else {
-//			//they selected an option
-//			if (n == 1) {
-//				//clicked accept
-//				System.out.println("Clicked Accept");
-//			} else {
-//				//clicked refuse
-//				System.out.println("Clicked Refuse");
-//			}
-//		}
-//	}
+
 	
 	public static void playerProfileView(User player1) {
 		Player player = (Player)player1;

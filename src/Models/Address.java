@@ -32,6 +32,4 @@ public class Address implements Serializable {
 				+ zip + ", city=" + city + "]";
 	}
 	
-	
-
 }
