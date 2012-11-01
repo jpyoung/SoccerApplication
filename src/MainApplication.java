@@ -269,6 +269,8 @@ public class MainApplication {
 			viewTeamProfiles(usersIndex); //go to view teams profiles
 		} else if (c == 3) {
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: coachesDashBoardView()   ACTION: call manageTeamView() method  in ManageTeamView class");
+			
+			
 			ManageTeamView.manageTeamView(usersIndex); //go to manage or create team
 		} else if (c == 4) {
 			firstView(); // go to save and log out. this will bring the user back to the first view
@@ -278,6 +280,9 @@ public class MainApplication {
 		}
 		
 	}
+	
+
+	
 	
 	//view for the players dashboard view
 	public static void playersDashBoardView(int usersIndex) {
@@ -327,6 +332,7 @@ public class MainApplication {
 					}
 				}
 			} else {
+				InputHelper.displayMessage("You have none", "Notifications");
 				System.out.println("You have none");
 			}
 		} else {

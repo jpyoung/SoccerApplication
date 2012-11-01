@@ -17,12 +17,41 @@ public class ManageTeamView {
 	
 	public static void manageTeamView(int usersIndex) {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
-		if (c.getTeam() != null) {
-			//Team already create: No. THen do this
+		
+		if (c.getHasTeam() && c.getTeam() != null) {
+			System.out.println("They have a team");
 			manageTeamPrompt(c.getTeam(), usersIndex);
 		} else {
-			
+			System.out.println("Dont have a team");
+			createTeamView(usersIndex);
 		}
+		
+//		if (c.getTeam() != null) {
+//			//Team already create: No. THen do this
+//			manageTeamPrompt(c.getTeam(), usersIndex);
+//		} else {
+//			
+//		}
+	}
+	
+	public static void createTeamView(int usersIndex){
+		System.out.println("Create Team View method called");
+		String title = "Create Team";
+		
+		String teamName = InputHelper.promptString("Enter in the Team Name:", "team name", title);
+		String homeColor = InputHelper.promptString("Enter in the Teams Home Color:", "home color", title);
+		String awayColor = InputHelper.promptString("Enter in the Teams Away Color:", "away color", title);
+		
+		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
+		c.getTeam().setName(teamName);
+		c.getTeam().setAwayColor(awayColor);
+		c.getTeam().setHomeColor(homeColor);
+		c.setHasTeam(true);
+		MainApplication.getController().getTeam().add(c.getTeam());
+		
+		InputHelper.displayMessage(teamName + " team has been created.", "Create Team");
+		
+		manageTeamView(usersIndex);
 	}
 	
 	
@@ -139,8 +168,9 @@ public class ManageTeamView {
 			InputHelper.displayMessage(ddMessage, "Invitation Confirmation");
 			
 			Coach coach = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
+			
 			Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
-			Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach");
+			Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach:" + coach.getFirstName());
 			jack.getInBox().addNotification(mm);
 			
 			//coach.getTeam().getRoster().addPlayerName(jack);

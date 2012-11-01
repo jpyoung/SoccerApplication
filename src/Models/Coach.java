@@ -14,6 +14,21 @@ public class Coach extends User implements Serializable {
 	private Team team;
 	private UserForm coachWaiver;
 	
+	private boolean hasTeam = false;
+	public boolean getHasTeam() {
+		
+		if (getTeam().getName() == null) {
+			hasTeam = false;
+		} else {
+			hasTeam = true;
+		}
+		
+		return hasTeam;
+	}
+	public void setHasTeam(boolean r) {
+		hasTeam = r;
+	}
+	
 	public Coach() {
 		// TODO Auto-generated constructor stub
 		super();
