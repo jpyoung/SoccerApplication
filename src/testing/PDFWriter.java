@@ -4,6 +4,9 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Models.Coach;
+import Models.User;
+
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -89,15 +92,64 @@ public class PDFWriter {
 		subCatPart.add(new Paragraph("Coach        userType = 2"));
 		subCatPart.add(new Paragraph("Player        userType = 3"));
 		Paragraph paragraph = new Paragraph();
-		addEmptyLine(paragraph, 3);
+		addEmptyLine(paragraph, 1);
 		subCatPart.add(paragraph);
 		createSecondTable(subCatPart, c);
 		subCatPart.add(paragraph);
 		addEmptyLine(paragraph, 2);
 		createTallyTable(subCatPart, c);
+		
+		subCatPart.add(paragraph);
+		addEmptyLine(paragraph, 6);
+		createTeamsOverviewTable(subCatPart, c);
+		
 		document.add(catPart);
 	}
 	
+	
+	public static void createTeamsOverviewTable(Section subCatPart, Controller c) throws BadElementException {
+		PdfPTable table = new PdfPTable(6);
+		
+		String[] titles = {"#", "Team Name", "Coach Name", "League Fees", "HasTeam", "Roster Count"};
+		giveHeaderCell(table, titles);
+		
+		ArrayList<User> u = c.getUc().getUserObjectArraylist();
+		ArrayList<Coach> tempee = new ArrayList<Coach>();
+		
+		for (int i = 0; i < u.size(); i++) {
+			if(u.get(i).getClass().getName().equals("Models.Coach")){
+				tempee.add((Coach)u.get(i));
+			}
+		}
+		
+		for (int i = 0; i < tempee.size(); i++) {
+			table.addCell(String.valueOf(i));
+			table.addCell(String.valueOf(tempee.get(i).getTeam().getName()));
+			table.addCell(String.valueOf(tempee.get(i).getFirstName()));
+			table.addCell(String.valueOf(tempee.get(i).getPayLeagueFees()));
+			table.addCell(String.valueOf(tempee.get(i).getHasTeam()));
+			table.addCell(String.valueOf(tempee.get(i).getTeam().getRoster().getPlayerCount()));
+		}
+		
+		
+		subCatPart.add(table);
+	}
+	
+	public static void giveHeaderCell(PdfPTable table, String[] titles) {
+		PdfPCell c1 = new PdfPCell(new Phrase(titles[0]));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		
+		for (int i = 1; i < titles.length; i++) {
+			c1 = new PdfPCell(new Phrase(titles[i]));
+			c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+			c1.setBackgroundColor(BaseColor.CYAN);
+			table.addCell(c1);
+		}
+		
+		
+	}
 	
 	//this method creates the table to display tallys of user table
 	public static void createTallyTable(Section subCatPart, Controller c) throws BadElementException {

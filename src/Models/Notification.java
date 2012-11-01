@@ -16,20 +16,23 @@ public class Notification implements Serializable {
 	private boolean doesRequireAction;
 	private String message;
 	private String sender; //it will be team name- coach name
+	private int senderUsersIndex = -1;
 	
 	public Notification() {
 		this.hasBeenViewed = false;
 		this.doesRequireAction = false;
 		this.message = "";
 		this.sender = "";
+		this.senderUsersIndex = -1;
 	}
 	
-	public Notification(boolean hasBeenViewed, String message, boolean doesRequireAction, String sender) {
+	public Notification(boolean hasBeenViewed, String message, boolean doesRequireAction, String sender, int senderUsersIndex) {
 		super();
 		this.hasBeenViewed = hasBeenViewed;
 		this.message = message;
 		this.doesRequireAction = doesRequireAction;
 		this.sender = sender;
+		this.senderUsersIndex = senderUsersIndex;
 	}
 
 	//getters
@@ -37,6 +40,7 @@ public class Notification implements Serializable {
 	public boolean isDoesRequireAction() { return doesRequireAction; }
 	public String getMessage() { return message; }
 	public String getSender() { return sender; }
+	public int getSenderUsersIndex() { return senderUsersIndex; }
 	
 	//setters
 	public void setHasBeenViewed(boolean hasBeenViewed) { this.hasBeenViewed = hasBeenViewed; }	
@@ -44,11 +48,18 @@ public class Notification implements Serializable {
 	public void setMessage(String message) { this.message = message; }
 	public void setSender(String sender) { this.sender = sender; }
 
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() {
 		return "Notification [hasBeenViewed=" + hasBeenViewed
 				+ ", doesRequireAction=" + doesRequireAction + ", message="
-				+ message + ", sender=" + sender + "]";
+				+ message + ", sender=" + sender + ", senderUsersIndex="
+				+ senderUsersIndex + "]";
 	}
+
+	
+
 
 }

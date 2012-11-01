@@ -71,7 +71,7 @@ The problem was that a coach could add a player, but by doing so the coach could
 
 
 
-
+---after first email----
 
 #10  added the below methods to the coaches class
 	private boolean hasTeam = false;
@@ -88,3 +88,16 @@ The problem was that a coach could add a player, but by doing so the coach could
 	public void setHasTeam(boolean r) {
 		hasTeam = r;
 	}
+	
+#11 added the below to the coaches class
+private boolean payLeagueFees = false;
+
+	public boolean getPayLeagueFees() {
+		return payLeagueFees;
+	}
+	public void setPayLeagueFees(boolean l) {
+		this.payLeagueFees = l;
+	}
+
+
+

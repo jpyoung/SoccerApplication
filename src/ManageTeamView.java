@@ -85,6 +85,7 @@ public class ManageTeamView {
 			} else if ( n == 3) {
 				//remove a player
 				System.out.println("remove a player");
+				viewRemovePlayerMenu(usersIndex);
 			} else if ( n == 4) {
 				//change team name
 				System.out.println("change team name");
@@ -162,9 +163,13 @@ public class ManageTeamView {
 			
 			Coach coach = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
 			
-			Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
-			Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach:" + coach.getFirstName());
-			jack.getInBox().addNotification(mm);
+			//Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
+			String messageF = OutputHelpers.giveConcatName(tempee2.get(n)) + ", will you join our team?";
+			Notification mm = new Notification(false, messageF, true, "Coach:" + coach.getFirstName(), usersIndex);
+			tempee2.get(n).getInBox().addNotification(mm);
+			
+//			coach.getTeam().getRoster().addPlayerName(duc);
+//			duc.setTeam(coach.getTeam());
 			
 			manageTeamView(usersIndex);
 		}
@@ -172,6 +177,59 @@ public class ManageTeamView {
 		
 	}
 	
+/***********Remove a player from the roster**************/	
+	public static void viewRemovePlayerMenu(int usersIndex) {
+		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
+		
+		choosePlayerToRemove(coach.getTeam(), usersIndex, coach);
+	}
+	
+	public static void choosePlayerToRemove(Team t, int usersIndex, Coach coach) {
+		String title = "Remove a player from  [" + t.getName() + "]";
+		String m = "Select player you want to remove from your roster.  or click 'back':\n";
+		
+		if (hasRosterBeenSet(t)) {
+			//has the roster been initialized 
+			if (t.getRoster().playerCount == 0) {
+				// their are no players on this coaches roster
+				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster", title);
+				manageTeamView(usersIndex);
+			} else {
+				//they do have players on their roster
+				Player[] pp = t.getRoster().getPlayersOnRoster();
+				int[] tempPoss = new int[pp.length];
+					for (int i = 0; i < pp.length; i++) {
+						m += (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "  ";
+						m += "\n";
+						tempPoss[i] = (i + 1);
+					}
+				String resp = InputHelper.promptStringMenuOptionsType2(m, "player choosen", title, tempPoss);
+				if (resp.equals("-n-u-l-l-")) {
+					manageTeamPrompt(t, usersIndex);
+				} else {
+					int n = Integer.parseInt(resp) - 1;
+					System.out.println("You selected this player number: " + resp + "   index value: " + n);
+					
+					
+					String messageF = OutputHelpers.giveConcatName(pp[n]) + ", the " + coach.getTeam().getName() + " team has dropped you from their roster.";
+					
+					Notification mm = new Notification(false, messageF, false, "Coach - " + coach.getFirstName(), usersIndex);
+					pp[n].getInBox().addNotification(mm); //adding the notification for being dropper
+					coach.getTeam().getRoster().removePlayer(pp[n]); //dropping the relationship
+					pp[n].setTeam(null);	//dropping the relationships
+					
+					InputHelper.displayMessage(OutputHelpers.giveConcatName(pp[n]) + " will be notified that he was cut from your roster.", "Player removed");
+					manageTeamPrompt(t, usersIndex);
+				}
+			}
+		}
+	}
+	
+	
+//	Notification mm = new Notification(false, "Duc, We are dropping you.", false, "Coach", 3);
+//	duc.getInBox().addNotification(mm);
+//	coach.getTeam().getRoster().removePlayer(duc);
+//	duc.setTeam(null);
 	
 /*****************************View Roster Section**************************************************************/
 	

@@ -37,6 +37,7 @@ public class Controller implements Serializable {
 		uc.setUserObject("mcook", "cook", 2, td.getUser6());
 		uc.setUserObject("sspees", "spes12", 3, td.getUser7());
 		uc.setUserObject("cFortier", "fort12", 3, td.getUser8());
+		
 		//outputting all the users credentials
 		getUc().outputAllCredentials();
 

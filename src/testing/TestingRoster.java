@@ -73,14 +73,14 @@ public class TestingRoster {
 				customCoachOuput(coach);
 				v2Menu(uc);
 			} else if (r == 2) {
-				Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach");
+				Notification mm = new Notification(false, "Jack, will you join our team.", true, "Coach", 3);
 				jack.getInBox().addNotification(mm);
 				
 				coach.getTeam().getRoster().addPlayerName(jack);
 				jack.setTeam(coach.getTeam());
 				v2Menu(uc);
 			} else if (r == 3) {
-				Notification mm = new Notification(false, "Jack, We are dropping you.", false, "Coach");
+				Notification mm = new Notification(false, "Jack, We are dropping you.", false, "Coach", 3);
 				jack.getInBox().addNotification(mm);
 				
 				coach.getTeam().getRoster().removePlayer(jack);
@@ -88,7 +88,7 @@ public class TestingRoster {
 				v2Menu(uc);
 				
 			} else if (r == 4) {
-				Notification mm = new Notification(false, "Duc, will you join our team.", true, "Coach");
+				Notification mm = new Notification(false, "Duc, will you join our team.", true, "Coach", 3);
 				duc.getInBox().addNotification(mm);
 				
 				coach.getTeam().getRoster().addPlayerName(duc);
@@ -96,7 +96,7 @@ public class TestingRoster {
 				v2Menu(uc);
 			} else if (r == 5) {
 				
-				Notification mm = new Notification(false, "Duc, We are dropping you.", false, "Coach");
+				Notification mm = new Notification(false, "Duc, We are dropping you.", false, "Coach", 3);
 				duc.getInBox().addNotification(mm);
 				coach.getTeam().getRoster().removePlayer(duc);
 				duc.setTeam(null);

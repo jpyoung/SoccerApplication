@@ -6,6 +6,7 @@ import helpers.Prompter;
 import javax.swing.JOptionPane;
 
 import testing.PDFWriter;
+import Models.Coach;
 import Models.Player;
 import Models.Team;
 import Models.User;
@@ -32,6 +33,9 @@ public class MainApplication {
 	
 		//used for load data from data file
 		SystemStateController.loadEverything();
+		
+		
+		
 		
 		//temp data
 //		Player p = (Player)getController().getUc().getUserObject(1);
@@ -313,7 +317,35 @@ public class MainApplication {
 				if (p.getInBox().getHasNotifications()) {
 					for (int i = 0; i < p.getInBox().getNotifications().size(); i++) {
 						//System.out.println(p.getInBox().getNotifications().get(i));
-						InputHelper.displayMessage(p.getInBox().getNotifications().get(i).toString(), "Your Notifications");
+						
+						
+						if (p.getInBox().getNotifications().get(i).isDoesRequireAction()) {
+							//its a notification where they accept or decline an action
+							boolean action = invitationDialog(p.getInBox().getNotifications().get(i).toString(), "Invitation Request");
+							if(action) {
+								//they accept
+								System.out.println("They accepttttt");
+								Coach coachSender = (Coach)getController().getUc().getUserObject(p.getInBox().getNotifications().get(i).getSenderUsersIndex());
+								System.out.println("The send object found: " + coachSender.getFirstName());
+								coachSender.getTeam().getRoster().addPlayerName(p);
+								p.setTeam(coachSender.getTeam());
+								
+								String messageF = "Congrats, you have just joined the " + coachSender.getTeam().getName() + " team, and were just added to its roster";
+								InputHelper.displayMessage(messageF, "Just joined a Team");
+								coachSender.getTeam().getRoster().addPlayerName(p);
+								p.setTeam(coachSender.getTeam());
+							} else {
+								System.out.println("You rejected it dude");
+								
+							}
+							p.getInBox().removeNotification(p.getInBox().getNotifications().get(i));
+						} else {
+							//else its just a message
+							InputHelper.displayMessage(p.getInBox().getNotifications().get(i).toString(), "Your Notifications");
+							p.getInBox().removeNotification(p.getInBox().getNotifications().get(i));
+						}
+						
+					
 					}
 				}
 			} else {
@@ -415,8 +447,7 @@ public class MainApplication {
 /***************************************************************************************************/	
 	
 	//Other methods not sure where to place yet
-	
-	public static void invitationDialog(String message, String title) {
+	public static boolean invitationDialog(String message, String title) {
 		Object[] options = { "Refuse", "Accept"};
 		int n = JOptionPane.showOptionDialog(null, message,
 				title, JOptionPane.YES_NO_CANCEL_OPTION,
@@ -424,17 +455,40 @@ public class MainApplication {
 		if (n == -1 ) {
 			//they pressed the x button
 			System.out.println("Clicked the x button");
+			return false;
 		} else {
 			//they selected an option
 			if (n == 1) {
 				//clicked accept
 				System.out.println("Clicked Accept");
+				return true;
+				
 			} else {
 				//clicked refuse
 				System.out.println("Clicked Refuse");
+				return false;
 			}
 		}
-	}
+	}	
+//	public static void invitationDialog(String message, String title) {
+//		Object[] options = { "Refuse", "Accept"};
+//		int n = JOptionPane.showOptionDialog(null, message,
+//				title, JOptionPane.YES_NO_CANCEL_OPTION,
+//				JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
+//		if (n == -1 ) {
+//			//they pressed the x button
+//			System.out.println("Clicked the x button");
+//		} else {
+//			//they selected an option
+//			if (n == 1) {
+//				//clicked accept
+//				System.out.println("Clicked Accept");
+//			} else {
+//				//clicked refuse
+//				System.out.println("Clicked Refuse");
+//			}
+//		}
+//	}
 	
 	public static void playerProfileView(User player1) {
 		Player player = (Player)player1;

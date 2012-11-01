@@ -68,7 +68,17 @@ public class TestDataLoader {
 		return p;
 	}
 	
-	//coach user
+	// offical user
+	public Official getUser5() {
+		Official o = new Official();
+		o.setAddress(createAddress5());
+		o.setFirstName("Brian");
+		o.setLastName("Vamieer");
+		o.setPhone("563 234 5566");
+		return o;
+	}
+	
+	//coach user:  Coach 1 - Team = Thunder Bolts
 	public Coach getUser4() {
 		Coach c = new Coach();
 		c.setAddress(createAddress4());
@@ -81,15 +91,17 @@ public class TestDataLoader {
 		return c;
 	}
 	
-	// offical user
-	public Official getUser5() {
-		Official o = new Official();
-		o.setAddress(createAddress5());
-		o.setFirstName("Brian");
-		o.setLastName("Vamieer");
-		o.setPhone("563 234 5566");
-		return o;
+	public Coach getUserThirdCoach() {
+		Coach c = new Coach();
+		Address a = new Address(); a.setStreet("2132 Moores Drive"); a.setCity("Moorestown"); a.setZip("30231"); a.setState("WV");
+		c.setAddress(a);
+		c.setFirstName("Hans");
+		c.setLastName("Backe");
+		c.setPhone("344 455 6643");
+		return c;
 	}
+	
+	
 	
 	//coach user
 	public Coach getUser6() {

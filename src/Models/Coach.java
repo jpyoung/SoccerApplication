@@ -14,6 +14,9 @@ public class Coach extends User implements Serializable {
 	private Team team;
 	private UserForm coachWaiver;
 	
+	private boolean payLeagueFees = false;
+	
+	
 	private boolean hasTeam = false;
 	public boolean getHasTeam() {
 		if (getTeam().getName() == null) {
@@ -45,9 +48,14 @@ public class Coach extends User implements Serializable {
 	public Team getTeam() {
 		return team;
 	}
-	public boolean payLeagueFees() {
-		return false;
+	public boolean getPayLeagueFees() {
+		return payLeagueFees;
 	}
+	public void setPayLeagueFees(boolean l) {
+		this.payLeagueFees = l;
+	}
+	
+	
 
 	@Override
 	public String toString() {

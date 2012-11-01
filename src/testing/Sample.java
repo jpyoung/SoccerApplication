@@ -8,7 +8,30 @@ public class Sample {
 	public static void main(String args[]) {
 		System.out.println("hello");
 		
+		TestDataLoader t = new TestDataLoader();
+		
+		Coach coach1 = t.getUser4(); //thunder bolts
+		Player p1 = (Player)t.getUser2();
+		
+		coach1.getTeam().getRoster().addPlayerName(p1);
+		p1.setTeam(coach1.getTeam());
+		
+		customCoachOuput(coach1);
+		
+		customOutput(p1);
+		
+		Coach coach2 = t.getUser6(); //dc united
+		customCoachOuput(coach2);
+		
+		
+		Coach coach3 = t.getUserThirdCoach();
+	
+		coach3.getTeam().setName("New York Red Bulls");
+		customCoachOuput(coach3);
+	
 	}
+	
+	
 	
 	
 	public static void customCoachOuput(Coach u) {
@@ -18,15 +41,15 @@ public class Sample {
 		dd += "\n\t\tlastname: " + u.getLastName();
 		dd += "\n\t\tphone: " + u.getPhone();
 
-
 		dd +="\n\t\tCoach { \n";
-		dd += "\t\t\tHas Team: " + u.getHasTeam();
+		dd += "\t\t\tLeague Fees Paid: " + u.getPayLeagueFees();
+		dd += "\n\t\t\tHas Team: " + u.getHasTeam();
 		dd += "\n\t\t\tTeam { \n";
 		dd += "\t\t\t\tTeam name: " + u.getTeam().getName();
 		dd += "\n\t\t\t\tHome Color: " + u.getTeam().getHomeColor();
 		dd += "\n\t\t\t\tAway Color: " + u.getTeam().getAwayColor();
 		dd += "\n\t\t\t\tCoach Name: " + (u.getTeam().getCoach().getFirstName() == null ? "Null" : u.getTeam().getCoach().getFirstName());
-		dd += "\n\t\t\t\tLeague Fees Paid: ";
+		
 
 		dd += "\n\t\t\t\tRoster {\n";
 		int pcount = u.getTeam().getRoster().getPlayerCount();
