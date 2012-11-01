@@ -3,8 +3,16 @@ package Models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * @author Jack Young
+ * @date Oct 30, 2012
+ */
 public class InBox implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean hasNotifications;
 	private ArrayList<Notification> notifications = new ArrayList<Notification>();
 	
