@@ -18,6 +18,8 @@ public class ManageTeamView {
 	public static void manageTeamView(int usersIndex) {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
 		
+		customCoachOuput(c);
+		
 		if (c.getHasTeam() && c.getTeam() != null) {
 			System.out.println("They have a team");
 			manageTeamPrompt(c.getTeam(), usersIndex);
@@ -100,6 +102,7 @@ public class ManageTeamView {
 			} else {
 				//pay league fees
 				System.out.println("pay league fees");
+				viewPayLeagueFeesMenu(usersIndex);
 			}
 		}
 		
@@ -113,11 +116,40 @@ public class ManageTeamView {
 	// pay league fees
 	// view roster
 	
+/****************************Choose a Captain Section***************************************************************/		
+	
+	
+/****************************Pay League Fees Section***************************************************************/		
+	public static void viewPayLeagueFeesMenu(int usersIndex) {
+		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
+		
+		if (c.getPayLeagueFees()) {
+			InputHelper.displayMessage("The " + c.getTeam().getName() + " has already Payed the League Fees.", "Pay League Fees - View");
+		} else {
+			String m = "The " + c.getTeam().getName() + " has not Payed is League Fees.";
+			m += "\nPress accept to pay, or press refuse not to pay.";
+			boolean response = MainApplication.invitationDialog(m, "Pay League Fees - View");
+			if ( response ) {
+				System.out.println("Agreed to pay the league fees");
+				c.setPayLeagueFees(true);
+				InputHelper.displayMessage("Thank you! You have successfully payed your teams league fees.", "Pay League Fees - View");
+			} else {
+				System.out.println("Refused to pay the league fees");
+				c.setPayLeagueFees(false);
+			}
+		}
+		
+		manageTeamView(usersIndex);
+	}
+	
+	
+	
 /****************************Add Player Section***************************************************************/	
 	public static void viewAddPlayerMenu(int usersIndex) {
 		JOptionPane.showMessageDialog(null, "Your at view add player menu top");
 		@SuppressWarnings("unused")
 		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
+		
 		
 		viewAvailablePlayers(usersIndex);
 	}
@@ -278,6 +310,7 @@ public class ManageTeamView {
 			m += "\nEmail: email address goes here";
 			m += "\nPhone: " + p.getPhone();
 			m += "\nSigned Waiver: " + (hasSignedWaiver(p) ? "Yes" : "NOO");
+			m += "\nCaptain: " + (p.getCaptain() ? "Yes" : "No");
 		InputHelper.displayMessage(m, title);
 		//this takes the coach back to the menu display all the players on their roster
 		viewRosterChoices(p.getTeam(), usersIndex);
@@ -352,6 +385,46 @@ public class ManageTeamView {
 			answer = true;
 		}
 		return answer;
+	}
+	
+	public static void customCoachOuput(Coach u) {
+		String dd = "firstname: " + u.getFirstName() + " " + u.getLastName();
+		dd += "\n\tUser { \n";
+		dd += "\t\tfirstname:" + u.getFirstName();
+		dd += "\n\t\tlastname: " + u.getLastName();
+		dd += "\n\t\tphone: " + u.getPhone();
+
+		dd +="\n\t\tCoach { \n";
+		dd += "\t\t\tLeague Fees Paid: " + u.getPayLeagueFees();
+		dd += "\n\t\t\tHas Team: " + u.getHasTeam();
+		dd += "\n\t\t\tTeam { \n";
+		dd += "\t\t\t\tTeam name: " + u.getTeam().getName();
+		dd += "\n\t\t\t\tHome Color: " + u.getTeam().getHomeColor();
+		dd += "\n\t\t\t\tAway Color: " + u.getTeam().getAwayColor();
+		dd += "\n\t\t\t\tCoach Name: " + (u.getTeam().getCoach().getFirstName() == null ? "Null" : u.getTeam().getCoach().getFirstName());
+		
+
+		dd += "\n\t\t\t\tRoster {\n";
+		int pcount = u.getTeam().getRoster().getPlayerCount();
+		dd += "\t\t\t\t\tplayer count: " + pcount;
+		if(pcount > 0) {
+			dd += "\n\t\t\t\t\tList--";
+			Player[] ppp = u.getTeam().getRoster().getPlayersOnRoster();
+			for (int i = 0; i < ppp.length; i++) {
+				dd += "\n\t\t\t\t\t" + ppp[i].getFirstName();
+			}
+		}
+
+		dd += "\n\t\t\t\t}";
+		dd += "\n\t\t\t}";
+
+		dd += "\n\t\tAddress { \n";
+		dd += "\t\t\tstate:" + u.getAddress();
+		dd += "\n\t\t}";
+
+		dd += "\n\t}";
+
+		System.out.println(dd);
 	}
 	
 }
