@@ -16,8 +16,7 @@ public class Roster implements Serializable{
 	public void addPlayerName(Player player) {
 		System.out.println("Add Player Method called");
 		roster.add(player);
-	
-		
+
 		playerCount++;
 	}
 	

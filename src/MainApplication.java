@@ -3,6 +3,8 @@ import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import testing.PDFWriter;
@@ -21,7 +23,7 @@ public class MainApplication {
 	public static Controller getController() { return controller; }
 	
 	//this var is used for to limit the whats being displayed in the console. 
-	public static boolean showConsoleDetails = true;
+	public static boolean showConsoleDetails = false;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -34,7 +36,7 @@ public class MainApplication {
 		//used for load data from data file
 		SystemStateController.loadEverything();
 		
-		
+		infoGatherer();
 		
 		
 		if (getShowConsoleDetails()) { 
@@ -46,12 +48,11 @@ public class MainApplication {
 		}
 		
 		
-		
-		
+		//
 		firstView();
+		//
+		infoGatherer();
 		
-
-	
 		//Saving Everything via serial data file
 		SystemStateController.saveUserCreds();
 		
@@ -60,6 +61,71 @@ public class MainApplication {
 		PDFWriter.runPDFwriter(getController());
 		
 	}
+	
+	
+	public static void infoGatherer() {
+		ArrayList<User> allUsers = getController().getUc().getUserObjectArraylist();
+		int playerCount = 0;
+		int coachCount = 0;
+		int officialCount = 0;
+		int others = 0;
+		for(int x = 0; x < allUsers.size(); x++) {
+			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
+				playerCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
+				coachCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
+				officialCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
+				others++;
+			}
+		}
+		
+		System.out.println("----Info Gather ---");
+		System.out.println("Player Count: " + playerCount);
+		System.out.println("Coach Count: " + coachCount);
+		System.out.println("Official Count: " + officialCount);
+		System.out.println("User Count: " + others);
+		
+		ArrayList<Integer> playerIds = new ArrayList<Integer>();
+		ArrayList<Integer> coachIds = new ArrayList<Integer>();
+		ArrayList<Integer> officialIds = new ArrayList<Integer>();
+		ArrayList<Integer> otherIds = new ArrayList<Integer>();
+		
+		for(int x = 0; x < allUsers.size(); x++) {
+			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
+				playerIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
+				coachIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
+				officialIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
+				otherIds.add(x);
+			}
+		}
+		
+		
+		System.out.println("Player ids: " + playerIds.toString());
+		System.out.println("Coach ids: " + coachIds.toString());
+		System.out.println("Official ids: " + officialIds.toString());
+		System.out.println("Other ids: " + otherIds.toString());
+		
+		for (int y = 0; y < coachCount; y++) {
+			System.out.println("--Coach ID = " + coachIds.get(y));
+			Coach c = (Coach)getController().getUc().getUserObject(coachIds.get(y));
+			ManageTeamView.customCoachOuput(c);
+		}
+		
+	}
+	
+	
+	
 	
 /*************************************************************************************************************/
 /****************************START:  firstView()**************************************************************/
@@ -315,8 +381,8 @@ public class MainApplication {
 								System.out.println("They accepttttt");
 								Coach coachSender = (Coach)getController().getUc().getUserObject(p.getInBox().getNotifications().get(i).getSenderUsersIndex());
 								System.out.println("The send object found: " + coachSender.getFirstName());
-								coachSender.getTeam().getRoster().addPlayerName(p);
-								p.setTeam(coachSender.getTeam());
+								//coachSender.getTeam().getRoster().addPlayerName(p);
+								//p.setTeam(coachSender.getTeam());
 								
 								String messageF = "Congrats, you have just joined the " + coachSender.getTeam().getName() + " team, and were just added to its roster";
 								InputHelper.displayMessage(messageF, "Just joined a Team");

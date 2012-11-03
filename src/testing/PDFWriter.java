@@ -129,6 +129,7 @@ public class PDFWriter {
 			table.addCell(String.valueOf(tempee.get(i).getPayLeagueFees()));
 			table.addCell(String.valueOf(tempee.get(i).getHasTeam()));
 			table.addCell(String.valueOf(tempee.get(i).getTeam().getRoster().getPlayerCount()));
+			
 		}
 		
 		
