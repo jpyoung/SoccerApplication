@@ -23,7 +23,7 @@ public class MainApplication {
 	public static Controller getController() { return controller; }
 	
 	//this var is used for to limit the whats being displayed in the console. 
-	public static boolean showConsoleDetails = false;
+	public static boolean showConsoleDetails = true;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	

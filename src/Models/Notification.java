@@ -51,10 +51,11 @@ public class Notification implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Notification [hasBeenViewed=" + hasBeenViewed
-				+ ", doesRequireAction=" + doesRequireAction + ", message="
-				+ message + ", sender=" + sender + ", senderUsersIndex="
-				+ senderUsersIndex + "]";
+		String aString = "Notification:\n\n";
+		aString += "From:   " + sender + "\n";
+		aString += "Message:\n" + message;
+		return aString;
+
 	}
 
 }

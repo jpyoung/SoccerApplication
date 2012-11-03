@@ -181,15 +181,31 @@ public class ManageTeamView {
 		int counter = 1;
 		ArrayList<Player> tempee2 = new ArrayList<Player>(); //this var holds the potential players in which the coach could invite to join his or her roster
 		
-		for (int i = 0; i < tempee.size(); i++) {
-			if(tempee.get(i).getTeam() == null ){
-				m +="\n" + counter + ". " + OutputHelpers.giveConcatName(tempee.get(i));
-				tempee2.add(tempee.get(i));
+		
+		System.out.println("Potential Players: " + tempee.size());
+		System.out.println("Potential Players Count: " + tempee2.size());
+		for (int k = 0; k < tempee.size(); k++) {
+			customOutput(tempee.get(k));
+		}
+		
+		for (int kk = 0; kk < tempee.size(); kk++) {
+			if (tempee.get(kk).getTeam() == null) {
+				System.out.println("adfas-   " + OutputHelpers.giveConcatName(tempee.get(kk)));
+				m +="\n" + counter + ". " + OutputHelpers.giveConcatName(tempee.get(kk));
+				tempee2.add(tempee.get(kk));
 				counter++;
-			} else {
-				tempee.remove(i);
 			}
 		}
+		
+//		for (int i = 0; i < tempee.size(); i++) {
+//			if(tempee.get(i).getTeam() == null ){
+//				m +="\n" + counter + ". " + OutputHelpers.giveConcatName(tempee.get(i));
+//				tempee2.add(tempee.get(i));
+//				counter++;
+//			} else {
+//				tempee.remove(i);
+//			}
+//		}
 
 		String resp = InputHelper.promptStringMenuOptionsType2(m, "select player", title, OutputHelpers.generatePossibleOptions(counter - 1));
 		
@@ -434,6 +450,48 @@ public class ManageTeamView {
 		dd += "\n\t}";
 
 		System.out.println(dd);
+	}
+	
+	public static void customOutput(Player u) {
+		
+		String dd = "firstname: " + u.getFirstName() + " " + u.getLastName();
+		
+		dd += "\n\tUser { \n";
+		dd += "\t\tfirstname:" + u.getFirstName();
+		dd += "\n\t\tlastname: " + u.getLastName();
+		dd += "\n\t\tphone: " + u.getPhone();
+		
+		dd +="\n\t\tPlayer { \n";
+		dd += "\t\t\tcaptain: " + u.getCaptain();
+		dd += "\n\t\t\tteam: " + (u.getTeam() == null ? "null" : u.getTeam().getName());
+		
+		dd += "\n\t\t\tPlayerWaiver { \n";
+		dd += "\t\t\t\tname:" + u.getPlayerWaiver().getName();
+		dd += "\n\t\t\t\tDescription:Hello there this is the description";
+		dd += "\n\t\t\t\tSign Date: " + u.getPlayerWaiver().getSignDate();
+		dd += "\n\t\t\t}";
+		dd += "\n\t\t}";
+		
+	
+		dd += "\n\t\tAddress { \n";
+		dd += "\t\t\tstate:" + u.getAddress();
+		dd += "\n\t\t}";
+		
+		dd += "\n\t\tInBox {\n";
+		dd += "\t\t\tNotifications has: " + u.getInBox().getHasNotifications() ;
+		if (u.getInBox().getHasNotifications()) {
+			dd += "\t\t\tList--";
+			for (int i = 0; i < u.getInBox().getNotifications().size(); i++) {
+				dd += "\n\t\t\t" + u.getInBox().getNotifications().get(i);
+			}
+		}
+		dd += "\n\t\t}";
+		
+		dd += "\n\t}";
+		
+
+		System.out.println(dd);
+		
 	}
 	
 }

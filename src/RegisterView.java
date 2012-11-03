@@ -43,11 +43,12 @@ public class RegisterView {
 				
 				//if they selected captain or player, either way they are still considered to be players
 				//thus their usertype is just three. 
+				int setLogInUserType = userType;
 				if (userType == 4) {
-					userType = 3;
-				}
+					setLogInUserType = 3;
+				} 
 				
-				MainApplication.getController().getUc().setUserObject(u, p, userType, promptForToEnterUserInfo(userType));
+				MainApplication.getController().getUc().setUserObject(u, p, setLogInUserType, promptForToEnterUserInfo(userType));
 				
 				String dataString = "Congratulations, your are now registered as a " + subDataString + ".";
 				dataString += "\nYou may now login to your dashboard.";

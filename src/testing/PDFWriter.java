@@ -276,45 +276,8 @@ public class PDFWriter {
 		subCatPart.add(table);
 	}
 	
-	//this method creates the table to display username, password, id, userType
-	public static void createSecondTable(Section subCatPart, Controller c)
-			throws BadElementException {
 
-		PdfPTable table = new PdfPTable(4);
-		PdfPCell c1 = new PdfPCell(new Phrase("username"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		c1.setBackgroundColor(BaseColor.CYAN);
-		table.addCell(c1);
-		c1 = new PdfPCell(new Phrase("password"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		c1.setBackgroundColor(BaseColor.CYAN);
-		table.addCell(c1);
-		c1 = new PdfPCell(new Phrase("id"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		c1.setBackgroundColor(BaseColor.CYAN);
-		table.addCell(c1);
-		c1 = new PdfPCell(new Phrase("userType"));
-		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
-		c1.setBackgroundColor(BaseColor.CYAN);
-		table.addCell(c1);
-		table.setHeaderRows(1);
-		ArrayList<String> xU = c.getUc().getUserNamesArraylist();
-		ArrayList<String> xP = c.getUc().getPasswordsArraylist();
-		ArrayList<Integer> xID = c.getUc().getIdArraylist();
-		ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
-		int loopLength = 0;
-		if (xU.size() == xP.size()) {
-			loopLength = xU.size();
-		}
-		for (int i = 0; i < loopLength; i++) {
-			table.addCell(xU.get(i));
-			table.addCell(xP.get(i));
-			table.addCell(String.valueOf(xID.get(i)));
-			table.addCell(String.valueOf(xTYPE.get(i)));
-		}
-		subCatPart.add(table);
-	}
-
+	//first table
 	public static void createTrialRevampedTable(Section subCatPart, Controller c)
 			throws BadElementException {
 
