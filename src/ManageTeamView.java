@@ -99,6 +99,7 @@ public class ManageTeamView {
 			} else if ( n == 6) {
 				//choose a captain
 				System.out.println("choose a captain");
+				viewChooseCaptainMenu(usersIndex);
 			} else {
 				//pay league fees
 				System.out.println("pay league fees");
@@ -117,6 +118,14 @@ public class ManageTeamView {
 	// view roster
 	
 /****************************Choose a Captain Section***************************************************************/		
+	public static void viewChooseCaptainMenu(int usersIndex) {
+		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
+		
+		InputHelper.displayMessage("Choose a captian will go here. Not yet implemented", "Choose a Captain - View");
+		
+		manageTeamView(usersIndex);
+	}
+	
 	
 	
 /****************************Pay League Fees Section***************************************************************/		

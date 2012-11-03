@@ -199,6 +199,8 @@ public class MainApplication {
 			playersDashBoardView(usersIndex);
 		} else {
 			System.out.println("Error, in the dashboard method if three. Unknown usertype");
+			InputHelper.displayMessage("Error, This user cannot login since they do not have a valid userType.", "Login Error");
+			firstView();
 		}
 		
 	}

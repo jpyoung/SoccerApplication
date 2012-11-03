@@ -99,5 +99,14 @@ private boolean payLeagueFees = false;
 		this.payLeagueFees = l;
 	}
 
+-----------Major Change
+-The project description had mentioned that a captain is a player, and how they they have the same user abilities as a Coach.  But given the data modal design
+this will not be possible.  As such, we have gear this application towards three types of users. 
+1 - Official
+2 - Coach
+3 - Player
+
+
+
 
 
