@@ -1,10 +1,13 @@
 package testing;
 
+import helpers.OutputHelpers;
+
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
 import Models.Coach;
+import Models.Player;
 import Models.User;
 
 import com.itextpdf.text.Anchor;
@@ -15,6 +18,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.List;
+import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Section;
@@ -91,19 +96,92 @@ public class PDFWriter {
 		subCatPart.add(new Paragraph("Official      userType = 1"));
 		subCatPart.add(new Paragraph("Coach        userType = 2"));
 		subCatPart.add(new Paragraph("Player        userType = 3"));
+		
 		Paragraph paragraph = new Paragraph();
+
+		//user credientials and info
 		addEmptyLine(paragraph, 1);
 		subCatPart.add(paragraph);
-		createSecondTable(subCatPart, c);
+		createTrialRevampedTable(subCatPart, c); //first table
+		
 		subCatPart.add(paragraph);
 		addEmptyLine(paragraph, 2);
-		createTallyTable(subCatPart, c);
+		createTallyTable(subCatPart, c);  //second table
 		
 		subCatPart.add(paragraph);
 		addEmptyLine(paragraph, 6);
-		createTeamsOverviewTable(subCatPart, c);
+		createTeamsOverviewTable(subCatPart, c);  //third table
+		
+		
+		//user credientials and info
+	
+		
+		
+		generateTeamRosterListing(subCatPart, c);
 		
 		document.add(catPart);
+	}
+	
+	public static void generateTeamRosterListing(Section subCatPart, Controller c) throws BadElementException {
+		ArrayList<User> allUsers = c.getUc().getUserObjectArraylist();
+		int playerCount = 0;
+		int coachCount = 0;
+		int officialCount = 0;
+		int others = 0;
+		for(int x = 0; x < allUsers.size(); x++) {
+			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
+				playerCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
+				coachCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
+				officialCount++;
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
+				others++;
+			}
+		}
+
+		ArrayList<Integer> playerIds = new ArrayList<Integer>();
+		ArrayList<Integer> coachIds = new ArrayList<Integer>();
+		ArrayList<Integer> officialIds = new ArrayList<Integer>();
+		ArrayList<Integer> otherIds = new ArrayList<Integer>();
+
+		for(int x = 0; x < allUsers.size(); x++) {
+			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
+				playerIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
+				coachIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
+				officialIds.add(x);
+			}
+			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
+				otherIds.add(x);
+			}
+		}
+
+		for (int y = 0; y < coachCount; y++) {
+			Coach co = (Coach)c.getUc().getUserObject(coachIds.get(y));
+			String title = "Team - " + co.getTeam().getName() + " - Roster";
+			subCatPart.add(new Paragraph("-------------------------------------------"));
+			subCatPart.add(new Paragraph(title));
+			List list = new List(true, false, 10);
+			Player[] pp = co.getTeam().getRoster().getPlayersOnRoster();
+			if(pp.length == 0) {
+				subCatPart.add(new Paragraph("  This team has no players. ", redFont));
+			} else {
+				for (int k = 0; k < pp.length; k++) {
+					list.add(new ListItem(" " + OutputHelpers.givePlayerConcatName(pp[k])));
+				}
+				subCatPart.add(list);
+			}
+
+			subCatPart.add(new Paragraph("-------------------------------------------"));
+		}
+
 	}
 	
 	
@@ -237,6 +315,55 @@ public class PDFWriter {
 		subCatPart.add(table);
 	}
 
+	public static void createTrialRevampedTable(Section subCatPart, Controller c)
+			throws BadElementException {
+
+		PdfPTable table = new PdfPTable(6);
+		PdfPCell c1 = new PdfPCell(new Phrase("username"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		c1 = new PdfPCell(new Phrase("password"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		c1 = new PdfPCell(new Phrase("id"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		c1 = new PdfPCell(new Phrase("userType"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		c1 = new PdfPCell(new Phrase("first name"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		c1 = new PdfPCell(new Phrase("last name"));
+		c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		c1.setBackgroundColor(BaseColor.CYAN);
+		table.addCell(c1);
+		table.setHeaderRows(1);
+		
+		ArrayList<String> xU = c.getUc().getUserNamesArraylist();
+		ArrayList<String> xP = c.getUc().getPasswordsArraylist();
+		ArrayList<Integer> xID = c.getUc().getIdArraylist();
+		ArrayList<Integer> xTYPE = c.getUc().getUserTypeArraylist();
+		//ArrayList<User> xUser = c.getUc().ge
+		int loopLength = 0;
+		if (xU.size() == xP.size()) {
+			loopLength = xU.size();
+		}
+		for (int i = 0; i < loopLength; i++) {
+			table.addCell(xU.get(i));
+			table.addCell(xP.get(i));
+			table.addCell(String.valueOf(xID.get(i)));
+			table.addCell(String.valueOf(xTYPE.get(i)));
+			table.addCell(c.getUc().getUserObject(i).getFirstName());
+			table.addCell(c.getUc().getUserObject(i).getLastName());
+		}
+		subCatPart.add(table);
+	}
 	private static void addEmptyLine(Paragraph paragraph, int number) {
 		for (int i = 0; i < number; i++) {
 			paragraph.add(new Paragraph(" "));
