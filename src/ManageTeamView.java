@@ -9,8 +9,11 @@ import Models.Player;
 import Models.Team;
 import Models.User;
 
-//Jack Young
-//10-27-2012
+
+/**
+ * @author Jack Young
+ * @date Nov 3, 2012
+ */
 public class ManageTeamView {
 	
 	public static void manageTeamView(int usersIndex) {
@@ -43,7 +46,6 @@ public class ManageTeamView {
 		MainApplication.getController().getTeam().add(c.getTeam());
 		
 		InputHelper.displayMessage(teamName + " team has been created.", "Create Team");
-		
 		manageTeamView(usersIndex);
 	}
 	
@@ -107,14 +109,7 @@ public class ManageTeamView {
 		
 		
 	}
-	
-	//remaining needed methods
-	// add a player
-	// remove a player
-	// choose a captain
-	// pay league fees
-	// view roster
-	
+
 /****************************Choose a Captain Section***************************************************************/		
 	public static void viewChooseCaptainMenu(int usersIndex) {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
@@ -157,7 +152,6 @@ public class ManageTeamView {
 /****************************Pay League Fees Section***************************************************************/		
 	public static void viewPayLeagueFeesMenu(int usersIndex) {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
-		
 		if (c.getPayLeagueFees()) {
 			InputHelper.displayMessage("The " + c.getTeam().getName() + " have already Payed the League Fees.", "Pay League Fees - View");
 		} else {
@@ -165,15 +159,12 @@ public class ManageTeamView {
 			m += "\nPress accept to pay, or press refuse not to pay.";
 			boolean response = MainApplication.invitationDialog(m, "Pay League Fees - View");
 			if ( response ) {
-				System.out.println("Agreed to pay the league fees");
 				c.setPayLeagueFees(true);
 				InputHelper.displayMessage("Thank you! You have successfully payed your teams league fees.", "Pay League Fees - View");
 			} else {
-				System.out.println("Refused to pay the league fees");
-				c.setPayLeagueFees(false);
+				c.setPayLeagueFees(false); //refused to pay league fees
 			}
 		}
-		
 		manageTeamView(usersIndex);
 	}
 	
@@ -243,25 +234,18 @@ public class ManageTeamView {
 			InputHelper.displayMessage(ddMessage, "Invitation Confirmation");
 			
 			Coach coach = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
-			
-			//Player jack = (Player)MainApplication.getController().getUc().getUserObject(1);
+
 			String messageF = OutputHelpers.giveConcatName(tempee2.get(n)) + ", will you join our team?";
 			Notification mm = new Notification(false, messageF, true, "Coach:" + coach.getFirstName(), usersIndex);
 			tempee2.get(n).getInBox().addNotification(mm);
-			
-//			coach.getTeam().getRoster().addPlayerName(duc);
-//			duc.setTeam(coach.getTeam());
-			
+
 			manageTeamView(usersIndex);
-		}
-		
-		
+		}	
 	}
 	
 /***********Remove a player from the roster**************/	
 	public static void viewRemovePlayerMenu(int usersIndex) {
 		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
-		
 		choosePlayerToRemove(coach.getTeam(), usersIndex, coach);
 	}
 	
@@ -290,7 +274,6 @@ public class ManageTeamView {
 				} else {
 					int n = Integer.parseInt(resp) - 1;
 					System.out.println("You selected this player number: " + resp + "   index value: " + n);
-					
 					
 					String messageF = OutputHelpers.giveConcatName(pp[n]) + ", the " + coach.getTeam().getName() + " team has dropped you from their roster.";
 					
@@ -347,7 +330,6 @@ public class ManageTeamView {
 	
 	
 	public static void viewTeamDetailedPlayerProfile(Player p, int usersIndex){ 
-		//System.out.println(p);
 		String title = "Player Profile: [" + OutputHelpers.giveConcatName(p) + "]";
 		String m = "Player Name: " + OutputHelpers.giveConcatName(p);
 			m += "\nEmail: email address goes here";
@@ -355,8 +337,7 @@ public class ManageTeamView {
 			m += "\nSigned Waiver: " + (hasSignedWaiver(p) ? "Yes" : "NOO");
 			m += "\nCaptain: " + (p.getCaptain() ? "Yes" : "No");
 		InputHelper.displayMessage(m, title);
-		//this takes the coach back to the menu display all the players on their roster
-		viewRosterChoices(p.getTeam(), usersIndex);
+		viewRosterChoices(p.getTeam(), usersIndex); //redirects back to menu of players on roster
 	}
 	
 /*******************************************************************************************/	
@@ -393,40 +374,29 @@ public class ManageTeamView {
 	//method used for changing the team name
 	public static void changeTeamName(Team t, int usersIndex) {
 		String title = "Manage Team [ " + t.getName() + " ]";
-		String message = "Current Team Name: " + t.getName();
-			message += "\nPlease enter in the new team name";
-		
+		String message = "Current Team Name: " + t.getName() + "\nPlease enter in the new team name";
 		String resp = InputHelper.promptString(message, "team name", title);
-		
 		t.setName(resp);
 		InputHelper.successfulEditDialog("team name changed ", "Manage Team - Team Name Changed");
 		manageTeamPrompt(t, usersIndex);
-		
 	}
 	
 
-	
 	public static boolean hasCaptainBeenSet(Team t){
 		boolean answer = false;
-		if (t.getCaptain() != null) {
-			answer = true;
-		} 
+		if (t.getCaptain() != null) { answer = true; } 
 		return answer;
 	}
 	
 	public static boolean hasRosterBeenSet(Team t) {
 		boolean answer = false;
-		if ( t.getRoster() != null) {
-			answer = true;
-		}
+		if ( t.getRoster() != null) { answer = true; }
 		return answer;
 	}
 	
 	public static boolean hasSignedWaiver(Player p) {
 		boolean answer = false;
-		if(p.getPlayerWaiver() != null) {
-			answer = true;
-		}
+		if (p.getPlayerWaiver() != null) { answer = true; }
 		return answer;
 	}
 	
@@ -436,7 +406,6 @@ public class ManageTeamView {
 		dd += "\t\tfirstname:" + u.getFirstName();
 		dd += "\n\t\tlastname: " + u.getLastName();
 		dd += "\n\t\tphone: " + u.getPhone();
-
 		dd +="\n\t\tCoach { \n";
 		dd += "\t\t\tLeague Fees Paid: " + u.getPayLeagueFees();
 		dd += "\n\t\t\tHas Team: " + u.getHasTeam();
@@ -445,8 +414,6 @@ public class ManageTeamView {
 		dd += "\n\t\t\t\tHome Color: " + u.getTeam().getHomeColor();
 		dd += "\n\t\t\t\tAway Color: " + u.getTeam().getAwayColor();
 		dd += "\n\t\t\t\tCoach Name: " + (u.getTeam().getCoach().getFirstName() == null ? "Null" : u.getTeam().getCoach().getFirstName());
-		
-
 		dd += "\n\t\t\t\tRoster {\n";
 		int pcount = u.getTeam().getRoster().getPlayerCount();
 		dd += "\t\t\t\t\tplayer count: " + pcount;
@@ -457,44 +424,33 @@ public class ManageTeamView {
 				dd += "\n\t\t\t\t\t" + ppp[i].getFirstName();
 			}
 		}
-
 		dd += "\n\t\t\t\t}";
 		dd += "\n\t\t\t}";
-
 		dd += "\n\t\tAddress { \n";
 		dd += "\t\t\tstate:" + u.getAddress();
 		dd += "\n\t\t}";
-
 		dd += "\n\t}";
-
 		System.out.println(dd);
 	}
 	
 	public static void customOutput(Player u) {
-		
 		String dd = "firstname: " + u.getFirstName() + " " + u.getLastName();
-		
 		dd += "\n\tUser { \n";
 		dd += "\t\tfirstname:" + u.getFirstName();
 		dd += "\n\t\tlastname: " + u.getLastName();
 		dd += "\n\t\tphone: " + u.getPhone();
-		
 		dd +="\n\t\tPlayer { \n";
 		dd += "\t\t\tcaptain: " + u.getCaptain();
 		dd += "\n\t\t\tteam: " + (u.getTeam() == null ? "null" : u.getTeam().getName());
-		
 		dd += "\n\t\t\tPlayerWaiver { \n";
 		dd += "\t\t\t\tname:" + u.getPlayerWaiver().getName();
 		dd += "\n\t\t\t\tDescription:Hello there this is the description";
 		dd += "\n\t\t\t\tSign Date: " + u.getPlayerWaiver().getSignDate();
 		dd += "\n\t\t\t}";
 		dd += "\n\t\t}";
-		
-	
 		dd += "\n\t\tAddress { \n";
 		dd += "\t\t\tstate:" + u.getAddress();
 		dd += "\n\t\t}";
-		
 		dd += "\n\t\tInBox {\n";
 		dd += "\t\t\tNotifications has: " + u.getInBox().getHasNotifications() ;
 		if (u.getInBox().getHasNotifications()) {
@@ -504,12 +460,8 @@ public class ManageTeamView {
 			}
 		}
 		dd += "\n\t\t}";
-		
 		dd += "\n\t}";
-		
-
 		System.out.println(dd);
-		
 	}
 	
 }
