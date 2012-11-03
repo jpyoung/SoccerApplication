@@ -41,8 +41,6 @@ public class TestDataLoader {
 		p.setFirstName("Duc");
 		p.setLastName("Truong");
 		p.setPhone("213 455 2323");
-		
-		
 		return p;
 	}
 	
@@ -55,8 +53,6 @@ public class TestDataLoader {
 		p.setPhone("222 455 1123");
 		return p;
 	}
-	
-
 	
 	public Player getUser8() {
 		Player p = new Player();
@@ -100,8 +96,6 @@ public class TestDataLoader {
 		c.setPhone("344 455 6643");
 		return c;
 	}
-	
-	
 	
 	//coach user
 	public Coach getUser6() {
