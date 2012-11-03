@@ -42,6 +42,7 @@ public class SystemStateController {
 
 	public static void loadEverything() {
 		MainApplication.controller = readIn();
+		//MainApplication.controller = readInDefault();
 		MainApplication.getController().getUc().outputSystemUsersTable();
 		findCoachesAndAddThereTeams();
 	}
@@ -63,10 +64,45 @@ public class SystemStateController {
 			return null;
 		}
 	}
+	
+	public static Controller readInDefault() {
+		try {
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(
+					"defaultBaseState.dat"));
+			Controller uu = (Controller) in.readObject();
+			in.close();
+			System.out
+					.println(OutputHelpers.timeStamp()
+							+ "----------------READ IN DEFAULT DATA File-------------------");
+			return uu;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("================ Fail ===========");
+			// MainApplication.getController().loadInitialData();
+			return null;
+		}
+	}
 
 	public static void saveUserCreds() {
 		writeOut();
+		//writeDefault();
 	}
+	
+	public static void writeDefault() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("defaultBaseState.dat"));
+			System.out.println("------team size on close-" + MainApplication.getController().getTeam().size());
+			out.writeObject(MainApplication.getController());
+			out.close();
+
+			System.out.println(OutputHelpers.timeStamp()
+					+ "--------------SAVED STATE DEFAULT DATA FILE---------");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	public static void writeOut() {
 		try {

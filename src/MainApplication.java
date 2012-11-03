@@ -21,7 +21,7 @@ public class MainApplication {
 	public static Controller getController() { return controller; }
 	
 	//this var is used for to limit the whats being displayed in the console. 
-	public static boolean showConsoleDetails = false;
+	public static boolean showConsoleDetails = true;
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -29,23 +29,13 @@ public class MainApplication {
 		System.out.println(OutputHelpers.timeStamp() + "-----MainApplication class - Main Method launch------");
 		
 		//load and output the initial  data
-		//getController().loadInitialData();
+		//predefinedDefaultTest();
 	
 		//used for load data from data file
 		SystemStateController.loadEverything();
 		
 		
 		
-		
-		//temp data
-//		Player p = (Player)getController().getUc().getUserObject(1);
-//		Coach cc = (Coach)getController().getUc().getUserObject(3);
-//		cc.getTeam().getRoster().addPlayerName(p);
-//		p.setTeam(cc.getTeam());
-//		Player p2 = (Player)getController().getUc().getUserObject(2);
-//		cc.getTeam().getRoster().addPlayerName(p2);
-//		p2.setTeam(cc.getTeam());
-		//end of temp data
 		
 		if (getShowConsoleDetails()) { 
 		System.out.println("\n\n--Before Application Close---"); System.out.println("Team arraylist size: " + getController().getTeam().size());
@@ -61,11 +51,7 @@ public class MainApplication {
 		firstView();
 		
 
-		
-		//output all userCreditential data on close
-		if (getShowConsoleDetails()) { System.out.println("--Data on Application Close---"); getController().getUc().outputAllCredentials(); }
-		
-		
+	
 		//Saving Everything via serial data file
 		SystemStateController.saveUserCreds();
 		
@@ -484,5 +470,21 @@ public class MainApplication {
 		data += "\nCaptain: " + player.getCaptain();
 	}
 	
+	
+	//This method is used to generate the data for the initial base application
+	public static void predefinedDefaultTest(){
+		
+		getController().loadInitialData();
+		
+		//temp data
+		Player p = (Player)getController().getUc().getUserObject(1);
+		Coach cc = (Coach)getController().getUc().getUserObject(3);
+		cc.getTeam().getRoster().addPlayerName(p);
+		p.setTeam(cc.getTeam());
+		Player p2 = (Player)getController().getUc().getUserObject(2);
+		cc.getTeam().getRoster().addPlayerName(p2);
+		p2.setTeam(cc.getTeam());
+		//end of temp data
+	}
 
 }

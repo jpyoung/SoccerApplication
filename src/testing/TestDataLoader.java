@@ -28,7 +28,7 @@ public class TestDataLoader {
 		p.setCaptain(false);
 		p.setFirstName("Jack");
 		p.setLastName("Young");
-		p.setPhone("703 9680 264");
+		p.setPhone("703 968 0264");
 		p.setAddress(createAddress2());
 		return p;
 	}
@@ -49,7 +49,7 @@ public class TestDataLoader {
 	public Player getUser7() {
 		Player p = new Player();
 		p.setAddress(createAddress3());
-		p.setCaptain(true);
+		p.setCaptain(false);
 		p.setFirstName("Sammy");
 		p.setLastName("Spees");
 		p.setPhone("222 455 1123");
@@ -61,7 +61,7 @@ public class TestDataLoader {
 	public Player getUser8() {
 		Player p = new Player();
 		p.setAddress(createAddress3());
-		p.setCaptain(true);
+		p.setCaptain(false);
 		p.setFirstName("Corey");
 		p.setLastName("Fortier");
 		p.setPhone("233 455 2323");
