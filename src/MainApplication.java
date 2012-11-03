@@ -14,16 +14,16 @@ import Models.Team;
 import Models.User;
 import controller.Controller;
 
-//Jack Young
-//Created On: 10/25/2012
+
+/**
+ * @author Jack Young
+ * @date Nov 3, 2012
+ */
 public class MainApplication {
 	
-	
 	public static Controller controller = new Controller();
-	public static Controller getController() { return controller; }
-	
-	//this var is used for to limit the whats being displayed in the console. 
-	public static boolean showConsoleDetails = true;
+	public static Controller getController() { return controller; } 
+	public static boolean showConsoleDetails = true;  //This var is used whats being displayed in the console. 
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -123,41 +123,31 @@ public class MainApplication {
 		}
 		
 	}
-	
-	
-	
+
 	
 /*************************************************************************************************************/
 /****************************START:  firstView()**************************************************************/
 /*************************************************************************************************************/
 	
 	//This is the first view the user will see when they run the application
-	//Welcome to Soccer Tournament Management - user can login or register
 	public static void firstView() {
 
 		System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()");
 		
 		Object[] options = {"Login", "Register" };
-		int n = JOptionPane.showOptionDialog(null,
-				"Welcome to Soccer Tournament Management",
-				"Home", JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE, null,
-				options, options[0]);
+		int n = JOptionPane.showOptionDialog(null, "Welcome to Soccer Tournament Management",
+				"Home", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 		
 		if(n == 1 ) {
-			// n == 1, means the user selected the register button
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected register button");
 			RegisterView.registerView();
 		} else if (n == 0 ) { 
-			// n == 0, means the user selected the login button
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected login button");
 			loginView();
 		} else {
-			// n is equal to -1
 			System.out.println(OutputHelpers.timeStamp() + "- SECTION: firstView.   Method Called: firstView()   ACTION: selected exit red button");
 			JOptionPane.showMessageDialog(null, "Good Bye - You clicked the exit button");
 		}
-	
 	}
 		
 /*************************************************************************************************************/
@@ -232,9 +222,8 @@ public class MainApplication {
 	public static void dashBoards(int usersIndex) {
 		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: dashBoards()");
 	
-		
-		//Here will go a if tree to decide whether the user that just loged in is a coach
-		//player or official.  From which it will call one of the three below methods to carry out that function
+		//Once a player has logged in.  This method will decide which dashboard they should be taken to depending
+		//on their userType
 		int tempType = getController().getUc().getUserType(usersIndex);
 		
 		if (tempType == 1) {
@@ -335,12 +324,10 @@ public class MainApplication {
 
 	//view for the players dashboard view
 	public static void playersDashBoardView(int usersIndex) {
-		System.out.println("\n\nPlayers Dash Board loaded");
-		
+		System.out.println(OutputHelpers.timeStamp() + "- SECTION: Dashboards.   Method Called: playersDashBoardView");
 		String displayString = "1. Edit Profile\n2. View Teams Profiles\n3. Invitations and Notifications\n4. Save and Logout";
 		String titleString = "Dashboard - Player - " + getController().getUc().getUserName(usersIndex);
 		String option = InputHelper.promptStringMenuOptions(displayString, "options", titleString, new int[]{1, 2, 3, 4});
-		
 		int c = Integer.parseInt(option);
 		if (c == 1) {
 			EditProfileView.editProfileView(usersIndex); //go to edit profile
@@ -358,9 +345,8 @@ public class MainApplication {
 	
 	
 	public static void playerNotificationView(int usersIndex) {
-		System.out.println("The index is: " + usersIndex);
-		Player p = (Player)getController().getUc().getUserObject(usersIndex);
 		
+		Player p = (Player)getController().getUc().getUserObject(usersIndex);
 		if (p.getInBox() != null) {
 			
 			if(p.getInBox().getHasNotifications()) {
@@ -398,20 +384,15 @@ public class MainApplication {
 							InputHelper.displayMessage(p.getInBox().getNotifications().get(i).toString(), "Your Notifications");
 							p.getInBox().removeNotification(p.getInBox().getNotifications().get(i));
 						}
-						
-					
 					}
 				}
 			} else {
-				InputHelper.displayMessage("You have none", "Notifications");
+				InputHelper.displayMessage("You have none.", "Notifications");
 				System.out.println("You have none");
 			}
 		} else {
 			InputHelper.displayMessage("You have none", "Notifications");
 		}
-		
-	
-		
 		playersDashBoardView(usersIndex);
 	}
 	
@@ -424,19 +405,14 @@ public class MainApplication {
 /***************************************************************************************************/
 /*******************************Start: View Team Profiles ******************************************/
 	
-	@SuppressWarnings("unused")
 	public static void viewTeamProfiles(int usersIndex) {
-		
 		String data = "Choose team to view:  (press cancel to go back)\n";	
-		
 		for (int i = 0; i < getController().getTeam().size(); i++) {
 			data += "\n" + (i+1) + ". "+ getController().getTeam().get(i).getName();
 		}
 		
 		if (getShowConsoleDetails()) { System.out.println("viewTeamProfiles, The Team Size: " + getController().getTeam().size()); }
 		
-		
-
 		int ln = getController().getTeam().size();
 		int[] pos = OutputHelpers.generatePossibleOptions(ln);
 
@@ -461,40 +437,27 @@ public class MainApplication {
 			//Calling the method to view a more detailed look at the selected team
 			detailedTeamView(getController().getTeam().get(c - 1), usersIndex);
 		}
-		
 	}
 	
-	//need to pass in a para when the backend classes are finished
-	// when the roster class is finished this method can be finished. So that it can display the names in the rosters
-	// when the user opts to view a detailed listing
+	//detailed team view method
 	public static void detailedTeamView(Team t, int usersIndex){
-		
 		System.out.println("Detailed Team View Method was Called");
 		String dTitle = "View - " + t.getName();
-		
 		if(t.getRoster().playerCount == 0) {
-			//thought a team has been created, there are no players associated with this team yet. ie zero players
+			//though a team has been created, there are no players associated with this team yet. ie zero players
 			InputHelper.displayMessage("This team currently does not have any players.", dTitle); 
 		} else {
 			//the selected team does have players
-			
 			String data = t.getName() + "\n";
 			data += "Coach Name: " + OutputHelpers.giveConcatName(t.getCoach()) + "\n\n";
 			data += "--Players List---\n";
 			Player[] pp = t.getRoster().getPlayersOnRoster();
-			
-			for (int i = 0; i < pp.length; i++) {
-				data += "   " + (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "\n";
-			}
-			
+				for (int i = 0; i < pp.length; i++) {
+					data += "   " + (i+1) + ". " + OutputHelpers.givePlayerConcatName(pp[i]) + "\n";
+				}
 			JOptionPane.showMessageDialog(null, data, dTitle, JOptionPane.INFORMATION_MESSAGE);
 		}
-		
-		
-
-		
-		viewTeamProfiles(usersIndex);
-		
+		viewTeamProfiles(usersIndex);	
 	}
 	
 	
@@ -504,22 +467,17 @@ public class MainApplication {
 	public static boolean invitationDialog(String message, String title) {
 		Object[] options = { "Refuse", "Accept"};
 		int n = JOptionPane.showOptionDialog(null, message,
-				title, JOptionPane.YES_NO_CANCEL_OPTION,
-				JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
+				title, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[1]);
 		if (n == -1 ) {
 			//they pressed the x button
-			System.out.println("Clicked the x button");
 			return false;
 		} else {
 			//they selected an option
 			if (n == 1) {
 				//clicked accept
-				System.out.println("Clicked Accept");
 				return true;
-				
 			} else {
 				//clicked refuse
-				System.out.println("Clicked Refuse");
 				return false;
 			}
 		}
@@ -539,10 +497,7 @@ public class MainApplication {
 	
 	//This method is used to generate the data for the initial base application
 	public static void predefinedDefaultTest(){
-		
 		getController().loadInitialData();
-		
-		//temp data
 		Player p = (Player)getController().getUc().getUserObject(1);
 		Coach cc = (Coach)getController().getUc().getUserObject(3);
 		cc.getTeam().getRoster().addPlayerName(p);
@@ -550,7 +505,6 @@ public class MainApplication {
 		Player p2 = (Player)getController().getUc().getUserObject(2);
 		cc.getTeam().getRoster().addPlayerName(p2);
 		p2.setTeam(cc.getTeam());
-		//end of temp data
 	}
 
 }
