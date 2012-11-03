@@ -21,13 +21,10 @@ public class Prompter {
 				JOptionPane.QUESTION_MESSAGE);
 		Prompt p = null;
 		if (input == null) {
-			p = new Prompt(null, true);
-			// System.out.println("You Pressed Cancel");
+			p = new Prompt(null, true); //you pressed cancel
 		} else {
 			p = new Prompt(input, false);
-			// System.out.println("enter: " + input);
 		}
-		// System.out.println("sss: " + p);
 		return p;
 	}
 
