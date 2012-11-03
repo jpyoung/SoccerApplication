@@ -107,6 +107,6 @@ this will not be possible.  As such, we have gear this application towards three
 3 - Player
 
 
-
+-- gonna remove their valdiation methods in the usercredientials class: change its return type to boolean
 
 

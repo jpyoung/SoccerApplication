@@ -1,5 +1,7 @@
 package Models;
 
+import helpers.InputHelper;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -93,7 +95,6 @@ public class UserCredentials implements Serializable {
 	
 
 
-	
 	/***End - Methods I added that not described in UML**/
 	
 	public String getUserName(int id) {
@@ -111,59 +112,100 @@ public class UserCredentials implements Serializable {
 	public User getUserObject(int id) {
 		return getUserObjectArraylist().get(id);
 	}
-	private int validateUserName(String userName) {
-		
-		boolean isError = true;
-		
-		int length = userName.length();
-		boolean isValidLength = false;
-			if(length >= 6 && length <= 12) {
-				isValidLength = true;
-			}
-		
-		if( isValidLength) {
-			int indexOfAtSymbol = userName.indexOf("@");
-			int indexOfDot = userName.indexOf(".");
-			System.out.println("length of : " + length);
-			System.out.println("index of @: " + indexOfAtSymbol);
-			System.out.println("index of .  : " + indexOfDot);
-			if ( indexOfAtSymbol == -1 || indexOfDot == -1) {
-				System.out.println("sorry but you are missing the @ symbol");
-			} else {
-				System.out.println("Valid Email");
-				isError = true;
-			}
+	
+	public static boolean validateUserName(String userName) {
+		boolean r = usernameChecker(userName);
+		if ( r ) {
+			return true;
 		} else {
-			//sorry but needs to be atleast 6 and 12 in length
-			if(length < 6) {
-				//too short
-				System.out.println("Error: username is to short!");
-			} else if (length > 12) {
-				//to long
-				System.out.println("Error: username is to long!");
-			} else {
-				System.out.println("Error: something went wrong in username validation");
-			}
+			InputHelper.displayMessage("Invalid username.\nMust have a length between 6 and 12. example format: ja@gmail.com", "Register - Invalid userName");
+			return false;
 		}
-		//string of alphanumeric characters + @ stirng of alphanumer characters + . + alpha characters
-		
-		
-		if(isError) {
-			//no there is no error
-			return 1;
-		} else {
-			//yes there is an error
-			return -1;
-		}
-		
-	}
-	private int validatePassword(String password) {
-		return 1;
-	}
-	public int validateLogin(int i) {
-		return 1;
 	}
 	
+	private static boolean usernameChecker(String userName) {
+		int length = userName.length();
+		if (length >= 6 && length <= 12) {
+			int indexOfAtSymbol = userName.indexOf("@");
+			int indexOfDot = userName.lastIndexOf(".");
+			if ( indexOfAtSymbol == -1 || indexOfDot == -1 || indexOfAtSymbol == 0) {
+				return false;  // does not contain a @ or . or @ symbol is the first char in username
+			} else {
+				if (indexOfDot < indexOfAtSymbol) {
+					return false; //making sure that the last index of the dot is not before the @ symbol
+				} else {
+					int distanceBetweenAtAndLastDot = indexOfDot - indexOfAtSymbol;
+					if (distanceBetweenAtAndLastDot <= 1) {
+						return false; // there needs to be atleast one char between @ and .   example jack@g.com
+					} else {
+						int distBetweenDotAndLastChar = (length - 1) - indexOfDot;
+						if (distBetweenDotAndLastChar < 1) {
+							return false;  //needs to be atleast 1 char after the last dot.  example jack@g.c
+						} else {
+							return true;
+						}
+					}
+				}
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	//The below was described in the diagram, but we redid some design
+//	public int validateUserName(String userName) {
+//		
+//		boolean isError = true;
+//		
+//		int length = userName.length();
+//		boolean isValidLength = false;
+//			if(length >= 6 && length <= 12) {
+//				isValidLength = true;
+//			}
+//		
+//		if( isValidLength) {
+//			int indexOfAtSymbol = userName.indexOf("@");
+//			int indexOfDot = userName.indexOf(".");
+//			System.out.println("length of : " + length);
+//			System.out.println("index of @: " + indexOfAtSymbol);
+//			System.out.println("index of .  : " + indexOfDot);
+//			if ( indexOfAtSymbol == -1 || indexOfDot == -1) {
+//				System.out.println("sorry but you are missing the @ symbol");
+//			} else {
+//				System.out.println("Valid Email");
+//				isError = true;
+//			}
+//		} else {
+//			//sorry but needs to be atleast 6 and 12 in length
+//			if(length < 6) {
+//				//too short
+//				System.out.println("Error: username is to short!");
+//			} else if (length > 12) {
+//				//to long
+//				System.out.println("Error: username is to long!");
+//			} else {
+//				System.out.println("Error: something went wrong in username validation");
+//			}
+//		}
+//		//string of alphanumeric characters + @ stirng of alphanumer characters + . + alpha characters
+//		
+//		
+//		if(isError) {
+//			//no there is no error
+//			return 1;
+//		} else {
+//			//yes there is an error
+//			return -1;
+//		}
+//		
+//	}
+//	private int validatePassword(String password) {
+//		return 1;
+//	}
+//	public int validateLogin(int i) {
+//		return 1;
+//	}
+//	
 
 	//temp method for testing
 	public void outputAllCredentials() {

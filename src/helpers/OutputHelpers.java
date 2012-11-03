@@ -5,6 +5,10 @@ import java.util.Date;
 import Models.Player;
 import Models.User;
 
+/**
+ * @author Jack Young
+ * @date Nov 3, 2012
+ */
 public class OutputHelpers {
 	
 	//Dynamically generate possible options for a list selection

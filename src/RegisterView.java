@@ -12,6 +12,10 @@ import Models.Player;
 import Models.User;
 
 
+/**
+ * @author Jack Young
+ * @date Nov 3, 2012
+ */
 public class RegisterView {
 	
 /*************************************************************************************************************/
@@ -28,13 +32,19 @@ public class RegisterView {
 		Prompt username;
 		Prompt password;
 
-		username = Prompter.question("Please enter your email address:", "Register - username");
+		username = Prompter.questionR("Please enter your email address:", "Register - username");
 	
 		if (!username.isDidPressCancel()) {
 			password = Prompter.question("Please enter your password:", "Register - password");
 			if (!password.isDidPressCancel()) {
 				
 				String u = username.getInputEntered();
+				
+				
+				//System.out.println("Username entered: " + u);
+				//System.out.println("Validate it:  " + MainApplication.getController().getUc().validateUserName(u));
+				
+				
 				String p = password.getInputEntered();
 				int userType = dropDownListDialog();
 				

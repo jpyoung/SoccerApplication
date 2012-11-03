@@ -3,6 +3,10 @@ import helpers.InputHelper;
 import javax.swing.JOptionPane;
 
 
+/**
+ * @author Jack Young
+ * @date Nov 3, 2012
+ */
 public class EditProfileView {
 
 	/***************************************************************************************************/	
