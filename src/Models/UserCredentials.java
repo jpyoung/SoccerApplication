@@ -177,7 +177,6 @@ public class UserCredentials implements Serializable {
 
 	//temp method for testing
 	public void outputAllCredentials() {
-		String ot = "Output - UserTable Credentials";
 		System.out.println("\n------------Output - UserTable Credentials-------------------");
 		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
 			System.out.println("#" + i + "  :  userName: " + getUserNamesArraylist().get(i) + ",    password: "
@@ -191,7 +190,6 @@ public class UserCredentials implements Serializable {
 
 	
 	public void outputSystemUsersTable() {
-		String ot = "Output - UserTable Credentials";
 		System.out.println("\n------------Output - UserTable Credentials-------------------");
 		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
 			System.out.println("#" + i + "  :  userName: " + getUserNamesArraylist().get(i) + ",    password: "

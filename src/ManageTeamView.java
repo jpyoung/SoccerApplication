@@ -3,8 +3,6 @@ import helpers.OutputHelpers;
 
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import Models.Coach;
 import Models.Notification;
 import Models.Player;
@@ -121,9 +119,37 @@ public class ManageTeamView {
 	public static void viewChooseCaptainMenu(int usersIndex) {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
 		
-		InputHelper.displayMessage("Choose a captian will go here. Not yet implemented", "Choose a Captain - View");
-		
-		manageTeamView(usersIndex);
+		if (c.getTeam().getRoster().getPlayerCount() == 0) {
+			InputHelper.displayMessage("Sorry, you cannot select a captain." +
+					"\nYour team must have players on the roster to do so. ", "Team Captain Selection");
+			manageTeamView(usersIndex);
+		} else {
+			Player[] ros = c.getTeam().getRoster().getPlayersOnRoster();
+			
+			String m = "Select a player to set them as a Captain on the team.";
+			for (int i = 0; i < ros.length; i++) {
+				m += "\n" + (i + 1) + ". " + OutputHelpers.givePlayerConcatName(ros[i]);
+			}
+			
+			String resp = InputHelper.promptStringMenuOptionsType2(m, "player selection", "Team Captain Selection", OutputHelpers.generatePossibleOptions(ros.length));
+			
+			if (resp.equals("-n-u-l-l-")) {
+				manageTeamView(usersIndex);
+			} else { 
+				int n = Integer.parseInt(resp) - 1;
+				System.out.println("You selected : " + resp + "  and index value of : " + n + "   name: " + ros[n].getFirstName());
+				for (int z = 0; z < ros.length; z++) {
+					if (n == z) {
+						ros[z].setCaptain(true); //setting the new captain
+					} else {
+						ros[z].setCaptain(false); //unsetting any other captains on the team. 
+					}
+				}
+				String outputM = "You have successfully changed your teams captain.";
+				InputHelper.displayMessage(outputM, "Choose a Captain - View");
+				manageTeamView(usersIndex);
+			}
+		}
 	}
 	
 	
@@ -133,9 +159,9 @@ public class ManageTeamView {
 		Coach c = (Coach)MainApplication.getController().getUc().getUserObject(usersIndex);
 		
 		if (c.getPayLeagueFees()) {
-			InputHelper.displayMessage("The " + c.getTeam().getName() + " has already Payed the League Fees.", "Pay League Fees - View");
+			InputHelper.displayMessage("The " + c.getTeam().getName() + " have already Payed the League Fees.", "Pay League Fees - View");
 		} else {
-			String m = "The " + c.getTeam().getName() + " has not Payed is League Fees.";
+			String m = "The " + c.getTeam().getName() + " have not Payed is League Fees.";
 			m += "\nPress accept to pay, or press refuse not to pay.";
 			boolean response = MainApplication.invitationDialog(m, "Pay League Fees - View");
 			if ( response ) {
@@ -155,10 +181,8 @@ public class ManageTeamView {
 	
 /****************************Add Player Section***************************************************************/	
 	public static void viewAddPlayerMenu(int usersIndex) {
-		JOptionPane.showMessageDialog(null, "Your at view add player menu top");
 		@SuppressWarnings("unused")
 		Coach coach = (Coach)MainApplication.getController().uc.getUserObject(usersIndex);
-		
 		
 		viewAvailablePlayers(usersIndex);
 	}
@@ -281,12 +305,7 @@ public class ManageTeamView {
 			}
 		}
 	}
-	
-	
-//	Notification mm = new Notification(false, "Duc, We are dropping you.", false, "Coach", 3);
-//	duc.getInBox().addNotification(mm);
-//	coach.getTeam().getRoster().removePlayer(duc);
-//	duc.setTeam(null);
+
 	
 /*****************************View Roster Section**************************************************************/
 	
@@ -304,7 +323,7 @@ public class ManageTeamView {
 			//has the roster been initialized 
 			if (t.getRoster().playerCount == 0) {
 				// their are no players on this coaches roster
-				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster", title);
+				InputHelper.errorMessage("Sorry, but you currently do not have any players on your roster.", title);
 				manageTeamView(usersIndex);
 			} else {
 				//they do have players on their roster
@@ -320,7 +339,6 @@ public class ManageTeamView {
 					manageTeamPrompt(t, usersIndex);
 				} else {
 					int n = Integer.parseInt(resp) - 1;
-					//System.out.println("You selected this player number: " + resp + "   index value: " + n);
 					viewTeamDetailedPlayerProfile(pp[n], usersIndex);
 				}
 			}

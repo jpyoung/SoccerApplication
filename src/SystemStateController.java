@@ -29,12 +29,11 @@ public class SystemStateController {
 		// clear existing teams, then will refill the team arraylist var
 		MainApplication.getController().getTeam().clear();
 
-		int hasTeamsCount = 0;
+		
 
 		for (int z = 0; z < coaches.size(); z++) {
 			if (coaches.get(z).getHasTeam()) {
 				MainApplication.getController().addATeam(coaches.get(z).getTeam());
-				hasTeamsCount++;
 			}
 		}
 

@@ -37,7 +37,6 @@ public class PDFWriter {
 	
 	private static String FILE = "UserPdf.pdf";
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-	@SuppressWarnings("unused")
 	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL, BaseColor.RED);
 	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16, Font.BOLD);
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
@@ -124,23 +123,15 @@ public class PDFWriter {
 	
 	public static void generateTeamRosterListing(Section subCatPart, Controller c) throws BadElementException {
 		ArrayList<User> allUsers = c.getUc().getUserObjectArraylist();
-		int playerCount = 0;
+		
 		int coachCount = 0;
-		int officialCount = 0;
-		int others = 0;
+	
 		for(int x = 0; x < allUsers.size(); x++) {
-			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
-				playerCount++;
-			}
+			
 			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
 				coachCount++;
 			}
-			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
-				officialCount++;
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
-				others++;
-			}
+		
 		}
 
 		ArrayList<Integer> playerIds = new ArrayList<Integer>();

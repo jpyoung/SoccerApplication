@@ -7,10 +7,7 @@ import java.io.Serializable;
  * @date Oct 30, 2012
  */
 public class Notification implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private boolean hasBeenViewed;
 	private boolean doesRequireAction;
