@@ -91,17 +91,7 @@ public class UserCredentials implements Serializable {
 		return userObject;
 	}
 	
-	public void tempVs(){
-		setUserName("jyoung");
-		setPassword("greatness");
-		setUserName("rpyoung");
-		setPassword("122686");
-		for (int i = 0; i < getUserNamesArraylist().size(); i++) {
-			System.out.println("#" + i + "  : " + getUserNamesArraylist().get(i) + "    " + getPasswordsArraylist().get(i));
-		}
-		System.out.println("Count: " + getUserNamesArraylist().size());
-		
-	}
+
 
 	
 	/***End - Methods I added that not described in UML**/

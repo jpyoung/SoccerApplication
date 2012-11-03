@@ -23,7 +23,7 @@ public class MainApplication {
 	
 	public static Controller controller = new Controller();
 	public static Controller getController() { return controller; } 
-	public static boolean showConsoleDetails = true;  //This var is used whats being displayed in the console. 
+	public static boolean showConsoleDetails = false;  //This var is used whats being displayed in the console. 
 	public static boolean getShowConsoleDetails() { return showConsoleDetails; }
 	public static void setShowConsoleDetails(boolean a){ showConsoleDetails = a; }
 	
@@ -36,7 +36,8 @@ public class MainApplication {
 		//used for load data from data file
 		SystemStateController.loadEverything();
 		
-		infoGatherer();
+		if (getShowConsoleDetails()) { infoGatherer(); }
+		
 		
 		
 		if (getShowConsoleDetails()) { 
