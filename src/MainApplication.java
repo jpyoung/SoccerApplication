@@ -3,8 +3,6 @@ import helpers.OutputHelpers;
 import helpers.Prompt;
 import helpers.Prompter;
 
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 import testing.PDFWriter;
@@ -36,92 +34,21 @@ public class MainApplication {
 		//used for load data from data file
 		SystemStateController.loadEverything();
 		
-		if (getShowConsoleDetails()) { infoGatherer(); }
-		
-		
-		
-		if (getShowConsoleDetails()) { 
-		System.out.println("\n\n--Before Application Close---"); System.out.println("Team arraylist size: " + getController().getTeam().size());
-		for (int i = 0; i < getController().getTeam().size(); i++) {
-			System.out.println(getController().getTeam().get(i).getName());
-		}
-		getController().getUc().outputAllCredentials();
-		}
-		
+		//getController().getUc().outputAllCredentials();
+		Player pppp = (Player)getController().getUc().getUserObject(1);
+		customOutput(pppp);
 		
 		//
 		firstView();
 		//
-		infoGatherer();
 		
 		//Saving Everything via serial data file
 		SystemStateController.saveUserCreds();
 		
-		//before the application closes, below i am creating a pdf document with information.  UserPdf.pdf
+		//before the application closes, Below I am making the calls to generate the PDF document with information.  UserPdf.pdf
+		@SuppressWarnings("unused")
 		PDFWriter pdf = new PDFWriter();
 		PDFWriter.runPDFwriter(getController());
-		
-	}
-	
-	
-	public static void infoGatherer() {
-		ArrayList<User> allUsers = getController().getUc().getUserObjectArraylist();
-		int playerCount = 0;
-		int coachCount = 0;
-		int officialCount = 0;
-		int others = 0;
-		for(int x = 0; x < allUsers.size(); x++) {
-			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
-				playerCount++;
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
-				coachCount++;
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
-				officialCount++;
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
-				others++;
-			}
-		}
-		
-		System.out.println("----Info Gather ---");
-		System.out.println("Player Count: " + playerCount);
-		System.out.println("Coach Count: " + coachCount);
-		System.out.println("Official Count: " + officialCount);
-		System.out.println("User Count: " + others);
-		
-		ArrayList<Integer> playerIds = new ArrayList<Integer>();
-		ArrayList<Integer> coachIds = new ArrayList<Integer>();
-		ArrayList<Integer> officialIds = new ArrayList<Integer>();
-		ArrayList<Integer> otherIds = new ArrayList<Integer>();
-		
-		for(int x = 0; x < allUsers.size(); x++) {
-			if (allUsers.get(x).getClass().getName().equals("Models.Player")){
-				playerIds.add(x);
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.Coach")) {
-				coachIds.add(x);
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.Official")) {
-				officialIds.add(x);
-			}
-			if (allUsers.get(x).getClass().getName().equals("Models.User")) {
-				otherIds.add(x);
-			}
-		}
-		
-		
-		System.out.println("Player ids: " + playerIds.toString());
-		System.out.println("Coach ids: " + coachIds.toString());
-		System.out.println("Official ids: " + officialIds.toString());
-		System.out.println("Other ids: " + otherIds.toString());
-		
-		for (int y = 0; y < coachCount; y++) {
-			System.out.println("--Coach ID = " + coachIds.get(y));
-			Coach c = (Coach)getController().getUc().getUserObject(coachIds.get(y));
-			ManageTeamView.customCoachOuput(c);
-		}
 		
 	}
 
@@ -508,4 +435,48 @@ public class MainApplication {
 		p2.setTeam(cc.getTeam());
 	}
 
+	
+	public static void customOutput(Player u) {
+		
+		String dd = "firstname: " + u.getFirstName() + " " + u.getLastName();
+		
+		dd += "\n\tUser { \n";
+		dd += "\t\tfirstname:" + u.getFirstName();
+		dd += "\n\t\tlastname: " + u.getLastName();
+		dd += "\n\t\tphone: " + u.getPhone();
+		
+		dd +="\n\t\tPlayer { \n";
+		dd += "\t\t\tcaptain: " + u.getCaptain();
+		dd += "\n\t\t\tteam: " + (u.getTeam() == null ? "null" : u.getTeam().getName());
+		
+		dd += "\n\t\t\tPlayerWaiver { \n";
+		dd += "\t\t\t\tname:" + u.getPlayerWaiver().getName();
+		dd += "\n\t\t\t\tDescription:Hello there this is the description";
+		dd += "\n\t\t\t\tSign Date: " + u.getPlayerWaiver().getSignDate();
+		dd += "\n\t\t\t}";
+		dd += "\n\t\t}";
+		
+	
+		dd += "\n\t\tAddress { \n";
+		dd += "\t\t\tstate:" + u.getAddress();
+		dd += "\n\t\t}";
+		
+		dd += "\n\t\tInBox {\n";
+//		dd += "\t\t\tNotifications has: " + u.getInBox().getHasNotifications() ;
+//		if (u.getInBox().getHasNotifications()) {
+//			dd += "\t\t\tList--";
+//			for (int i = 0; i < u.getInBox().getNotifications().size(); i++) {
+//				dd += "\n\t\t\t" + u.getInBox().getNotifications().get(i);
+//			}
+//		}
+		dd += "\n\t\t}";
+		
+		dd += "\n\t}";
+		
+
+		System.out.println(dd);
+		
+	}
+	
+	
 }

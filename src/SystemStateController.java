@@ -52,10 +52,10 @@ public class SystemStateController {
 			System.out.println(OutputHelpers.timeStamp() + "----------------READ IN From DATA File---------------");
 			return uu;
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("================ Fail ===========");
-			// MainApplication.getController().loadInitialData();
-			return null;
+			//e.printStackTrace();
+			System.out.println("================ Fail - Data file Synch Error ==========="); //this is expected on the first launch. 
+			MainApplication.getController().loadInitialData();
+			return MainApplication.getController();
 		}
 	}
 	

@@ -113,6 +113,15 @@ public class UserCredentials implements Serializable {
 		return getUserObjectArraylist().get(id);
 	}
 	
+	public static boolean validatePassword(String password) {
+		if (password.length() >= 6 && password.length() <= 12) {
+			return true;
+		} else {
+			InputHelper.displayMessage("Invalid password.\nMust have a length between 6 and 12.", "Register - Invalid Password");
+			return false;
+		}
+	}
+	
 	public static boolean validateUserName(String userName) {
 		boolean r = usernameChecker(userName);
 		if ( r ) {
